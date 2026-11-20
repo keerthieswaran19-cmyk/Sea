@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aura English | Boutique Language Training • Pallavaram, Chennai</title>
+  
+  <!-- Elite Typography: Fraunces + Plus Jakarta Sans 900 + BJCree -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600;1,9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/bjcree@latest/index.css">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Fullscreen Luxury Viewport (Pure White Canvas) -->
+  <div class="viewport-canvas">
+
+    <!-- Minimalist Studio Floating Frosted Header (Ocean Blue Light Glass) -->
+    <header class="studio-nav" id="studioNav">
+      <!-- Scroll Depth Indicator Line -->
+      <div class="nav-scroll-progress" id="navScrollProgress"></div>
+
+      <div class="nav-brand">
+        <span class="brand-crest-mark">
+          <span class="crest-shimmer"></span>
+        </span>
+        <div class="brand-typography">
+          <span class="brand-title">AURA ENGLISH</span>
+          <span class="brand-subtitle">PALLAVARAM • CHENNAI</span>
+        </div>
+      </div>
+
+      <!-- Live Atelier Cohort Status Pill -->
+      <div class="nav-status-badge">
+        <span class="status-pulse-dot"></span>
+        <span>1:6 Studio Cohorts Open • Pallavaram</span>
+      </div>
+
+      <div class="nav-actions">
+        <nav class="nav-links-cluster">
+          <a href="#" class="nav-link-item active" id="navLinkHero">Overview</a>
+          <a href="#coursesSection" class="nav-link-item" id="navLinkCourses">Boutique Cohorts</a>
+          <a href="#learnSection" class="nav-link-item" id="navLinkLearn">Learn With Us</a>
+        </nav>
+        
+        <button class="nav-consult-pill" id="navModalTrigger">
+          <span>Schedule Visit</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Viewport Layout -->
+    <main class="hero-layout">
+      
+      <!-- LEFT: 3D Alphabet Playground + Action Cluster -->
+      <div class="visual-column-left">
+        <div class="visual-stage-left" id="visualStage">
+          
+          <!-- Interactive 3D Clay Alphabet Physics Canvas -->
+          <canvas id="alphabetCanvas" class="alphabet-canvas"></canvas>
+
+          <!-- Floating Boutique Satellite Cards (Symmetrical Round Formation) -->
+          <div class="floating-satellite-card card-fluency">
+            <span class="satellite-pill">01</span>
+            <div class="satellite-body">
+              <strong>Spoken Fluency</strong>
+              <small>Natural Cadence & Rhythm</small>
+            </div>
+          </div>
+
+          <div class="floating-satellite-card card-grammar">
+            <span class="satellite-pill">02</span>
+            <div class="satellite-body">
+              <strong>Strong Grammar</strong>
+              <small>Contextual Sentence Flow</small>
+            </div>
+          </div>
+
+          <div class="floating-satellite-card card-pronunciation">
+            <span class="satellite-pill">03</span>
+            <div class="satellite-body">
+              <strong>Natural Pronunciation</strong>
+              <small>Phonetic Precision</small>
+            </div>
+          </div>
+
+          <div class="floating-satellite-card card-speaking">
+            <span class="satellite-pill">04</span>
+            <div class="satellite-body">
+              <strong>Public Speaking</strong>
+              <small>Stage Confidence</small>
+            </div>
+          </div>
+
+          <div class="floating-satellite-card card-vocabulary">
+            <span class="satellite-pill">05</span>
+            <div class="satellite-body">
+              <strong>Vocabulary Builder</strong>
+              <small>Word Power Mastery</small>
+            </div>
+          </div>
+
+          <div class="floating-satellite-card card-studio">
+            <span class="satellite-pill">06</span>
+            <div class="satellite-body">
+              <strong>Pallavaram Studio</strong>
+              <small>In-Person Sessions</small>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Luxury Action Cluster (Shifted under Alphabet Dropping Stage) -->
+        <div class="cta-cluster cta-left">
+          <button class="btn-magnetic-luxury" id="heroModalTrigger">
+            <span class="btn-ambient-foil"></span>
+            <span class="btn-text">Book Free Diagnostic Session</span>
+            <div class="btn-arrow-ring">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </div>
+          </button>
+
+          <a href="tel:+919840000000" class="btn-whisper-call">
+            <span class="call-pulse"></span>
+            <span>Speak with Senior Mentor</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT: Editorial Masterpiece with Dynamic Carousel -->
+      <div class="editorial-stage-right" id="editorialStage">
+
+        <!-- Master Headline -->
+        <h1 class="headline-editorial">
+          <span class="line-lead">Speak English with</span>
+          
+          <span class="emphasis-block">
+            <span class="word-card" id="wordConfidence">
+              <span class="metallic-word">Confidence,</span>
+            </span>
+
+            <span class="word-card" id="wordClarity">
+              <span class="metallic-word">Clarity,</span>
+            </span>
+
+            <span class="and-connector">and</span>
+
+            <span class="word-card" id="wordEase">
+              <span class="metallic-word">Ease.</span>
+            </span>
+          </span>
+        </h1>
+
+        <!-- Pedagogical Interactive Carousel Ticker -->
+        <div class="pedagogy-ticker" id="carouselTabs">
+          <button class="ticker-item active-glow" data-index="0" type="button">
+            <span class="ticker-badge">01</span>
+            <span class="ticker-title">Spoken Fluency</span>
+          </button>
+          <span class="ticker-sep">•</span>
+          <button class="ticker-item" data-index="1" type="button">
+            <span class="ticker-badge">02</span>
+            <span class="ticker-title">Applied Grammar</span>
+          </button>
+          <span class="ticker-sep">•</span>
+          <button class="ticker-item" data-index="2" type="button">
+            <span class="ticker-badge">03</span>
+            <span class="ticker-title">Natural Pronunciation</span>
+          </button>
+        </div>
+
+        <!-- Dynamic Carousel Sub-headline Paragraph -->
+        <div class="para-carousel-wrapper">
+          <p class="para-bjcree carousel-para active" id="carouselPara">
+            Boutique, personalized English language training in Pallavaram, Chennai. We transform hesitant speakers into articulate communicators, instilling effortless cadence, spontaneous conversational flow, and stage poise in a warm, supportive environment.
+          </p>
+
+          <!-- Carousel Progress Indicator Dots -->
+          <div class="carousel-dots-row">
+            <span class="carousel-dot active" data-index="0"></span>
+            <span class="carousel-dot" data-index="1"></span>
+            <span class="carousel-dot" data-index="2"></span>
+          </div>
+        </div>
+
+        <!-- Boutique Atelier Trust Pillars -->
+        <div class="atelier-trust-pillars">
+          <div class="pillar-item">
+            <span class="pillar-dot"></span>
+            <span class="pillar-label">1:6 Boutique Ratio</span>
+          </div>
+          <span class="pillar-divider">•</span>
+          <div class="pillar-item">
+            <span class="pillar-dot"></span>
+            <span class="pillar-label">CEFR Fluency Framework</span>
+          </div>
+          <span class="pillar-divider">•</span>
+          <div class="pillar-item">
+            <span class="pillar-dot"></span>
+            <span class="pillar-label">Weekly Audio Review</span>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- ==========================================================================
+       SECTION 2: BOUTIQUE COURSES & COHORTS (3 HORIZONTAL CARDS)
+       ========================================================================== -->
+  <section class="section-courses" id="coursesSection">
+    <!-- Atmospheric Ocean Blue Light Orbs (For subtle scroll depth & ambient glow) -->
+    <div class="section-ocean-orb orb-top-left" id="orbLeft"></div>
+    <div class="section-ocean-orb orb-bottom-right" id="orbRight"></div>
+
+    <div class="courses-container">
+      
+      <!-- Clean Centered Section Header with Glowing Effects -->
+      <div class="courses-header-block" id="coursesHeaderBlock">
+        <div class="courses-ocean-pill">
+          <span class="sparkle-cyan">✦</span>
+          <span>INTIMATE 1:6 STUDIO COHORTS • PALLAVARAM</span>
+        </div>
+        <h2 class="courses-title" id="coursesTitle">
+          Our featured <span class="ocean-text-accent">courses</span>
+          <span class="title-halo-line" id="headerHaloLine"></span>
+        </h2>
+        <p class="courses-desc" id="coursesDesc">
+          Our featured courses inspire <span class="desc-highlight">growth</span> with <span class="desc-highlight">expert instruction</span> and <span class="desc-highlight">practical skills</span>.
+        </p>
+      </div>
+
+      <!-- 3 Horizontal Featured Course Cards (Exact Ref 3 Layout) -->
+      <div class="courses-grid">
+        
+        <!-- CARD 1: Junior (Ages 6 - 10) -->
+        <article class="course-card" data-course="junior" tabindex="0">
+          <!-- Card Cover Image Container -->
+          <div class="card-cover-wrapper">
+            <span class="card-floating-badge">Junior • Ages 6–10</span>
+            <img 
+              src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80" 
+              alt="Junior Articulators Studio" 
+              class="card-cover-photo"
+              loading="lazy"
+            >
+          </div>
+
+          <!-- Card Content Body -->
+          <div class="card-content-body">
+            <!-- Header Row: Title on Left, Cohort Badge on Right -->
+            <div class="card-headline-row">
+              <h3 class="course-name">Junior Articulators Studio</h3>
+              <span class="course-price-tag">1:6 Ratio</span>
+            </div>
+
+            <!-- Mentor Credential Subtitle -->
+            <p class="course-mentor-line">Julian Munoz • Senior Phonetics Lead</p>
+
+            <!-- Spec Container Box (Grey 2-Column Spec) -->
+            <div class="course-specs-box">
+              <div class="spec-cell">
+                <div class="spec-cell-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                  </svg>
+                </div>
+                <div class="spec-cell-text">
+                  <span class="spec-label">Lessons</span>
+                  <span class="spec-val">24 Sessions</span>
+                </div>
+              </div>
+
+              <div class="spec-cell-divider"></div>
+
+              <div class="spec-cell">
+                <div class="spec-cell-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                </div>
+                <div class="spec-cell-text">
+                  <span class="spec-label">Duration</span>
+                  <span class="spec-val">12 Weeks • 48 hrs</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Pill Button -->
+            <button class="btn-view-course btn-outline" data-course="junior" type="button">
+              <span>View Course</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- CARD 2: Scholar (Ages 11 - 17) - Featured Center Card with Dark Button -->
+        <article class="course-card card-featured" data-course="scholar" tabindex="0">
+          <!-- Card Cover Image Container -->
+          <div class="card-cover-wrapper">
+            <span class="card-floating-badge badge-featured">Scholar • Ages 11–17</span>
+            <img 
+              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" 
+              alt="Scholar Fluency & Debate Lab" 
+              class="card-cover-photo"
+              loading="lazy"
+            >
+          </div>
+
+          <!-- Card Content Body -->
+          <div class="card-content-body">
+            <!-- Header Row: Title on Left, Cohort Badge on Right -->
+            <div class="card-headline-row">
+              <h3 class="course-name">Scholar Fluency & Debate Lab</h3>
+              <span class="course-price-tag tag-featured">1:6 Ratio</span>
+            </div>
+
+            <!-- Mentor Credential Subtitle -->
+            <p class="course-mentor-line">Sarah Collins • Debate & Rhetoric Coach</p>
+
+            <!-- Spec Container Box (Grey 2-Column Spec) -->
+            <div class="course-specs-box">
+              <div class="spec-cell">
+                <div class="spec-cell-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                  </svg>
+                </div>
+                <div class="spec-cell-text">
+                  <span class="spec-label">Lessons</span>
+                  <span class="spec-val">24 Sessions</span>
+                </div>
+              </div>
+
+              <div class="spec-cell-divider"></div>
+
+              <div class="spec-cell">
+                <div class="spec-cell-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                </div>
+                <div class="spec-cell-text">
+                  <span class="spec-label">Duration</span>
+                  <span class="spec-val">12 Weeks • 48 hrs</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Pill Button (Dark Filled for Center Card per Reference 3) -->
+            <button class="btn-view-course btn-solid-dark" data-course="scholar" type="button">
+              <span>View Course</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- CARD 3: Executive (Ages 18+) -->
+        <article class="course-card" data-course="executive" tabindex="0">
+          <!-- Card Cover Image Container -->
+          <div class="card-cover-wrapper">
+            <span class="card-floating-badge">Adults • Ages 18+</span>
+            <img 
+              src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80" 
+              alt="Executive Diction & Rhetoric" 
+              class="card-cover-photo"
+              loading="lazy"
+            >
+          </div>
+
+          <!-- Card Content Body -->
+          <div class="card-content-body">
+            <!-- Header Row: Title on Left, Cohort Badge on Right -->
+            <div class="card-headline-row">
+              <h3 class="course-name">Executive Diction & Rhetoric</h3>
+              <span class="course-price-tag">1:6 Ratio</span>
+            </div>
+
+            <!-- Mentor Credential Subtitle -->
+            <p class="course-mentor-line">Elwood Walsh • Executive Diction Director</p>
+
+            <!-- Spec Container Box (Grey 2-Column Spec) -->
+            <div class="course-specs-box">
+              <div class="spec-cell">
+                <div class="spec-cell-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                  </svg>
+                </div>
+                <div class="spec-cell-text">
+                  <span class="spec-label">Lessons</span>
+                  <span class="spec-val">16 Sessions</span>
+                </div>
+              </div>
+
+              <div class="spec-cell-divider"></div>
+
+              <div class="spec-cell">
+                <div class="spec-cell-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                </div>
+                <div class="spec-cell-text">
+                  <span class="spec-label">Duration</span>
+                  <span class="spec-val">8 Weeks • 32 hrs</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Pill Button -->
+            <button class="btn-view-course btn-outline" data-course="executive" type="button">
+              <span>View Course</span>
+            </button>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- SECOND ROW: 2 Additional Boutique Programs (Same Exact Style) -->
+      <div class="courses-grid-duo">
+        
+        <!-- CARD 4: IELTS & Academic Fluency Studio -->
+        <article class="course-card" data-course="ielts" tabindex="0">
+          <!-- Card Cover Image Container -->
+          <div class="card-cover-wrapper">
+            <span class="card-floating-badge">Academic • Ages 16+</span>
+            <img 
+              src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80" 
+              alt="IELTS & Academic Fluency Studio" 
+              class="card-cover-photo"
+              loading="lazy"
+            >
+          </div>
+
+          <!-- Card Content Body -->
+          <div class="card-content-body">
+            <!-- Header Row: Title on Left, Cohort Badge on Right -->
+            <div class="card-headline-row">
+              <h3 class="course-name">IELTS & Academic Fluency Studio</h3>
+              <span class="course-price-tag">1:6 Ratio</span>
+            </div>
+
+            <!-- Mentor Credential Subtitle -->
+            <p class="course-mentor-line">Dr. Aris Thorne • IELTS Master Examiner</p>
+
+            <!-- Spec Container Box (Grey 2-Column Spec) -->
+            <div class="course-specs-box">
+              <div class="spec-cell">
+                <div class="spec-cell-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                  </svg>
+                </div>
+                <div class="spec-cell-text">
+                  <span class="spec-label">Lessons</span>
+                  <span class="spec-val">20 Sessions</span>
+                </div>
+              </div>
+
+              <div class="spec-cell-divider"></div>
+
+              <div class="spec-cell">
+                <div class="spec-cell-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                </div>
+                <div class="spec-cell-text">
+                  <span class="spec-label">Duration</span>
+                  <span class="spec-val">10 Weeks • 40 hrs</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Pill Button -->
+            <button class="btn-view-course btn-outline" data-course="ielts" type="button">
+              <span>View Course</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- CARD 5: Corporate Oratory & Stage Poise Lab -->
+        <article class="course-card card-featured" data-course="oratory" tabindex="0">
+          <!-- Card Cover Image Container -->
+          <div class="card-cover-wrapper">
+            <span class="card-floating-badge badge-featured">Weekend • Professionals</span>
+            <img 
+              src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=800&q=80" 
+              alt="Corporate Oratory & Stage Poise Lab" 
+              class="card-cover-photo"
+              loading="lazy"
+            >
+          </div>
+
+          <!-- Card Content Body -->
+          <div class="card-content-body">
+            <!-- Header Row: Title on Left, Cohort Badge on Right -->
+            <div class="card-headline-row">
+              <h3 class="course-name">Corporate Oratory & Stage Poise Lab</h3>
+              <span class="course-price-tag tag-featured">1:6 Ratio</span>
+            </div>
+
+            <!-- Mentor Credential Subtitle -->
+            <p class="course-mentor-line">Kavitha Sundaram • TEDx Speaker & Voice Coach</p>
+
+            <!-- Spec Container Box (Grey 2-Column Spec) -->
+            <div class="course-specs-box">
+              <div class="spec-cell">
+                <div class="spec-cell-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                  </svg>
+                </div>
+                <div class="spec-cell-text">
+                  <span class="spec-label">Lessons</span>
+                  <span class="spec-val">16 Sessions</span>
+                </div>
+              </div>
+
+              <div class="spec-cell-divider"></div>
+
+              <div class="spec-cell">
+                <div class="spec-cell-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                </div>
+                <div class="spec-cell-text">
+                  <span class="spec-label">Duration</span>
+                  <span class="spec-val">8 Weeks • 32 hrs</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Pill Button (Dark Solid for Center Featured) -->
+            <button class="btn-view-course btn-solid-dark" data-course="oratory" type="button">
+              <span>View Course</span>
+            </button>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 3: LEARN WITH US (EDITORIAL BLOGS & MASTERCLASSES - REF LAYOUT)
+       ========================================================================== -->
+  <section class="section-learn" id="learnSection">
+    <!-- Atmospheric Ocean Blue Light Orbs for Section 3 -->
+    <div class="section-ocean-orb orb-learn-left"></div>
+    <div class="section-ocean-orb orb-learn-right"></div>
+
+    <div class="learn-container">
+      
+      <!-- Editorial Header Row (Matching Reference Image) -->
+      <div class="learn-header-row" id="learnHeaderRow">
+        <div class="learn-header-left">
+          <div class="learn-ocean-pill">
+            <span class="ocean-dot-pulse"></span>
+            <span class="learn-kicker">Get inspired.</span>
+          </div>
+        </div>
+        
+        <div class="learn-header-center">
+          <h2 class="learn-title">
+            Learn With <span class="ocean-text-accent">Us</span>
+            <span class="learn-halo-line"></span>
+          </h2>
+        </div>
+        
+        <div class="learn-header-right">
+          <div class="learn-nav-controls">
+            <button class="learn-nav-btn btn-prev" id="learnPrevBtn" type="button" aria-label="Previous articles">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button class="learn-nav-btn btn-next" id="learnNextBtn" type="button" aria-label="Next articles">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 Editorial Columns (Exact Reference Image Layout) -->
+      <div class="learn-cards-track" id="learnCardsTrack">
+        
+        <!-- CARD 1: Courses -->
+        <article class="learn-card" data-article="courses" tabindex="0">
+          <div class="learn-img-wrapper">
+            <span class="learn-floating-badge">Atelier Cohorts • CEFR</span>
+            <img 
+              src="https://images.unsplash.com/photo-1531545514256-b1400bc00f31?auto=format&fit=crop&w=800&q=80" 
+              alt="Courses at Aura English" 
+              class="learn-card-img"
+              loading="lazy"
+            >
+          </div>
+          <div class="learn-card-body">
+            <h3 class="learn-card-title">Courses</h3>
+            <p class="learn-card-desc">
+              Enhance your speaking precision, acoustic phonetics, and structured fluency with Aura Atelier's diagnostic programs. Our intimate 1:6 studio mentoring aligns with the CEFR framework, offering evidence-based practices to eliminate regional hesitation.
+            </p>
+            <a href="#learnSection" class="learn-card-link" data-article="courses">
+              <span>LEARN</span>
+              <span class="link-arrow">→</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- CARD 2: Blog -->
+        <article class="learn-card" data-article="blog" tabindex="0">
+          <div class="learn-img-wrapper">
+            <span class="learn-floating-badge badge-editorial">Acoustic Drills • Journal</span>
+            <img 
+              src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" 
+              alt="Blog at Aura English" 
+              class="learn-card-img"
+              loading="lazy"
+            >
+          </div>
+          <div class="learn-card-body">
+            <h3 class="learn-card-title">Blog</h3>
+            <p class="learn-card-desc">
+              Explore our atelier journal for expert insights on cognitive translation, phonetic placement, and impromptu rhetoric. Discover essays by senior language coaches offering the latest acoustic drills and practical strategies for spontaneous fluency.
+            </p>
+            <a href="#learnSection" class="learn-card-link" data-article="blog">
+              <span>READ</span>
+              <span class="link-arrow">→</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- CARD 3: Webinars -->
+        <article class="learn-card" data-article="webinars" tabindex="0">
+          <div class="learn-img-wrapper">
+            <span class="learn-floating-badge badge-masterclass">Audio Studio • Masterclass</span>
+            <img 
+              src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80" 
+              alt="Webinars at Aura English" 
+              class="learn-card-img"
+              loading="lazy"
+            >
+          </div>
+          <div class="learn-card-body">
+            <h3 class="learn-card-title">Webinars</h3>
+            <p class="learn-card-desc">
+              Deepen your communication poise with our recorded audio workshops. Senior debate coaches discuss boardroom rhetoric, interview composure, and vowel modulation. Explore studio archives with new masterclasses added monthly.
+            </p>
+            <a href="#learnSection" class="learn-card-link" data-article="webinars">
+              <span>WATCH</span>
+              <span class="link-arrow">→</span>
+            </a>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Editorial Reading Modal / Reader Overlay -->
+  <dialog class="reader-dialog" id="readerDialog">
+    <div class="reader-panel">
+      <button class="reader-dismiss-btn" id="closeReaderBtn" aria-label="Close reader">✕</button>
+      <div class="reader-body">
+        <span class="reader-kicker" id="readerKicker">THE ATELIER JOURNAL</span>
+        <h3 class="reader-title" id="readerTitle">Speech Cadence & Cognitive Translation</h3>
+        <span class="reader-meta" id="readerMeta">7 Min Read • Published by Senior Phonetics Lead</span>
+        <div class="reader-content" id="readerContent">
+          <!-- Dynamically populated via script.js -->
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ==========================================================================
+       COURSE SYLLABUS DOSSIER OVERLAY POPUP (SPLIT LUXURY MODAL)
+       ========================================================================== -->
+  <dialog class="dossier-dialog" id="dossierDialog">
+    <div class="dossier-panel">
+      <button class="dossier-dismiss-btn" id="closeDossierBtn" aria-label="Close dossier">✕</button>
+      
+      <div class="dossier-split-grid">
+        
+        <!-- Left Summary Sidebar -->
+        <div class="dossier-sidebar">
+          <div class="dossier-badge-row">
+            <span class="dossier-kicker" id="dossierAge">AGES 6 – 10</span>
+            <span class="dossier-tag-pill">PALLAVARAM ATELIER</span>
+          </div>
+
+          <h3 class="dossier-title" id="dossierTitle">Junior Articulators Studio</h3>
+          <p class="dossier-tagline" id="dossierTagline">Foundational Spoken Cadence, Storytelling & Phonics</p>
+
+          <div class="dossier-specs-list">
+            <div class="dossier-spec-box">
+              <span class="spec-label">COHORT DENSITY</span>
+              <strong class="spec-value">Strictly 1:6 Ratio</strong>
+              <small class="spec-sub">Personalized spoken airtime</small>
+            </div>
+            <div class="dossier-spec-box">
+              <span class="spec-label">PROGRAM DURATION</span>
+              <strong class="spec-value" id="dossierDuration">12 Weeks • 24 Hours</strong>
+              <small class="spec-sub">2 Sessions / Week</small>
+            </div>
+            <div class="dossier-spec-box">
+              <span class="spec-label">PEDAGOGICAL FORMAT</span>
+              <strong class="spec-value">In-Studio Immersion</strong>
+              <small class="spec-sub">2nd Main Rd, Pallavaram</small>
+            </div>
+            <div class="dossier-spec-box">
+              <span class="spec-label">AUDITORY PROGRESS</span>
+              <strong class="spec-value">Weekly Audio Reports</strong>
+              <small class="spec-sub">Voice recording progress sent to parent</small>
+            </div>
+          </div>
+
+          <div class="dossier-action-box">
+            <button class="btn-dossier-enroll" id="dossierEnrollBtn" type="button">
+              <span>Reserve Cohort Seat</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+            <span class="dossier-guarantee">🔒 No bulk classrooms. Every student receives individual verbal feedback.</span>
+          </div>
+        </div>
+
+        <!-- Right Syllabus Modular Journey -->
+        <div class="dossier-content-area">
+          <div class="dossier-section-heading">
+            <h4>Modular 4-Phase Curriculum</h4>
+            <span class="syllabus-sub">Designed for progressive phonetic and cognitive speaking mastery</span>
+          </div>
+
+          <div class="syllabus-phases" id="dossierPhases">
+            <!-- Dynamically populated via script.js -->
+          </div>
+
+          <div class="dossier-outcomes-block">
+            <h4>Graduation Milestones & Outcomes</h4>
+            <div class="outcomes-grid" id="dossierOutcomes">
+              <!-- Dynamically populated via script.js -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Diagnostic Assessment Modal Dialog -->
+  <dialog class="diagnostic-dialog" id="diagnosticDialog">
+    <div class="dialog-panel">
+      <button class="dialog-dismiss-btn" id="closeDialogBtn" aria-label="Close dialog">✕</button>
+
+      <span class="dialog-pre">PALLAVARAM STUDIO</span>
+      <h3 class="dialog-title">Book 1-on-1 Diagnostic Session</h3>
+      <p class="dialog-desc">
+        A private 20-minute spoken evaluation with our senior English trainer to chart your child's fluency progress.
+      </p>
+
+      <form class="dialog-form" id="diagnosticForm" onsubmit="return false;">
+        <div class="form-pair">
+          <div class="form-field">
+            <label for="studentName">Student Name</label>
+            <input type="text" id="studentName" placeholder="e.g. Mithran" required>
+          </div>
+          <div class="form-field">
+            <label for="studentAge">Grade / Age</label>
+            <input type="text" id="studentAge" placeholder="e.g. 7th Std (Age 12)" required>
+          </div>
+        </div>
+
+        <div class="form-pair">
+          <div class="form-field">
+            <label for="parentPhone">Parent WhatsApp / Phone</label>
+            <input type="tel" id="parentPhone" placeholder="+91 98400 00000" required>
+          </div>
+          <div class="form-field">
+            <label for="focusTarget">Focus Need</label>
+            <select id="focusTarget">
+              <option value="fluency">Overcoming Hesitation in Speaking</option>
+              <option value="grammar">Applied Grammar & Sentence Building</option>
+              <option value="pronunciation">Natural Pronunciation & Phonics</option>
+              <option value="all">Comprehensive English Mastery</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="dialog-confirm-action">
+          <span>Confirm Diagnostic Slot</span>
+        </button>
+
+        <span class="dialog-assurance">
+          🔒 Private & personalized. Studio located on 2nd Main Road, Pallavaram, Chennai.
+        </span>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Clean Alert Toast -->
+  <div class="status-toast" id="statusToast" role="alert">
+    <span class="toast-symbol">✓</span>
+    <div class="toast-text">
+      <strong>Diagnostic Request Received</strong>
+      <span>Our Pallavaram studio will contact you shortly.</span>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
