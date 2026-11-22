@@ -1399,10 +1399,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-      // ==========================================================================
-  // SECTION 4: ATELIER VOICES (HORIZONTAL CINEMA RUNWAY CONTROLLER)
+        // ==========================================================================
+  // SECTION 4: ATELIER VOICES — APPLE STUDIO HORIZONTAL HORIZON
+  // position:sticky + 400vh + translate3d driven by window scroll
   // ==========================================================================
 
+  const stickyViewport = document.getElementById('testimonialsStickyViewport');
   const runwayViewport = document.getElementById('testimonialsRunwayViewport');
   const runwayTrack = document.getElementById('testimonialsRunwayTrack');
   const runwayCards = Array.from(document.querySelectorAll('.runway-card-unit'));
@@ -1412,9 +1414,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const runwayPrevBtn = document.getElementById('runwayPrevBtn');
   const runwayNextBtn = document.getElementById('runwayNextBtn');
   const testimonialsHeaderBlock = document.getElementById('testimonialsHeaderBlock');
+  
+  // Note: testimonialsSection already declared at line ~1095 for scroll spy
 
   let activeRunwayIdx = 0;
   let isSectionVisible = false;
+  const TOTAL_CARDS = runwayCards.length;
+  
+  // --- Check if we're in mobile/tablet mode (no sticky scroll) ---
+  function isMobileMode() {
+    return window.innerWidth <= 1120;
+  }
 
   // --- Format Timecode TC HH:MM:SS:FF ---
   function formatTC(seconds) {
@@ -1426,22 +1436,21 @@ document.addEventListener('DOMContentLoaded', () => {
     return `TC ${pad(h)}:${pad(m)}:${pad(s)}:${pad(f)} // PALLAVARAM`;
   }
 
-  // --- Center and Scroll to a Specific Card ---
-  function scrollToCard(index) {
-    if (!runwayViewport || !runwayCards[index]) return;
-    const targetCard = runwayCards[index];
-    const targetScroll = targetCard.offsetLeft - (runwayViewport.clientWidth - targetCard.clientWidth) / 2;
-    runwayViewport.scrollTo({ left: targetScroll, behavior: 'smooth' });
-  }
-
   // --- Update Active Card & Play Active Video ---
   function updateActiveCard(newIdx) {
+    if (newIdx < 0 || newIdx >= TOTAL_CARDS) return;
     if (newIdx === activeRunwayIdx && runwayCards[newIdx]?.classList.contains('active')) return;
     activeRunwayIdx = newIdx;
 
     // Update Counter
     if (runwayCounterCurrent) {
       runwayCounterCurrent.textContent = String(newIdx + 1).padStart(2, '0');
+    }
+
+    // Update Scrub Fill
+    if (runwayScrubFill) {
+      const pct = ((newIdx + 1) / TOTAL_CARDS) * 100;
+      runwayScrubFill.style.width = pct + '%';
     }
 
     // Update Pill Tabs
@@ -1465,60 +1474,116 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Track Horizontal Scroll State ---
-  let isRunwayTicking = false;
-  function handleRunwayScroll() {
-    if (!runwayViewport || runwayCards.length === 0) return;
+  // ==========================================================================
+  // CORE: Scroll-to-Horizontal Mapping (window.scroll -> translate3d on rail)
+  // ==========================================================================
+  let rafId = null;
+  
+  function handleScrollToHorizontal() {
+    if (!testimonialsSection || !runwayTrack || !runwayViewport || isMobileMode()) return;
 
-    const viewportCenter = runwayViewport.scrollLeft + runwayViewport.clientWidth / 2;
-    const maxScroll = runwayViewport.scrollWidth - runwayViewport.clientWidth;
+    const sectionTop = testimonialsSection.offsetTop;
+    const sectionHeight = testimonialsSection.offsetHeight; // 400vh
+    const viewportHeight = window.innerHeight; // 100vh
+    const maxScroll = sectionHeight - viewportHeight; // 300vh of usable scroll
+    const scrollInside = window.scrollY - sectionTop;
+    
+    // Clamp progress 0 to 1
+    const progress = Math.max(0, Math.min(1, scrollInside / maxScroll));
 
-    // Update bottom scrub fill
-    if (runwayScrubFill && maxScroll > 0) {
-      const pct = Math.min(100, Math.max(5, (runwayViewport.scrollLeft / maxScroll) * 100));
-      runwayScrubFill.style.width = pct + '%';
+    // Calculate how far the rail needs to translate
+    const railWidth = runwayTrack.scrollWidth;
+    const viewportWidth = runwayViewport.clientWidth;
+    const maxTranslate = railWidth - viewportWidth;
+    
+    if (maxTranslate <= 0) return;
+    
+    const translateX = -(progress * maxTranslate);
+    
+    // Apply transform — GPU-accelerated, single property, 120fps butter
+    runwayTrack.style.transform = `translate3d(${translateX}px, 0, 0)`;
+
+    // Determine which card is "centered" based on progress
+    const cardProgress = progress * (TOTAL_CARDS - 1);
+    const closestIdx = Math.round(cardProgress);
+    
+    if (closestIdx !== activeRunwayIdx) {
+      updateActiveCard(closestIdx);
     }
-
-    // Find closest card to viewport center
-    let closestIdx = 0;
-    let minDistance = Infinity;
-
-    runwayCards.forEach((card, idx) => {
-      const cardCenter = card.offsetLeft + card.clientWidth / 2;
-      const distance = Math.abs(viewportCenter - cardCenter);
-      if (distance < minDistance) {
-        minDistance = distance;
-        closestIdx = idx;
-      }
-    });
-
-    updateActiveCard(closestIdx);
   }
 
-  if (runwayViewport) {
-    runwayViewport.addEventListener('scroll', () => {
-      if (!isRunwayTicking) {
-        window.requestAnimationFrame(() => {
-          handleRunwayScroll();
-          isRunwayTicking = false;
-        });
-        isRunwayTicking = true;
+  // Throttle scroll with rAF for butter-smooth 120fps
+  function onWindowScroll() {
+    if (rafId) return;
+    rafId = requestAnimationFrame(() => {
+      handleScrollToHorizontal();
+      rafId = null;
+    });
+  }
+
+  window.addEventListener('scroll', onWindowScroll, { passive: true });
+
+  // --- Navigate to a card by scrolling the PAGE to the right vertical position ---
+  function scrollToCard(index) {
+    if (!testimonialsSection || isMobileMode()) return;
+    const sectionTop = testimonialsSection.offsetTop;
+    const sectionHeight = testimonialsSection.offsetHeight;
+    const viewportHeight = window.innerHeight;
+    const maxScroll = sectionHeight - viewportHeight;
+    
+    // Map card index to scroll progress
+    const progress = index / (TOTAL_CARDS - 1);
+    const targetScrollY = sectionTop + (progress * maxScroll);
+    
+    window.scrollTo({ top: targetScrollY, behavior: 'smooth' });
+  }
+
+  // --- Pill Tab Click Handlers ---
+  runwayPillTabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const idx = parseInt(tab.getAttribute('data-index'), 10);
+      if (!isNaN(idx)) {
+        if (isMobileMode()) {
+          // Mobile: scroll the overflow container
+          const targetCard = runwayCards[idx];
+          if (targetCard && runwayViewport) {
+            const targetScroll = targetCard.offsetLeft - (runwayViewport.clientWidth - targetCard.clientWidth) / 2;
+            runwayViewport.scrollTo({ left: targetScroll, behavior: 'smooth' });
+          }
+        } else {
+          scrollToCard(idx);
+        }
       }
-    }, { passive: true });
+    });
+  });
 
-    // --- Convert Mouse Wheel into Smooth Physical Horizontal Glide ---
-    runwayViewport.addEventListener('wheel', (e) => {
-      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-      const maxScroll = runwayViewport.scrollWidth - runwayViewport.clientWidth;
+  // --- Prev / Next Arrow Actions ---
+  if (runwayPrevBtn) {
+    runwayPrevBtn.addEventListener('click', () => {
+      const prevIdx = Math.max(0, activeRunwayIdx - 1);
+      if (isMobileMode()) {
+        const targetCard = runwayCards[prevIdx];
+        if (targetCard && runwayViewport) {
+          runwayViewport.scrollTo({ left: targetCard.offsetLeft - (runwayViewport.clientWidth - targetCard.clientWidth) / 2, behavior: 'smooth' });
+        }
+      } else {
+        scrollToCard(prevIdx);
+      }
+    });
+  }
 
-      // Allow natural vertical page scroll at boundaries
-      if (runwayViewport.scrollLeft >= maxScroll - 15 && delta > 0) return;
-      if (runwayViewport.scrollLeft <= 15 && delta < 0) return;
-
-      // Physically glide cards horizontally!
-      e.preventDefault();
-      runwayViewport.scrollLeft += delta * 1.35;
-    }, { passive: false });
+  if (runwayNextBtn) {
+    runwayNextBtn.addEventListener('click', () => {
+      const nextIdx = Math.min(TOTAL_CARDS - 1, activeRunwayIdx + 1);
+      if (isMobileMode()) {
+        const targetCard = runwayCards[nextIdx];
+        if (targetCard && runwayViewport) {
+          runwayViewport.scrollTo({ left: targetCard.offsetLeft - (runwayViewport.clientWidth - targetCard.clientWidth) / 2, behavior: 'smooth' });
+        }
+      } else {
+        scrollToCard(nextIdx);
+      }
+    });
   }
 
   // --- Setup Video Listeners for All Cards ---
@@ -1527,7 +1592,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const playHud = card.querySelector('.runway-play-hud');
     const hudIcon = card.querySelector('.hud-play-icon');
     const audioBtn = card.querySelector('.btn-runway-audio');
-    const audioLabel = audioBtn ? audioBtn.querySelector('.audio-label') : null;
     const progressFill = card.querySelector('.cinema-progress-fill');
     const timecodeElem = card.querySelector('.timecode-badge');
     const equalizer = card.querySelector('.studio-equalizer');
@@ -1550,7 +1614,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Clicking video card toggles play/pause
+    // Click video card toggles play/pause
     if (videoCard) {
       videoCard.addEventListener('click', (e) => {
         if (e.target.closest('.btn-runway-audio')) return;
@@ -1569,7 +1633,6 @@ document.addEventListener('DOMContentLoaded', () => {
         video.muted = !video.muted;
         if (video.muted) {
           audioBtn.classList.remove('unmuted');
-          if (audioLabel) audioLabel.textContent = 'Tap for Sound';
           audioBtn.innerHTML = `
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
             <span class="audio-label">Tap for Sound</span>
@@ -1585,7 +1648,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Timeupdate handler
+    // Timeupdate
     video.addEventListener('timeupdate', () => {
       if (video.duration && isFinite(video.duration)) {
         const pct = (video.currentTime / video.duration) * 100;
@@ -1606,31 +1669,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (equalizer) equalizer.classList.remove('playing');
     });
   });
-
-  // --- Pill Tab Click Handlers ---
-  runwayPillTabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      const idx = parseInt(tab.getAttribute('data-index'), 10);
-      if (!isNaN(idx)) {
-        scrollToCard(idx);
-      }
-    });
-  });
-
-  // --- Prev / Next Arrow Actions ---
-  if (runwayPrevBtn) {
-    runwayPrevBtn.addEventListener('click', () => {
-      const prevIdx = Math.max(0, activeRunwayIdx - 1);
-      scrollToCard(prevIdx);
-    });
-  }
-
-  if (runwayNextBtn) {
-    runwayNextBtn.addEventListener('click', () => {
-      const nextIdx = Math.min(runwayCards.length - 1, activeRunwayIdx + 1);
-      scrollToCard(nextIdx);
-    });
-  }
 
   // --- IntersectionObserver for Section 4 ---
   if ('IntersectionObserver' in window) {
@@ -1659,18 +1697,19 @@ document.addEventListener('DOMContentLoaded', () => {
               if (video) video.play().catch(() => {});
             }
           } else {
-            // Pause all videos when scrolled away to save GPU & battery
+            // Pause all videos when scrolled away
             runwayCards.forEach((card) => {
               const video = card.querySelector('.runway-video-elem');
               if (video && !video.paused) video.pause();
             });
           }
         });
-      }, { threshold: 0.15 });
+      }, { threshold: 0.05 });
       sectionObs.observe(testimonialsSection);
     }
   }
 
-  // Initial State Check
-  handleRunwayScroll();
+  // --- Initial state ---
+  handleScrollToHorizontal();
+
 });
