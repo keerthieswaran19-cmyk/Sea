@@ -1399,22 +1399,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ==========================================================================
-  // SECTION 4: ATELIER VOICES — HORIZONTAL STICKY PINNING CINEMA CONTROLLER
+    // ==========================================================================
+  // SECTION 4: ATELIER VOICES (3D CINEMA DECK & SPEECH SHOWCASE CONTROLLER)
   // ==========================================================================
 
-  const testimonialsStickyViewport = document.getElementById('testimonialsStickyViewport');
-  const testimonialsHorizontalRail = document.getElementById('testimonialsHorizontalRail');
-  const runwayItems = Array.from(document.querySelectorAll('.testimonial-runway-item'));
+  const testimonialsStageWrap = document.getElementById('testimonialsStageWrap');
+  const deckStoryUnits = Array.from(document.querySelectorAll('.deck-story-unit'));
   const runwayCounterCurrent = document.getElementById('runwayCounterCurrent');
   const runwayScrubFill = document.getElementById('runwayScrubFill');
   const runwayPillTabs = document.querySelectorAll('.runway-pill-tab');
   const runwayPrevBtn = document.getElementById('runwayPrevBtn');
   const runwayNextBtn = document.getElementById('runwayNextBtn');
   const testimonialsHeaderBlock = document.getElementById('testimonialsHeaderBlock');
+  const ghostImg1 = document.getElementById('ghostImg1');
+  const ghostImg2 = document.getElementById('ghostImg2');
+  const ghostPill1 = document.getElementById('ghostPill1');
+  const ghostPill2 = document.getElementById('ghostPill2');
 
-  let activeRunwayIndex = 0;
+  const storyMeta = [
+    { name: '01 AARAV (DEBATE LAB)', poster: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80' },
+    { name: '02 DIVYA (TECH LEAD)', poster: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80' },
+    { name: '03 KARTHIK (IELTS 8.5)', poster: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80' },
+    { name: '04 PRIYA (PARENT)', poster: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80' }
+  ];
+
+  let currentStoryIdx = 0;
   let isSectionInView = false;
+  let isWheelTransitioning = false;
 
   // --- Format Timecode TC HH:MM:SS:FF ---
   function formatTC(seconds) {
@@ -1426,25 +1437,87 @@ document.addEventListener('DOMContentLoaded', () => {
     return `TC ${pad(h)}:${pad(m)}:${pad(s)}:${pad(f)} // PALLAVARAM`;
   }
 
-  // --- Video Setup & Bulletproof Playback Conductor ---
-  runwayItems.forEach((item, index) => {
-    const video = item.querySelector('.runway-video-elem');
-    const playHud = item.querySelector('.runway-play-hud');
-    const hudIcon = item.querySelector('.hud-play-icon');
-    const audioBtn = item.querySelector('.btn-runway-audio');
+  // --- Update Ghost Deck Cards ---
+  function updateGhostCards(activeIdx) {
+    const next1 = (activeIdx + 1) % storyMeta.length;
+    const next2 = (activeIdx + 2) % storyMeta.length;
+
+    if (ghostImg1 && storyMeta[next1]) ghostImg1.src = storyMeta[next1].poster;
+    if (ghostPill1 && storyMeta[next1]) ghostPill1.textContent = `NEXT: ${storyMeta[next1].name}`;
+
+    if (ghostImg2 && storyMeta[next2]) ghostImg2.src = storyMeta[next2].poster;
+    if (ghostPill2 && storyMeta[next2]) ghostPill2.textContent = storyMeta[next2].name;
+  }
+
+  // --- Switch Story Function ---
+  function switchDeckStory(newIdx, direction = 'next') {
+    if (newIdx < 0 || newIdx >= deckStoryUnits.length || newIdx === currentStoryIdx) return;
+
+    const oldUnit = deckStoryUnits[currentStoryIdx];
+    const newUnit = deckStoryUnits[newIdx];
+
+    // Handle old unit exit animation
+    if (oldUnit) {
+      oldUnit.classList.remove('active');
+      if (direction === 'next') {
+        oldUnit.classList.add('exit-left');
+      }
+      const oldVideo = oldUnit.querySelector('.deck-video-elem');
+      if (oldVideo && !oldVideo.paused) oldVideo.pause();
+
+      setTimeout(() => {
+        oldUnit.classList.remove('exit-left');
+      }, 550);
+    }
+
+    // Handle new unit entrance animation
+    if (newUnit) {
+      newUnit.classList.add('active');
+      const newVideo = newUnit.querySelector('.deck-video-elem');
+      if (newVideo && isSectionInView) {
+        newVideo.play().catch(() => {});
+      }
+    }
+
+    currentStoryIdx = newIdx;
+
+    // Update Counter
+    if (runwayCounterCurrent) {
+      runwayCounterCurrent.textContent = String(newIdx + 1).padStart(2, '0');
+    }
+
+    // Update Progress Scrub Fill
+    if (runwayScrubFill) {
+      runwayScrubFill.style.width = `${((newIdx + 1) / deckStoryUnits.length) * 100}%`;
+    }
+
+    // Update Pill Tabs
+    runwayPillTabs.forEach((tab, idx) => {
+      tab.classList.toggle('active', idx === newIdx);
+    });
+
+    // Update Ghost cards
+    updateGhostCards(newIdx);
+  }
+
+  // --- Setup Video Listeners for All Story Units ---
+  deckStoryUnits.forEach((unit) => {
+    const video = unit.querySelector('.deck-video-elem');
+    const playHud = unit.querySelector('.deck-play-hud');
+    const hudIcon = unit.querySelector('.hud-play-icon');
+    const audioBtn = unit.querySelector('.btn-deck-audio');
     const audioLabel = audioBtn ? audioBtn.querySelector('.audio-label') : null;
-    const progressFill = item.querySelector('.cinema-progress-fill');
-    const timecodeElem = item.querySelector('.timecode-badge');
-    const equalizer = item.querySelector('.studio-equalizer');
-    const videoCard = item.querySelector('.runway-video-card');
+    const progressFill = unit.querySelector('.cinema-progress-fill');
+    const timecodeElem = unit.querySelector('.timecode-badge');
+    const equalizer = unit.querySelector('.studio-equalizer');
+    const videoCard = unit.querySelector('.deck-video-player-card');
 
     if (!video) return;
 
-    // Ensure initial attributes
     video.muted = true;
     video.playsInline = true;
 
-    // Click Play HUD to Play/Pause
+    // Click Play HUD
     if (playHud) {
       playHud.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -1456,10 +1529,10 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Clicking the video card toggles play/pause
+    // Clicking video card toggles play/pause
     if (videoCard) {
       videoCard.addEventListener('click', (e) => {
-        if (e.target.closest('.btn-runway-audio')) return;
+        if (e.target.closest('.btn-deck-audio')) return;
         if (video.paused) {
           video.play().catch(() => {});
         } else {
@@ -1468,7 +1541,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Audio Toggle (Mute / Live Sound)
+    // Audio Toggle
     if (audioBtn) {
       audioBtn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -1491,7 +1564,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Timeupdate handler: progress bar & timecode
+    // Timeupdate handler
     video.addEventListener('timeupdate', () => {
       if (video.duration && isFinite(video.duration)) {
         const pct = (video.currentTime / video.duration) * 100;
@@ -1513,131 +1586,94 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- Switch Active Runway Card & Play Active Video ---
-  function setActiveRunwayCard(newIndex, playVideo = true) {
-    if (newIndex < 0 || newIndex >= runwayItems.length) return;
-    activeRunwayIndex = newIndex;
+  // --- Wheel Event: Smooth Horizontal Deck Scrubbing ---
+  if (testimonialsStageWrap) {
+    testimonialsStageWrap.addEventListener('wheel', (e) => {
+      // If user scrolls horizontally or vertically with intent
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
 
-    // Update runway counter
-    if (runwayCounterCurrent) {
-      runwayCounterCurrent.textContent = String(newIndex + 1).padStart(2, '0');
-    }
-
-    // Update pill tabs
-    runwayPillTabs.forEach((tab, idx) => {
-      tab.classList.toggle('active', idx === newIndex);
-    });
-
-    // Update cards active state & playback conductor
-    runwayItems.forEach((item, idx) => {
-      const isActive = idx === newIndex;
-      item.classList.toggle('active', isActive);
-
-      const video = item.querySelector('.runway-video-elem');
-      if (video) {
-        if (isActive && isSectionInView && playVideo) {
-          video.play().catch(() => {});
-        } else if (!isActive) {
-          if (!video.paused) video.pause();
+      if (Math.abs(delta) > 25 && !isWheelTransitioning) {
+        if (delta > 0) {
+          // Scroll Down / Right -> Next Card
+          if (currentStoryIdx < deckStoryUnits.length - 1) {
+            e.preventDefault();
+            isWheelTransitioning = true;
+            switchDeckStory(currentStoryIdx + 1, 'next');
+            setTimeout(() => { isWheelTransitioning = false; }, 600);
+          }
+          // If on last card, allow normal page scroll down!
+        } else {
+          // Scroll Up / Left -> Previous Card
+          if (currentStoryIdx > 0) {
+            e.preventDefault();
+            isWheelTransitioning = true;
+            switchDeckStory(currentStoryIdx - 1, 'prev');
+            setTimeout(() => { isWheelTransitioning = false; }, 600);
+          }
+          // If on first card, allow normal page scroll up!
         }
       }
-    });
+    }, { passive: false });
   }
 
-  // --- Horizontal Sticky Scrub Scroll Math ---
-  function handleRunwayScroll() {
-    if (!testimonialsSection || !testimonialsHorizontalRail || runwayItems.length === 0) return;
+  // --- Touch Swipe Left/Right for Mobile & Tablets ---
+  let touchStartX = 0;
+  let touchStartY = 0;
 
-    // Check if desktop / pinned mode
-    if (window.innerWidth < 1024) return;
+  if (testimonialsStageWrap) {
+    testimonialsStageWrap.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].clientX;
+      touchStartY = e.changedTouches[0].clientY;
+    }, { passive: true });
 
-    const sectionRect = testimonialsSection.getBoundingClientRect();
-    const sectionTop = testimonialsSection.offsetTop;
-    const sectionHeight = testimonialsSection.offsetHeight;
-    const viewportHeight = window.innerHeight;
-    const scrollY = window.scrollY || window.pageYOffset;
-    const maxScroll = sectionHeight - viewportHeight;
+    testimonialsStageWrap.addEventListener('touchend', (e) => {
+      const touchEndX = e.changedTouches[0].clientX;
+      const touchEndY = e.changedTouches[0].clientY;
+      const diffX = touchEndX - touchStartX;
+      const diffY = touchEndY - touchStartY;
 
-    if (maxScroll <= 0) return;
-
-    // Calculate how far inside the 380vh section we have scrolled
-    const scrollInside = scrollY - sectionTop;
-    const progress = Math.min(1, Math.max(0, scrollInside / maxScroll));
-
-    // Calculate total rail width and translation distance
-    const railScrollWidth = testimonialsHorizontalRail.scrollWidth;
-    const viewportWidth = window.innerWidth;
-    // Translate from starting padding to reveal last card at center
-    const maxTranslate = railScrollWidth - viewportWidth + (viewportWidth * 0.12);
-    const translateX = -(progress * maxTranslate);
-
-    testimonialsHorizontalRail.style.transform = `translate3d(${translateX.toFixed(1)}px, 0, 0)`;
-
-    // Update bottom scrub fill line
-    if (runwayScrubFill) {
-      runwayScrubFill.style.width = `${Math.min(100, Math.max(5, progress * 100))}%`;
-    }
-
-    // Find card closest to viewport center (window.innerWidth / 2)
-    const screenCenter = viewportWidth / 2;
-    let closestIndex = 0;
-    let minDistance = Infinity;
-
-    runwayItems.forEach((item, idx) => {
-      const rect = item.getBoundingClientRect();
-      const itemCenter = rect.left + rect.width / 2;
-      const dist = Math.abs(screenCenter - itemCenter);
-      if (dist < minDistance) {
-        minDistance = dist;
-        closestIndex = idx;
+      // Only trigger if horizontal swipe is dominant
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+        if (diffX < 0) {
+          // Swiped Left -> Next Card
+          const nextIdx = (currentStoryIdx + 1) % deckStoryUnits.length;
+          switchDeckStory(nextIdx, 'next');
+        } else {
+          // Swiped Right -> Prev Card
+          const prevIdx = (currentStoryIdx - 1 + deckStoryUnits.length) % deckStoryUnits.length;
+          switchDeckStory(prevIdx, 'prev');
+        }
       }
-    });
-
-    if (closestIndex !== activeRunwayIndex) {
-      setActiveRunwayCard(closestIndex, true);
-    }
+    }, { passive: true });
   }
 
-  // Attach to window scroll via requestAnimationFrame
-  window.addEventListener('scroll', () => {
-    handleRunwayScroll();
-  }, { passive: true });
-
-  // --- Click Pill Tabs: Smooth Scroll to that Card ---
+  // --- Pill Tab Click Handlers ---
   runwayPillTabs.forEach((tab) => {
     tab.addEventListener('click', () => {
       const idx = parseInt(tab.getAttribute('data-index'), 10);
-      if (!isNaN(idx) && testimonialsSection) {
-        const sectionTop = testimonialsSection.offsetTop;
-        const maxScroll = testimonialsSection.offsetHeight - window.innerHeight;
-        const targetScroll = sectionTop + (idx / (runwayItems.length - 1)) * maxScroll;
-        window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+      if (!isNaN(idx) && idx !== currentStoryIdx) {
+        const dir = idx > currentStoryIdx ? 'next' : 'prev';
+        switchDeckStory(idx, dir);
       }
     });
   });
 
-  // --- Prev / Next Arrow Navigation ---
-  if (runwayPrevBtn && testimonialsSection) {
+  // --- Prev / Next Arrow Actions ---
+  if (runwayPrevBtn) {
     runwayPrevBtn.addEventListener('click', () => {
-      const targetIdx = Math.max(0, activeRunwayIndex - 1);
-      const sectionTop = testimonialsSection.offsetTop;
-      const maxScroll = testimonialsSection.offsetHeight - window.innerHeight;
-      const targetScroll = sectionTop + (targetIdx / (runwayItems.length - 1)) * maxScroll;
-      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+      const prevIdx = (currentStoryIdx - 1 + deckStoryUnits.length) % deckStoryUnits.length;
+      switchDeckStory(prevIdx, 'prev');
     });
   }
 
-  if (runwayNextBtn && testimonialsSection) {
+  if (runwayNextBtn) {
     runwayNextBtn.addEventListener('click', () => {
-      const targetIdx = Math.min(runwayItems.length - 1, activeRunwayIndex + 1);
-      const sectionTop = testimonialsSection.offsetTop;
-      const maxScroll = testimonialsSection.offsetHeight - window.innerHeight;
-      const targetScroll = sectionTop + (targetIdx / (runwayItems.length - 1)) * maxScroll;
-      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+      const nextIdx = (currentStoryIdx + 1) % deckStoryUnits.length;
+      switchDeckStory(nextIdx, 'next');
     });
   }
 
-  // --- IntersectionObserver for Section 4 (Auto-Play Active Video) ---
+  // --- IntersectionObserver for Section 4 ---
   if ('IntersectionObserver' in window) {
     if (testimonialsHeaderBlock) {
       const headerObs = new IntersectionObserver((entries) => {
@@ -1658,26 +1694,24 @@ document.addEventListener('DOMContentLoaded', () => {
           isSectionInView = entry.isIntersecting;
           if (entry.isIntersecting) {
             testimonialsSection.classList.add('revealed');
-            // Play active card video
-            const activeItem = runwayItems[activeRunwayIndex];
-            if (activeItem) {
-              const video = activeItem.querySelector('.runway-video-elem');
+            const activeUnit = deckStoryUnits[currentStoryIdx];
+            if (activeUnit) {
+              const video = activeUnit.querySelector('.deck-video-elem');
               if (video) video.play().catch(() => {});
             }
           } else {
-            // Pause all videos when section is off screen to save memory & battery
-            runwayItems.forEach((item) => {
-              const video = item.querySelector('.runway-video-elem');
+            // Pause all videos when scrolled away to save memory & battery
+            deckStoryUnits.forEach((unit) => {
+              const video = unit.querySelector('.deck-video-elem');
               if (video && !video.paused) video.pause();
             });
           }
         });
-      }, { threshold: 0.05 });
+      }, { threshold: 0.15 });
       sectionObs.observe(testimonialsSection);
     }
   }
 
-  // Initial trigger
-  setActiveRunwayCard(0, false);
-  handleRunwayScroll();
+  // Initial State Setup
+  updateGhostCards(0);
 });
