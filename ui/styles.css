@@ -2118,6 +2118,498 @@ html, body {
 }
 
 /* ==========================================================================
+   SECTION 4: ATELIER VOICE REELS (STACKED VIDEO TESTIMONIALS)
+   ========================================================================== */
+.section-testimonials {
+  width: 100%;
+  padding: 7rem 3.5rem 8.5rem;
+  background: #fbfdff;
+  position: relative;
+  border-top: 1px solid rgba(0, 157, 196, 0.12);
+  overflow: hidden;
+}
+
+.orb-testimonials-left {
+  top: 8%;
+  left: -8%;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(0, 157, 196, 0.22) 0%, rgba(34, 211, 238, 0.05) 60%, transparent 80%);
+}
+
+.orb-testimonials-right {
+  bottom: 4%;
+  right: -8%;
+  width: 560px;
+  height: 560px;
+  background: radial-gradient(circle, rgba(0, 157, 196, 0.18) 0%, rgba(14, 165, 233, 0.04) 60%, transparent 80%);
+}
+
+.testimonials-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+/* Header Block with Ocean Blue Accents */
+.testimonials-header-block {
+  text-align: center;
+  margin: 0 auto 3.8rem;
+  max-width: 780px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.2;
+  transform: translateY(28px) scale(0.97);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.section-testimonials.revealed .testimonials-header-block {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.testimonials-ocean-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 157, 196, 0.08);
+  border: 1px solid rgba(0, 157, 196, 0.28);
+  color: #007d9c;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.35rem 1rem;
+  border-radius: 9999px;
+  margin-bottom: 1.15rem;
+  box-shadow: 0 4px 14px rgba(0, 157, 196, 0.08);
+  backdrop-filter: blur(8px);
+}
+
+.testimonials-title {
+  position: relative;
+  font-family: var(--font-sans);
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  color: #09131f;
+  margin-bottom: 0.95rem;
+  line-height: 1.2;
+}
+
+.testimonials-halo-line {
+  display: block;
+  height: 3px;
+  width: 40px;
+  background: linear-gradient(90deg, transparent, #009DC4 30%, #22d3ee 70%, transparent);
+  margin: 0.85rem auto 0;
+  border-radius: 9999px;
+  box-shadow: 0 0 14px rgba(0, 157, 196, 0.7);
+  transition: width 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.section-testimonials.revealed .testimonials-halo-line {
+  width: 155px;
+}
+
+.testimonials-desc {
+  font-family: var(--font-para);
+  font-size: 1.14rem;
+  line-height: 1.7;
+  color: #475569;
+  max-width: 650px;
+  margin: 0 auto 2rem;
+}
+
+/* Navigation Controls & Carousel Progress */
+.testimonials-nav-cluster {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: #ffffff;
+  padding: 0.45rem 0.85rem;
+  border-radius: 9999px;
+  border: 1.5px solid #e2e8f0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.reel-nav-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid #e2e8f0;
+  background: #ffffff;
+  color: #09131f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-smooth);
+}
+
+.reel-nav-btn:hover {
+  background: #009DC4;
+  color: #ffffff;
+  border-color: #009DC4;
+  box-shadow: 0 4px 14px rgba(0, 157, 196, 0.35);
+  transform: scale(1.08);
+}
+
+.reel-indicators {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.reel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: #cbd5e1;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.reel-dot.active {
+  width: 24px;
+  background: #009DC4;
+  box-shadow: 0 0 10px rgba(0, 157, 196, 0.6);
+}
+
+/* Horizontal Stacked Video Reel Track (Scroll Right) */
+.voice-reels-track {
+  display: flex;
+  gap: 2.2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 1.5rem 0.5rem 2.5rem;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.voice-reels-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Individual Video Reel Card (Luxury Aspect Ratio) */
+.voice-reel-card {
+  flex: 0 0 350px;
+  max-width: 350px;
+  height: 590px;
+  border-radius: 26px;
+  border: 1.5px solid rgba(0, 157, 196, 0.2);
+  position: relative;
+  overflow: hidden;
+  background: #050b14;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+  scroll-snap-align: center;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.45s ease;
+  cursor: pointer;
+  will-change: transform;
+}
+
+.voice-reel-card:hover,
+.voice-reel-card.active {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(0, 157, 196, 0.6);
+  box-shadow: 0 24px 60px rgba(0, 157, 196, 0.22), 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.reel-video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.reel-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.reel-scrim-gradient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(9, 19, 31, 0.72) 0%, rgba(9, 19, 31, 0.05) 32%, rgba(9, 19, 31, 0.25) 58%, rgba(9, 19, 31, 0.94) 100%);
+  z-index: 2;
+}
+
+/* Top Identity & 5-Star Ratings Overlay */
+.reel-top-bar {
+  position: absolute;
+  top: 1.15rem;
+  left: 1.15rem;
+  right: 1.15rem;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.reel-author-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: rgba(9, 19, 31, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0.35rem 0.85rem 0.35rem 0.35rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  max-width: 72%;
+}
+
+.author-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid #009DC4;
+  flex-shrink: 0;
+}
+
+.author-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.author-name {
+  font-family: var(--font-sans);
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.author-cohort {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #22d3ee;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.reel-stars-pill {
+  background: rgba(0, 157, 196, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 157, 196, 0.45);
+  padding: 0.35rem 0.65rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #38bdf8;
+  font-size: 0.72rem;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(0, 157, 196, 0.15);
+}
+
+.stars-gold {
+  color: #38bdf8;
+  letter-spacing: 0.05em;
+  font-size: 0.8rem;
+}
+
+.rating-val {
+  color: #ffffff;
+  font-size: 0.72rem;
+}
+
+/* Center Click Play / Pause Badge */
+.reel-center-play-badge {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(0, 157, 196, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  z-index: 3;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 25px rgba(0, 157, 196, 0.4);
+}
+
+.voice-reel-card:hover .reel-center-play-badge {
+  opacity: 0.95;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.voice-reel-card.playing .reel-center-play-badge .play-icon {
+  display: none;
+}
+
+.voice-reel-card.playing .reel-center-play-badge .pause-icon {
+  display: block;
+}
+
+.voice-reel-card:not(.playing) .reel-center-play-badge .pause-icon {
+  display: none;
+}
+
+.voice-reel-card:not(.playing) .reel-center-play-badge .play-icon {
+  display: block;
+}
+
+/* Bottom Controls (Left: Ocean Blue Audio Pill + Waveform) */
+.reel-bottom-controls {
+  position: absolute;
+  bottom: 8.5rem;
+  left: 1.15rem;
+  right: 1.15rem;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ocean-audio-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: rgba(0, 157, 196, 0.9);
+  border: 1px solid rgba(34, 211, 238, 0.5);
+  padding: 0.4rem 0.85rem;
+  border-radius: 9999px;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 157, 196, 0.35);
+  transition: all 0.25s ease;
+}
+
+.ocean-audio-pill:hover {
+  background: #0087a8;
+  transform: scale(1.05);
+}
+
+.audio-wave-bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+
+.audio-wave-bars .bar {
+  width: 2.5px;
+  height: 4px;
+  background: #ffffff;
+  border-radius: 2px;
+  transition: height 0.2s ease;
+}
+
+.voice-reel-card.sound-active .audio-wave-bars .bar-1 {
+  animation: waveBounce 0.8s infinite ease-in-out alternate;
+}
+.voice-reel-card.sound-active .audio-wave-bars .bar-2 {
+  animation: waveBounce 0.6s 0.2s infinite ease-in-out alternate;
+}
+.voice-reel-card.sound-active .audio-wave-bars .bar-3 {
+  animation: waveBounce 0.9s 0.4s infinite ease-in-out alternate;
+}
+.voice-reel-card.sound-active .audio-wave-bars .bar-4 {
+  animation: waveBounce 0.7s 0.1s infinite ease-in-out alternate;
+}
+
+@keyframes waveBounce {
+  0% { height: 3px; }
+  100% { height: 14px; }
+}
+
+.voice-reel-card.sound-active .sound-icon-muted {
+  display: none;
+}
+.voice-reel-card.sound-active .sound-icon-unmuted {
+  display: block;
+}
+.voice-reel-card:not(.sound-active) .sound-icon-unmuted {
+  display: none;
+}
+.voice-reel-card:not(.sound-active) .sound-icon-muted {
+  display: block;
+}
+
+.reel-timestamp {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.75);
+  background: rgba(9, 19, 31, 0.6);
+  padding: 0.35rem 0.65rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Spoken Dialogue Live Subtitle Captions */
+.reel-captions-box {
+  position: absolute;
+  bottom: 1.15rem;
+  left: 1.15rem;
+  right: 1.15rem;
+  z-index: 4;
+  background: rgba(9, 19, 31, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(0, 157, 196, 0.3);
+  border-radius: 18px;
+  padding: 0.95rem 1.05rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.caption-marker {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #22d3ee;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.caption-text {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  line-height: 1.48;
+  color: #f1f5f9;
+  margin: 0;
+  font-style: italic;
+}
+
+.caption-highlight {
+  color: #38bdf8;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: rgba(56, 189, 248, 0.4);
+}
+
+/* ==========================================================================
    Editorial Reading Overlay Modal
    ========================================================================== */
 .reader-dialog {
@@ -2317,6 +2809,10 @@ html, body {
     padding: 4.5rem 1.5rem;
   }
 
+  .section-testimonials {
+    padding: 4.5rem 1.5rem;
+  }
+
   .learn-cards-track {
     grid-template-columns: 1fr;
     gap: 2.2rem;
@@ -2353,6 +2849,20 @@ html, body {
 
   .section-learn {
     padding: 3.5rem 1.25rem;
+  }
+
+  .section-testimonials {
+    padding: 3.5rem 1.25rem;
+  }
+
+  .testimonials-title {
+    font-size: 2.2rem;
+  }
+
+  .voice-reel-card {
+    flex: 0 0 310px;
+    max-width: 310px;
+    height: 540px;
   }
 
   .learn-title {

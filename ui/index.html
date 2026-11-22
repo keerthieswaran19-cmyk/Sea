@@ -44,6 +44,7 @@
           <a href="#" class="nav-link-item active" id="navLinkHero">Overview</a>
           <a href="#coursesSection" class="nav-link-item" id="navLinkCourses">Boutique Cohorts</a>
           <a href="#learnSection" class="nav-link-item" id="navLinkLearn">Learn With Us</a>
+          <a href="#testimonialsSection" class="nav-link-item" id="navLinkTestimonials">Voice Reels</a>
         </nav>
         
         <button class="nav-consult-pill" id="navModalTrigger">
@@ -692,6 +693,293 @@
 
       </div>
 
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 4: ATELIER VOICE REELS (STACKED VIDEO TESTIMONIALS)
+       ========================================================================== -->
+  <section class="section-testimonials" id="testimonialsSection">
+    <!-- Atmospheric Ocean Blue Light Orbs for Section 4 -->
+    <div class="section-ocean-orb orb-testimonials-left"></div>
+    <div class="section-ocean-orb orb-testimonials-right"></div>
+
+    <div class="testimonials-container">
+      
+      <!-- Section Header with Ocean Blue Accents -->
+      <div class="testimonials-header-block" id="testimonialsHeaderBlock">
+        <div class="testimonials-ocean-pill">
+          <span class="sparkle-cyan">✦</span>
+          <span>AUTHENTIC STUDENT & EXECUTIVE TRANSFORMATIONS</span>
+        </div>
+        <h2 class="testimonials-title">
+          Voices of the <span class="ocean-text-accent">Atelier</span>
+          <span class="testimonials-halo-line"></span>
+        </h2>
+        <p class="testimonials-desc">
+          Watch how personalized 1:6 studio mentoring dissolves regional hesitation and builds instinctive, articulate spoken poise.
+        </p>
+
+        <!-- Carousel Navigation Controls & Progress Track -->
+        <div class="testimonials-nav-cluster">
+          <button class="reel-nav-btn btn-prev" id="reelPrevBtn" type="button" aria-label="Previous testimonial video">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <div class="reel-indicators" id="reelIndicators">
+            <span class="reel-dot active" data-index="0"></span>
+            <span class="reel-dot" data-index="1"></span>
+            <span class="reel-dot" data-index="2"></span>
+            <span class="reel-dot" data-index="3"></span>
+          </div>
+          <button class="reel-nav-btn btn-next" id="reelNextBtn" type="button" aria-label="Next testimonial video">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Horizontal Stacked Video Reel Track -->
+      <div class="voice-reels-track" id="voiceReelsTrack">
+        
+        <!-- VIDEO CARD 1: Junior Articulator (Aanya, Age 9) -->
+        <article class="voice-reel-card active" data-index="0">
+          <div class="reel-video-container">
+            <!-- Top Identity & 5-Star Ratings Floating Overlay -->
+            <div class="reel-top-bar">
+              <div class="reel-author-badge">
+                <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=160&q=80" alt="Aanya Sharma" class="author-avatar" loading="lazy">
+                <div class="author-info">
+                  <h4 class="author-name">Aanya Sharma, 9 yrs</h4>
+                  <span class="author-cohort">Junior Articulators • Chennai</span>
+                </div>
+              </div>
+              <div class="reel-stars-pill">
+                <span class="stars-gold">★★★★★</span>
+                <span class="rating-val">5.0</span>
+              </div>
+            </div>
+
+            <!-- Video Player Element with Poster Fallback -->
+            <video 
+              class="reel-video" 
+              src="https://vjs.zencdn.net/v/oceans.mp4" 
+              poster="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80"
+              playsinline 
+              muted 
+              loop 
+              preload="metadata"
+            ></video>
+
+            <!-- Video Dark Gradient Scrim for Readability -->
+            <div class="reel-scrim-gradient"></div>
+
+            <!-- Center Click Play / Pause Indicator -->
+            <div class="reel-center-play-badge">
+              <svg class="play-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              <svg class="pause-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+            </div>
+
+            <!-- Bottom Control Cluster (Left: Ocean Blue Audio Pill + Waveform) -->
+            <div class="reel-bottom-controls">
+              <button class="ocean-audio-pill" type="button" aria-label="Toggle sound">
+                <div class="audio-wave-bars">
+                  <span class="bar bar-1"></span>
+                  <span class="bar bar-2"></span>
+                  <span class="bar bar-3"></span>
+                  <span class="bar bar-4"></span>
+                </div>
+                <span class="audio-label">SOUND OFF</span>
+                <svg class="sound-icon-muted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"></path><path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                <svg class="sound-icon-unmuted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+              </button>
+
+              <span class="reel-timestamp">0:45 Reel</span>
+            </div>
+
+            <!-- Spoken Dialogue Live Subtitle Captions (BBC/Documentary Style) -->
+            <div class="reel-captions-box">
+              <span class="caption-marker">SPOKEN REFLEX</span>
+              <p class="caption-text">
+                "I used to get stuck translating Tamil words in my head. In just 8 weeks at <span class="caption-highlight">Aura Atelier</span>, I can speak in school assemblies without any hesitation!"
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- VIDEO CARD 2: Scholar Fluency (Rhea, Age 16) -->
+        <article class="voice-reel-card" data-index="1">
+          <div class="reel-video-container">
+            <div class="reel-top-bar">
+              <div class="reel-author-badge">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80" alt="Rhea Sundaram" class="author-avatar" loading="lazy">
+                <div class="author-info">
+                  <h4 class="author-name">Rhea Sundaram, 16 yrs</h4>
+                  <span class="author-cohort">Scholar Fluency & Debate Lab • Pallavaram</span>
+                </div>
+              </div>
+              <div class="reel-stars-pill">
+                <span class="stars-gold">★★★★★</span>
+                <span class="rating-val">5.0</span>
+              </div>
+            </div>
+
+            <video 
+              class="reel-video" 
+              src="https://media.w3.org/2010/05/sintel/trailer.mp4" 
+              poster="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80"
+              playsinline 
+              muted 
+              loop 
+              preload="metadata"
+            ></video>
+
+            <div class="reel-scrim-gradient"></div>
+
+            <div class="reel-center-play-badge">
+              <svg class="play-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              <svg class="pause-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+            </div>
+
+            <div class="reel-bottom-controls">
+              <button class="ocean-audio-pill" type="button" aria-label="Toggle sound">
+                <div class="audio-wave-bars">
+                  <span class="bar bar-1"></span>
+                  <span class="bar bar-2"></span>
+                  <span class="bar bar-3"></span>
+                  <span class="bar bar-4"></span>
+                </div>
+                <span class="audio-label">SOUND OFF</span>
+                <svg class="sound-icon-muted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"></path><path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                <svg class="sound-icon-unmuted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+              </button>
+              <span class="reel-timestamp">0:52 Reel</span>
+            </div>
+
+            <div class="reel-captions-box">
+              <span class="caption-marker">PARLIAMENTARY RHETORIC</span>
+              <p class="caption-text">
+                "The 1:6 ratio made all the difference. My coach corrected my acoustic cadence, and I won <span class="caption-highlight">Best Speaker</span> at the National Youth Parliamentary Debate!"
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- VIDEO CARD 3: IELTS Academic (Karthik Ram, Age 22) -->
+        <article class="voice-reel-card" data-index="2">
+          <div class="reel-video-container">
+            <div class="reel-top-bar">
+              <div class="reel-author-badge">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=160&q=80" alt="Karthik Ram" class="author-avatar" loading="lazy">
+                <div class="author-info">
+                  <h4 class="author-name">Karthik Ram, 22 yrs</h4>
+                  <span class="author-cohort">IELTS Academic Studio • Band 8.5</span>
+                </div>
+              </div>
+              <div class="reel-stars-pill">
+                <span class="stars-gold">★★★★★</span>
+                <span class="rating-val">5.0</span>
+              </div>
+            </div>
+
+            <video 
+              class="reel-video" 
+              src="https://www.w3schools.com/html/mov_bbb.mp4" 
+              poster="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80"
+              playsinline 
+              muted 
+              loop 
+              preload="metadata"
+            ></video>
+
+            <div class="reel-scrim-gradient"></div>
+
+            <div class="reel-center-play-badge">
+              <svg class="play-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              <svg class="pause-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+            </div>
+
+            <div class="reel-bottom-controls">
+              <button class="ocean-audio-pill" type="button" aria-label="Toggle sound">
+                <div class="audio-wave-bars">
+                  <span class="bar bar-1"></span>
+                  <span class="bar bar-2"></span>
+                  <span class="bar bar-3"></span>
+                  <span class="bar bar-4"></span>
+                </div>
+                <span class="audio-label">SOUND OFF</span>
+                <svg class="sound-icon-muted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"></path><path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                <svg class="sound-icon-unmuted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+              </button>
+              <span class="reel-timestamp">0:48 Reel</span>
+            </div>
+
+            <div class="reel-captions-box">
+              <span class="caption-marker">BAND 8.5 SPEAKING</span>
+              <p class="caption-text">
+                "Other institutes taught memorized templates. Dr. Aris taught me <span class="caption-highlight">spontaneous thought-chunking</span> and natural pauses. Scored 8.5 in my first attempt!"
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- VIDEO CARD 4: Executive Oratory (Dr. Meera Vasudevan) -->
+        <article class="voice-reel-card" data-index="3">
+          <div class="reel-video-container">
+            <div class="reel-top-bar">
+              <div class="reel-author-badge">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=160&q=80" alt="Dr. Meera Vasudevan" class="author-avatar" loading="lazy">
+                <div class="author-info">
+                  <h4 class="author-name">Dr. Meera Vasudevan</h4>
+                  <span class="author-cohort">Corporate Oratory & Stage Poise Lab • VP</span>
+                </div>
+              </div>
+              <div class="reel-stars-pill">
+                <span class="stars-gold">★★★★★</span>
+                <span class="rating-val">5.0</span>
+              </div>
+            </div>
+
+            <video 
+              class="reel-video" 
+              src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" 
+              poster="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80"
+              playsinline 
+              muted 
+              loop 
+              preload="metadata"
+            ></video>
+
+            <div class="reel-scrim-gradient"></div>
+
+            <div class="reel-center-play-badge">
+              <svg class="play-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              <svg class="pause-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+            </div>
+
+            <div class="reel-bottom-controls">
+              <button class="ocean-audio-pill" type="button" aria-label="Toggle sound">
+                <div class="audio-wave-bars">
+                  <span class="bar bar-1"></span>
+                  <span class="bar bar-2"></span>
+                  <span class="bar bar-3"></span>
+                  <span class="bar bar-4"></span>
+                </div>
+                <span class="audio-label">SOUND OFF</span>
+                <svg class="sound-icon-muted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"></path><path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                <svg class="sound-icon-unmuted" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 5L6 9H2v6h4l5 4V5z"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+              </button>
+              <span class="reel-timestamp">0:56 Reel</span>
+            </div>
+
+            <div class="reel-captions-box">
+              <span class="caption-marker">EXECUTIVE CADENCE</span>
+              <p class="caption-text">
+                "Presenting to European and US boardrooms required unshakeable vocal authority. Aura's <span class="caption-highlight">diaphragmatic breath drills</span> transformed how I command attention."
+              </p>
+            </div>
+          </div>
+        </article>
+
+      </div>
     </div>
   </section>
 

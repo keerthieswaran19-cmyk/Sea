@@ -1089,8 +1089,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinkHero = document.getElementById('navLinkHero');
   const navLinkCourses = document.getElementById('navLinkCourses');
   const navLinkLearn = document.getElementById('navLinkLearn');
+  const navLinkTestimonials = document.getElementById('navLinkTestimonials');
   const coursesSection = document.getElementById('coursesSection');
   const learnSection = document.getElementById('learnSection');
+  const testimonialsSection = document.getElementById('testimonialsSection');
   const coursesHeaderBlock = document.getElementById('coursesHeaderBlock');
   const coursesGrid = document.querySelector('.courses-grid');
   const coursesGridDuo = document.querySelector('.courses-grid-duo');
@@ -1121,18 +1123,27 @@ document.addEventListener('DOMContentLoaded', () => {
     if (navLinkHero && navLinkCourses) {
       const coursesTop = coursesSection ? coursesSection.offsetTop - 240 : 800;
       const learnTop = learnSection ? learnSection.offsetTop - 240 : 1800;
+      const testTop = testimonialsSection ? testimonialsSection.offsetTop - 240 : 2700;
 
-      if (learnSection && scrollY >= learnTop) {
-        if (navLinkLearn) navLinkLearn.classList.add('active');
-        navLinkCourses.classList.remove('active');
-        navLinkHero.classList.remove('active');
-      } else if (coursesSection && scrollY >= coursesTop) {
-        navLinkCourses.classList.add('active');
-        navLinkHero.classList.remove('active');
+      if (testimonialsSection && scrollY >= testTop) {
+        if (navLinkTestimonials) navLinkTestimonials.classList.add('active');
         if (navLinkLearn) navLinkLearn.classList.remove('active');
+        if (navLinkCourses) navLinkCourses.classList.remove('active');
+        if (navLinkHero) navLinkHero.classList.remove('active');
+      } else if (learnSection && scrollY >= learnTop) {
+        if (navLinkLearn) navLinkLearn.classList.add('active');
+        if (navLinkTestimonials) navLinkTestimonials.classList.remove('active');
+        if (navLinkCourses) navLinkCourses.classList.remove('active');
+        if (navLinkHero) navLinkHero.classList.remove('active');
+      } else if (coursesSection && scrollY >= coursesTop) {
+        if (navLinkCourses) navLinkCourses.classList.add('active');
+        if (navLinkTestimonials) navLinkTestimonials.classList.remove('active');
+        if (navLinkLearn) navLinkLearn.classList.remove('active');
+        if (navLinkHero) navLinkHero.classList.remove('active');
       } else {
-        navLinkHero.classList.add('active');
-        navLinkCourses.classList.remove('active');
+        if (navLinkHero) navLinkHero.classList.add('active');
+        if (navLinkTestimonials) navLinkTestimonials.classList.remove('active');
+        if (navLinkCourses) navLinkCourses.classList.remove('active');
         if (navLinkLearn) navLinkLearn.classList.remove('active');
       }
     }
@@ -1221,6 +1232,25 @@ document.addEventListener('DOMContentLoaded', () => {
       }, { threshold: 0.15 });
       learnObserver.observe(learnSection);
     }
+
+    // Atelier Voice Reels (Section 4) Observer — Zero Lag In-View Video Player
+    if (testimonialsSection) {
+      const testObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            testimonialsSection.classList.add('revealed');
+            playActiveReelVideo();
+          } else {
+            if (entry.boundingClientRect.top > 0) {
+              testimonialsSection.classList.remove('revealed');
+            }
+            // When section leaves viewport, instantly pause all videos to ensure 0% CPU/GPU overhead!
+            pauseAllReelVideos();
+          }
+        });
+      }, { threshold: 0.15 });
+      testObserver.observe(testimonialsSection);
+    }
   } else {
     // Fallback if IntersectionObserver not supported
     if (coursesHeaderBlock) coursesHeaderBlock.classList.add('revealed');
@@ -1228,6 +1258,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (coursesGridDuo) coursesGridDuo.classList.add('fanned-out');
     if (learnSection) learnSection.classList.add('revealed');
     if (learnCardsTrack) learnCardsTrack.classList.add('fanned-out');
+    if (testimonialsSection) testimonialsSection.classList.add('revealed');
   }
 
   // --- 6. Interactive Card 3D Magnetic Tilt & Spotlight (Apple / Stripe style) ---
@@ -1387,4 +1418,171 @@ document.addEventListener('DOMContentLoaded', () => {
       learnTrack.scrollBy({ left: 420, behavior: 'smooth' });
     });
   }
+
+  // ==========================================================================
+  // SECTION 4: ATELIER VOICE REELS CONTROLLER (STACKED VIDEO TESTIMONIALS)
+  // ==========================================================================
+  const voiceReelsTrack = document.getElementById('voiceReelsTrack');
+  const reelCards = document.querySelectorAll('.voice-reel-card');
+  const reelDots = document.querySelectorAll('.reel-dot');
+  const reelPrevBtn = document.getElementById('reelPrevBtn');
+  const reelNextBtn = document.getElementById('reelNextBtn');
+  let activeReelIndex = 0;
+
+  function pauseAllReelVideos() {
+    reelCards.forEach((card) => {
+      const vid = card.querySelector('video');
+      if (vid && !vid.paused) {
+        vid.pause();
+      }
+      card.classList.remove('playing');
+    });
+  }
+
+  function playActiveReelVideo() {
+    if (activeReelIndex < 0 || activeReelIndex >= reelCards.length) return;
+    const activeCard = reelCards[activeReelIndex];
+    if (!activeCard) return;
+
+    const vid = activeCard.querySelector('video');
+    if (vid) {
+      vid.play().then(() => {
+        activeCard.classList.add('playing');
+      }).catch(() => {
+        // Autoplay policy fallback: video remains ready with poster
+      });
+    }
+  }
+
+  function setActiveReel(index) {
+    if (index < 0 || index >= reelCards.length) return;
+    activeReelIndex = index;
+
+    reelCards.forEach((card, i) => {
+      if (i === activeReelIndex) {
+        card.classList.add('active');
+      } else {
+        card.classList.remove('active');
+        const vid = card.querySelector('video');
+        if (vid && !vid.paused) vid.pause();
+        card.classList.remove('playing');
+      }
+    });
+
+    reelDots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === activeReelIndex);
+    });
+
+    // If section is currently in view, play the newly active video
+    if (testimonialsSection && testimonialsSection.classList.contains('revealed')) {
+      playActiveReelVideo();
+    }
+  }
+
+  // Carousel Next/Prev Controls
+  if (reelPrevBtn && voiceReelsTrack) {
+    reelPrevBtn.addEventListener('click', () => {
+      const newIdx = Math.max(0, activeReelIndex - 1);
+      scrollToReel(newIdx);
+    });
+  }
+
+  if (reelNextBtn && voiceReelsTrack) {
+    reelNextBtn.addEventListener('click', () => {
+      const newIdx = Math.min(reelCards.length - 1, activeReelIndex + 1);
+      scrollToReel(newIdx);
+    });
+  }
+
+  function scrollToReel(index) {
+    if (!voiceReelsTrack || !reelCards[index]) return;
+    const card = reelCards[index];
+    voiceReelsTrack.scrollTo({
+      left: card.offsetLeft - voiceReelsTrack.offsetLeft - 20,
+      behavior: 'smooth'
+    });
+    setActiveReel(index);
+  }
+
+  // Indicator Dot click handlers
+  reelDots.forEach((dot) => {
+    dot.addEventListener('click', () => {
+      const idx = parseInt(dot.getAttribute('data-index') || '0', 10);
+      scrollToReel(idx);
+    });
+  });
+
+  // Track horizontal scroll listener to update indicators & active video on swipe
+  if (voiceReelsTrack) {
+    let reelScrollTicking = false;
+    voiceReelsTrack.addEventListener('scroll', () => {
+      if (!reelScrollTicking) {
+        window.requestAnimationFrame(() => {
+          const scrollLeft = voiceReelsTrack.scrollLeft;
+          let closestIdx = 0;
+          let minDistance = Infinity;
+
+          reelCards.forEach((card, i) => {
+            const cardLeft = card.offsetLeft - voiceReelsTrack.offsetLeft;
+            const distance = Math.abs(cardLeft - scrollLeft);
+            if (distance < minDistance) {
+              minDistance = distance;
+              closestIdx = i;
+            }
+          });
+
+          if (closestIdx !== activeReelIndex) {
+            setActiveReel(closestIdx);
+          }
+          reelScrollTicking = false;
+        });
+        reelScrollTicking = true;
+      }
+    }, { passive: true });
+  }
+
+  // Card Click & Ocean Blue Audio Pill Toggle
+  reelCards.forEach((card, idx) => {
+    const vid = card.querySelector('video');
+    const audioBtn = card.querySelector('.ocean-audio-pill');
+    const audioLabel = card.querySelector('.audio-label');
+
+    // Click card: if not active, scroll to it; if active, toggle play/pause
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.ocean-audio-pill')) return; // handled by audio pill
+
+      if (idx !== activeReelIndex) {
+        scrollToReel(idx);
+        return;
+      }
+
+      if (vid) {
+        if (vid.paused) {
+          vid.play().then(() => card.classList.add('playing')).catch(() => {});
+        } else {
+          vid.pause();
+          card.classList.remove('playing');
+        }
+      }
+    });
+
+    // Audio Mute / Unmute Button (Signature Ocean Blue Pill)
+    if (audioBtn && vid) {
+      audioBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        vid.muted = !vid.muted;
+        const isUnmuted = !vid.muted;
+
+        card.classList.toggle('sound-active', isUnmuted);
+        if (audioLabel) {
+          audioLabel.textContent = isUnmuted ? 'SOUND ON' : 'SOUND OFF';
+        }
+
+        // If video was paused, start playback when sound is turned on
+        if (isUnmuted && vid.paused) {
+          vid.play().then(() => card.classList.add('playing')).catch(() => {});
+        }
+      });
+    }
+  });
 });
