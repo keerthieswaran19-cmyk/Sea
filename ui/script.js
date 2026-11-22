@@ -1136,12 +1136,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (navLinkCourses) navLinkCourses.classList.remove('active');
         if (navLinkHero) navLinkHero.classList.remove('active');
       } else if (coursesSection && scrollY >= coursesTop) {
-        if (navLinkCourses) navLinkCourses.classList.add('active');
+        navLinkCourses.classList.add('active');
         if (navLinkTestimonials) navLinkTestimonials.classList.remove('active');
         if (navLinkLearn) navLinkLearn.classList.remove('active');
         if (navLinkHero) navLinkHero.classList.remove('active');
       } else {
-        if (navLinkHero) navLinkHero.classList.add('active');
+        navLinkHero.classList.add('active');
         if (navLinkTestimonials) navLinkTestimonials.classList.remove('active');
         if (navLinkCourses) navLinkCourses.classList.remove('active');
         if (navLinkLearn) navLinkLearn.classList.remove('active');
@@ -1232,25 +1232,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }, { threshold: 0.15 });
       learnObserver.observe(learnSection);
     }
-
-    // Atelier Voice Reels (Section 4) Observer — Zero Lag In-View Video Player
-    if (testimonialsSection) {
-      const testObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            testimonialsSection.classList.add('revealed');
-            playActiveReelVideo();
-          } else {
-            if (entry.boundingClientRect.top > 0) {
-              testimonialsSection.classList.remove('revealed');
-            }
-            // When section leaves viewport, instantly pause all videos to ensure 0% CPU/GPU overhead!
-            pauseAllReelVideos();
-          }
-        });
-      }, { threshold: 0.15 });
-      testObserver.observe(testimonialsSection);
-    }
   } else {
     // Fallback if IntersectionObserver not supported
     if (coursesHeaderBlock) coursesHeaderBlock.classList.add('revealed');
@@ -1258,7 +1239,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (coursesGridDuo) coursesGridDuo.classList.add('fanned-out');
     if (learnSection) learnSection.classList.add('revealed');
     if (learnCardsTrack) learnCardsTrack.classList.add('fanned-out');
-    if (testimonialsSection) testimonialsSection.classList.add('revealed');
   }
 
   // --- 6. Interactive Card 3D Magnetic Tilt & Spotlight (Apple / Stripe style) ---
@@ -1420,169 +1400,364 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // SECTION 4: ATELIER VOICE REELS CONTROLLER (STACKED VIDEO TESTIMONIALS)
+  // SECTION 4: ATELIER VOICES — CINEMA DECK CONTROLLER
   // ==========================================================================
-  const voiceReelsTrack = document.getElementById('voiceReelsTrack');
-  const reelCards = document.querySelectorAll('.voice-reel-card');
-  const reelDots = document.querySelectorAll('.reel-dot');
-  const reelPrevBtn = document.getElementById('reelPrevBtn');
-  const reelNextBtn = document.getElementById('reelNextBtn');
-  let activeReelIndex = 0;
 
-  function pauseAllReelVideos() {
-    reelCards.forEach((card) => {
-      const vid = card.querySelector('video');
-      if (vid && !vid.paused) {
-        vid.pause();
-      }
-      card.classList.remove('playing');
-    });
+  // --- Testimonial Stories Data ---
+  const testimonialStories = [
+    {
+      name: 'Aarav Sundaram',
+      role: 'Scholar Fluency & Debate Lab • Age 14',
+      outcome: 'Outcome: Inter-School Debate Finalist',
+      avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=200&q=80',
+      caption: 'Before Aura, I used to <span class="highlight-cyan">freeze mid-sentence</span> during school debates. Now I structure arguments in real-time — my coach says I sound like a <span class="highlight-cyan">native parliamentary speaker.</span>',
+      videoSrc: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+      poster: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80',
+      cohortTag: '1:6 ATELIER IMMERSION',
+      duration: '0:48s HD',
+      ghostImg1: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80',
+      ghostImg2: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80',
+      ghostLabel1: 'STORY 02',
+      ghostLabel2: 'STORY 03'
+    },
+    {
+      name: 'Divya Raghavan',
+      role: 'Corporate Cadence Accelerator • Tech Lead',
+      outcome: 'Outcome: Promoted to Global Client-Facing Role',
+      avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80',
+      caption: 'My <span class="highlight-cyan">MTI was holding me back</span> in client calls. After 12 weeks at Aura, my VP said my <span class="highlight-cyan">diction rivals our London team.</span> I lead global standups now with zero hesitation.',
+      videoSrc: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
+      poster: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=80',
+      cohortTag: '1:6 CORPORATE CADENCE',
+      duration: '1:12s HD',
+      ghostImg1: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80',
+      ghostImg2: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=800&q=80',
+      ghostLabel1: 'STORY 03',
+      ghostLabel2: 'STORY 04'
+    },
+    {
+      name: 'Karthik Venkatesh',
+      role: 'IELTS Precision Cohort • Band 8.5',
+      outcome: 'Outcome: IELTS 8.5 — Canada PR Approved',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+      caption: 'I attempted IELTS <span class="highlight-cyan">three times before Aura.</span> Their phonetic placement drills fixed my vowel shifts. <span class="highlight-cyan">Band 8.5 on my first attempt</span> after the program — my PR got approved in 4 months.',
+      videoSrc: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+      poster: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80',
+      cohortTag: '1:6 IELTS PRECISION',
+      duration: '0:56s HD',
+      ghostImg1: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=800&q=80',
+      ghostImg2: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80',
+      ghostLabel1: 'STORY 04',
+      ghostLabel2: 'STORY 01'
+    },
+    {
+      name: 'Priya Natarajan',
+      role: 'Parent (Son: Age 10 — Junior Orators)',
+      outcome: 'Outcome: Son selected for Model UN delegation',
+      avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80',
+      caption: 'My son was <span class="highlight-cyan">terrified of speaking English</span> at school. Within 8 weeks at Aura, he <span class="highlight-cyan">volunteered for the Model UN.</span> The confidence transformation is beyond what I imagined.',
+      videoSrc: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+      poster: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=1200&q=80',
+      cohortTag: '1:6 JUNIOR ORATORS',
+      duration: '0:42s HD',
+      ghostImg1: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80',
+      ghostImg2: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80',
+      ghostLabel1: 'STORY 01',
+      ghostLabel2: 'STORY 02'
+    }
+  ];
+
+  // --- DOM References for Section 4 ---
+  const cinemaVideo = document.getElementById('activeTestimonialVideo');
+  const spokenCaptionText = document.getElementById('spokenCaptionText');
+  const authorName = document.getElementById('authorName');
+  const authorRole = document.getElementById('authorRole');
+  const authorOutcome = document.getElementById('authorOutcome');
+  const authorAvatar = document.getElementById('authorAvatar');
+  const cinemaPlayBtn = document.getElementById('cinemaPlayBtn');
+  const hudPlayIcon = document.getElementById('hudPlayIcon');
+  const studioEqualizer = document.getElementById('studioEqualizer');
+  const cinemaProgressFill = document.getElementById('cinemaProgressFill');
+  const videoTimecode = document.getElementById('videoTimecode');
+  const cinemaCohortTag = document.getElementById('cinemaCohortTag');
+  const cinemaDurationTag = document.getElementById('cinemaDurationTag');
+  const ghostImg1 = document.getElementById('ghostImg1');
+  const ghostImg2 = document.getElementById('ghostImg2');
+  const ghostLabel1 = document.getElementById('ghostLabel1');
+  const ghostLabel2 = document.getElementById('ghostLabel2');
+  const btnAudioToggle = document.getElementById('btnAudioToggle');
+  const audioToggleLabel = document.getElementById('audioToggleLabel');
+  const audioIconSvg = document.getElementById('audioIconSvg');
+  const storyTabs = document.getElementById('storyTabs');
+  const testimonialPrevBtn = document.getElementById('testimonialPrevBtn');
+  const testimonialNextBtn = document.getElementById('testimonialNextBtn');
+  const phaseBtnWeek1 = document.getElementById('phaseBtnWeek1');
+  const phaseBtnWeek12 = document.getElementById('phaseBtnWeek12');
+  const testimonialsHeaderBlock = document.getElementById('testimonialsHeaderBlock');
+  const testimonialQuoteCard = document.getElementById('testimonialQuoteCard');
+  const cinemaPlayerCard = document.getElementById('cinemaPlayerCard');
+
+  let activeStoryIndex = 0;
+  let isTestimonialVisible = false;
+
+  // --- Format Timecode as TC HH:MM:SS:FF ---
+  function formatTimecode(seconds) {
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = Math.floor(seconds % 60);
+    const f = Math.floor((seconds % 1) * 24); // 24fps frame count
+    const pad = (n) => String(n).padStart(2, '0');
+    return `TC ${pad(h)}:${pad(m)}:${pad(s)}:${pad(f)} // PALLAVARAM`;
   }
 
-  function playActiveReelVideo() {
-    if (activeReelIndex < 0 || activeReelIndex >= reelCards.length) return;
-    const activeCard = reelCards[activeReelIndex];
-    if (!activeCard) return;
+  // --- Switch Story Function ---
+  function switchStory(index) {
+    if (index < 0 || index >= testimonialStories.length) return;
+    const story = testimonialStories[index];
+    activeStoryIndex = index;
 
-    const vid = activeCard.querySelector('video');
-    if (vid) {
-      vid.play().then(() => {
-        activeCard.classList.add('playing');
-      }).catch(() => {
-        // Autoplay policy fallback: video remains ready with poster
+    // Pause current video first
+    if (cinemaVideo && !cinemaVideo.paused) {
+      cinemaVideo.pause();
+    }
+
+    // Update Quote Card content
+    if (spokenCaptionText) spokenCaptionText.innerHTML = story.caption;
+    if (authorName) authorName.textContent = story.name;
+    if (authorRole) authorRole.textContent = story.role;
+    if (authorOutcome) authorOutcome.textContent = story.outcome;
+    if (authorAvatar) {
+      authorAvatar.src = story.avatar;
+      authorAvatar.alt = story.name;
+    }
+
+    // Update Video
+    if (cinemaVideo) {
+      cinemaVideo.poster = story.poster;
+      const source = cinemaVideo.querySelector('source');
+      if (source) source.src = story.videoSrc;
+      cinemaVideo.load();
+    }
+
+    // Update cinema metadata tags
+    if (cinemaCohortTag) cinemaCohortTag.textContent = story.cohortTag;
+    if (cinemaDurationTag) cinemaDurationTag.textContent = story.duration;
+    if (videoTimecode) videoTimecode.textContent = formatTimecode(0);
+
+    // Update ghost deck cards
+    if (ghostImg1) ghostImg1.src = story.ghostImg1;
+    if (ghostImg2) ghostImg2.src = story.ghostImg2;
+    if (ghostLabel1) ghostLabel1.textContent = story.ghostLabel1;
+    if (ghostLabel2) ghostLabel2.textContent = story.ghostLabel2;
+
+    // Reset progress bar
+    if (cinemaProgressFill) cinemaProgressFill.style.width = '0%';
+
+    // Reset play button state
+    if (hudPlayIcon) hudPlayIcon.textContent = '▶';
+    if (studioEqualizer) studioEqualizer.classList.remove('playing');
+
+    // Update active story tab
+    if (storyTabs) {
+      const tabs = storyTabs.querySelectorAll('.story-tab');
+      tabs.forEach((tab, i) => {
+        tab.classList.toggle('active', i === index);
       });
     }
-  }
 
-  function setActiveReel(index) {
-    if (index < 0 || index >= reelCards.length) return;
-    activeReelIndex = index;
-
-    reelCards.forEach((card, i) => {
-      if (i === activeReelIndex) {
-        card.classList.add('active');
-      } else {
-        card.classList.remove('active');
-        const vid = card.querySelector('video');
-        if (vid && !vid.paused) vid.pause();
-        card.classList.remove('playing');
-      }
-    });
-
-    reelDots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === activeReelIndex);
-    });
-
-    // If section is currently in view, play the newly active video
-    if (testimonialsSection && testimonialsSection.classList.contains('revealed')) {
-      playActiveReelVideo();
-    }
-  }
-
-  // Carousel Next/Prev Controls
-  if (reelPrevBtn && voiceReelsTrack) {
-    reelPrevBtn.addEventListener('click', () => {
-      const newIdx = Math.max(0, activeReelIndex - 1);
-      scrollToReel(newIdx);
-    });
-  }
-
-  if (reelNextBtn && voiceReelsTrack) {
-    reelNextBtn.addEventListener('click', () => {
-      const newIdx = Math.min(reelCards.length - 1, activeReelIndex + 1);
-      scrollToReel(newIdx);
-    });
-  }
-
-  function scrollToReel(index) {
-    if (!voiceReelsTrack || !reelCards[index]) return;
-    const card = reelCards[index];
-    voiceReelsTrack.scrollTo({
-      left: card.offsetLeft - voiceReelsTrack.offsetLeft - 20,
-      behavior: 'smooth'
-    });
-    setActiveReel(index);
-  }
-
-  // Indicator Dot click handlers
-  reelDots.forEach((dot) => {
-    dot.addEventListener('click', () => {
-      const idx = parseInt(dot.getAttribute('data-index') || '0', 10);
-      scrollToReel(idx);
-    });
-  });
-
-  // Track horizontal scroll listener to update indicators & active video on swipe
-  if (voiceReelsTrack) {
-    let reelScrollTicking = false;
-    voiceReelsTrack.addEventListener('scroll', () => {
-      if (!reelScrollTicking) {
-        window.requestAnimationFrame(() => {
-          const scrollLeft = voiceReelsTrack.scrollLeft;
-          let closestIdx = 0;
-          let minDistance = Infinity;
-
-          reelCards.forEach((card, i) => {
-            const cardLeft = card.offsetLeft - voiceReelsTrack.offsetLeft;
-            const distance = Math.abs(cardLeft - scrollLeft);
-            if (distance < minDistance) {
-              minDistance = distance;
-              closestIdx = i;
-            }
-          });
-
-          if (closestIdx !== activeReelIndex) {
-            setActiveReel(closestIdx);
-          }
-          reelScrollTicking = false;
+    // Animate card swap — brief entrance pulse
+    if (testimonialQuoteCard) {
+      testimonialQuoteCard.style.opacity = '0';
+      testimonialQuoteCard.style.transform = 'translateY(16px)';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          testimonialQuoteCard.style.transition = 'opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1), transform 0.5s cubic-bezier(0.19, 1, 0.22, 1)';
+          testimonialQuoteCard.style.opacity = '1';
+          testimonialQuoteCard.style.transform = 'translateY(0)';
         });
-        reelScrollTicking = true;
-      }
-    }, { passive: true });
+      });
+    }
+
+    if (cinemaPlayerCard) {
+      cinemaPlayerCard.style.opacity = '0';
+      cinemaPlayerCard.style.transform = 'scale(0.95)';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          cinemaPlayerCard.style.transition = 'opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1), transform 0.5s cubic-bezier(0.19, 1, 0.22, 1)';
+          cinemaPlayerCard.style.opacity = '1';
+          cinemaPlayerCard.style.transform = 'scale(1)';
+        });
+      });
+    }
+
+    // Auto-play if section is visible
+    if (isTestimonialVisible && cinemaVideo) {
+      cinemaVideo.play().then(() => {
+        if (hudPlayIcon) hudPlayIcon.textContent = '⏸';
+        if (studioEqualizer) studioEqualizer.classList.add('playing');
+      }).catch(() => {});
+    }
   }
 
-  // Card Click & Ocean Blue Audio Pill Toggle
-  reelCards.forEach((card, idx) => {
-    const vid = card.querySelector('video');
-    const audioBtn = card.querySelector('.ocean-audio-pill');
-    const audioLabel = card.querySelector('.audio-label');
+  // --- Initialize first story ---
+  if (spokenCaptionText && testimonialStories.length > 0) {
+    spokenCaptionText.innerHTML = testimonialStories[0].caption;
+  }
 
-    // Click card: if not active, scroll to it; if active, toggle play/pause
-    card.addEventListener('click', (e) => {
-      if (e.target.closest('.ocean-audio-pill')) return; // handled by audio pill
+  // --- Story Tab Click Handlers ---
+  if (storyTabs) {
+    const tabs = storyTabs.querySelectorAll('.story-tab');
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const idx = parseInt(tab.getAttribute('data-index'), 10);
+        if (!isNaN(idx) && idx !== activeStoryIndex) {
+          switchStory(idx);
+        }
+      });
+    });
+  }
 
-      if (idx !== activeReelIndex) {
-        scrollToReel(idx);
-        return;
+  // --- Prev / Next Navigation ---
+  if (testimonialPrevBtn) {
+    testimonialPrevBtn.addEventListener('click', () => {
+      const nextIdx = (activeStoryIndex - 1 + testimonialStories.length) % testimonialStories.length;
+      switchStory(nextIdx);
+    });
+  }
+
+  if (testimonialNextBtn) {
+    testimonialNextBtn.addEventListener('click', () => {
+      const nextIdx = (activeStoryIndex + 1) % testimonialStories.length;
+      switchStory(nextIdx);
+    });
+  }
+
+  // --- Video Play / Pause Controller ---
+  if (cinemaPlayBtn && cinemaVideo) {
+    cinemaPlayBtn.addEventListener('click', () => {
+      if (cinemaVideo.paused) {
+        cinemaVideo.play().then(() => {
+          if (hudPlayIcon) hudPlayIcon.textContent = '⏸';
+          if (studioEqualizer) studioEqualizer.classList.add('playing');
+        }).catch(() => {});
+      } else {
+        cinemaVideo.pause();
+        if (hudPlayIcon) hudPlayIcon.textContent = '▶';
+        if (studioEqualizer) studioEqualizer.classList.remove('playing');
       }
+    });
+  }
 
-      if (vid) {
-        if (vid.paused) {
-          vid.play().then(() => card.classList.add('playing')).catch(() => {});
+  // --- Audio Mute / Unmute Toggle ---
+  if (btnAudioToggle && cinemaVideo) {
+    btnAudioToggle.addEventListener('click', () => {
+      cinemaVideo.muted = !cinemaVideo.muted;
+      if (audioToggleLabel) {
+        audioToggleLabel.textContent = cinemaVideo.muted ? 'Muted' : 'Live Audio';
+      }
+      // Swap SVG icon — muted (X lines) vs unmuted (speaker waves)
+      if (audioIconSvg) {
+        if (cinemaVideo.muted) {
+          audioIconSvg.innerHTML = `
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+          `;
         } else {
-          vid.pause();
-          card.classList.remove('playing');
+          audioIconSvg.innerHTML = `
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          `;
         }
       }
     });
+  }
 
-    // Audio Mute / Unmute Button (Signature Ocean Blue Pill)
-    if (audioBtn && vid) {
-      audioBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        vid.muted = !vid.muted;
-        const isUnmuted = !vid.muted;
+  // --- Video Progress Bar & Timecode (timeupdate) ---
+  if (cinemaVideo) {
+    cinemaVideo.addEventListener('timeupdate', () => {
+      if (cinemaVideo.duration && isFinite(cinemaVideo.duration)) {
+        const pct = (cinemaVideo.currentTime / cinemaVideo.duration) * 100;
+        if (cinemaProgressFill) cinemaProgressFill.style.width = pct + '%';
+        if (videoTimecode) videoTimecode.textContent = formatTimecode(cinemaVideo.currentTime);
+      }
+    });
 
-        card.classList.toggle('sound-active', isUnmuted);
-        if (audioLabel) {
-          audioLabel.textContent = isUnmuted ? 'SOUND ON' : 'SOUND OFF';
-        }
+    // Update play icon on video end (loop will restart, but keep icon correct)
+    cinemaVideo.addEventListener('play', () => {
+      if (hudPlayIcon) hudPlayIcon.textContent = '⏸';
+      if (studioEqualizer) studioEqualizer.classList.add('playing');
+    });
 
-        // If video was paused, start playback when sound is turned on
-        if (isUnmuted && vid.paused) {
-          vid.play().then(() => card.classList.add('playing')).catch(() => {});
-        }
-      });
+    cinemaVideo.addEventListener('pause', () => {
+      if (hudPlayIcon) hudPlayIcon.textContent = '▶';
+      if (studioEqualizer) studioEqualizer.classList.remove('playing');
+    });
+  }
+
+  // --- Week 01 / Week 12 Transformation Toggle ---
+  if (phaseBtnWeek1 && phaseBtnWeek12) {
+    phaseBtnWeek1.addEventListener('click', () => {
+      phaseBtnWeek1.classList.add('active');
+      phaseBtnWeek12.classList.remove('active');
+      // Visual toggle — in production, would swap video src to baseline clip
+      if (cinemaVideo) {
+        cinemaVideo.currentTime = 0;
+        if (cinemaProgressFill) cinemaProgressFill.style.width = '0%';
+      }
+    });
+
+    phaseBtnWeek12.addEventListener('click', () => {
+      phaseBtnWeek12.classList.add('active');
+      phaseBtnWeek1.classList.remove('active');
+      // Visual toggle — in production, would swap video src to cadence clip
+      if (cinemaVideo) {
+        cinemaVideo.currentTime = 0;
+        if (cinemaProgressFill) cinemaProgressFill.style.width = '0%';
+      }
+    });
+  }
+
+  // --- IntersectionObserver for Section 4 (Auto-play / Auto-pause + Reveal) ---
+  if ('IntersectionObserver' in window) {
+    // Testimonials Header Reveal
+    if (testimonialsHeaderBlock) {
+      const testHeaderObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            testimonialsHeaderBlock.classList.add('revealed');
+          } else if (entry.boundingClientRect.top > 0) {
+            testimonialsHeaderBlock.classList.remove('revealed');
+          }
+        });
+      }, { threshold: 0.2 });
+      testHeaderObserver.observe(testimonialsHeaderBlock);
     }
-  });
+
+    // Testimonials Section — Auto-play/pause video on visibility
+    if (testimonialsSection && cinemaVideo) {
+      const testSectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          isTestimonialVisible = entry.isIntersecting;
+          if (entry.isIntersecting) {
+            testimonialsSection.classList.add('revealed');
+            // Auto-play muted when section enters viewport
+            cinemaVideo.play().then(() => {
+              if (hudPlayIcon) hudPlayIcon.textContent = '⏸';
+              if (studioEqualizer) studioEqualizer.classList.add('playing');
+            }).catch(() => {});
+          } else {
+            // Auto-pause when section leaves viewport
+            if (!cinemaVideo.paused) {
+              cinemaVideo.pause();
+              if (hudPlayIcon) hudPlayIcon.textContent = '▶';
+              if (studioEqualizer) studioEqualizer.classList.remove('playing');
+            }
+          }
+        });
+      }, { threshold: 0.25 });
+      testSectionObserver.observe(testimonialsSection);
+    }
+  }
 });
