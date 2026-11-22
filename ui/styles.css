@@ -2248,14 +2248,14 @@ html, body {
 }
 
 /* ==========================================================================
-   SECTION 4: ATELIER VOICES (3D CINEMA DECK & SPEECH SHOWCASE)
+   SECTION 4: ATELIER VOICES (HORIZONTAL CINEMA RUNWAY & 3D SPEECH SHOWCASE)
    ========================================================================== */
 .section-testimonials {
   position: relative;
   width: 100%;
-  min-height: 920px;
-  padding: 6.5rem 2rem 7rem;
-  background: #ffffff;
+  min-height: 940px;
+  padding: 6.5rem 0 6.5rem;
+  background: radial-gradient(circle at 50% 12%, rgba(0, 157, 196, 0.08) 0%, #ffffff 65%);
   border-top: 1px solid rgba(0, 157, 196, 0.12);
   overflow: hidden;
 }
@@ -2277,9 +2277,10 @@ html, body {
 }
 
 .testimonials-container {
-  max-width: 1360px;
+  max-width: 1280px;
   margin: 0 auto;
-  width: 100%;
+  width: calc(100% - 3rem);
+  padding: 0 1rem;
   position: relative;
   z-index: 2;
 }
@@ -2288,7 +2289,7 @@ html, body {
 .testimonials-header-block {
   text-align: center;
   max-width: 860px;
-  margin: 0 auto 3.5rem;
+  margin: 0 auto 1.5rem;
 }
 
 .testimonials-ocean-pill {
@@ -2355,58 +2356,68 @@ html, body {
 }
 
 /* ==========================================================================
-   Main 3D Cinema Deck Stage
+   Full-Width Horizontal Runway Viewport & Track
    ========================================================================== */
-.testimonials-stage-wrap {
+.testimonials-runway-viewport {
   width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 2.2rem 0 3.2rem;
+  cursor: grab;
+}
+
+.testimonials-runway-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.testimonials-runway-viewport:active {
+  cursor: grabbing;
+}
+
+.testimonials-runway-track {
   display: flex;
-  justify-content: center;
   align-items: center;
-  position: relative;
-  margin-bottom: 3.5rem;
-  perspective: 1200px;
+  gap: 5vw;
+  width: max-content;
+  padding-left: calc(50vw - 520px);
+  padding-right: calc(50vw - 520px);
 }
 
-.testimonials-deck-stage {
+/* Single Runway Card Unit (1040px wide) */
+.runway-card-unit {
+  flex: 0 0 1040px;
+  width: 1040px;
+  height: 500px;
   position: relative;
-  width: 100%;
-  max-width: 1140px;
-  height: 490px;
-}
-
-/* Individual Story Unit */
-.deck-story-unit {
-  position: absolute;
-  inset: 0;
   display: flex;
   align-items: center;
-  opacity: 0;
-  pointer-events: none;
-  transform: translate3d(50px, 0, 0) scale(0.96);
-  transition: all 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  scroll-snap-align: center;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease;
+  transform: scale(0.92);
+  opacity: 0.45;
+  filter: blur(0.5px);
 }
 
-.deck-story-unit.active {
+.runway-card-unit.active {
+  transform: scale(1);
   opacity: 1;
-  pointer-events: auto;
-  transform: translate3d(0, 0, 0) scale(1);
-  z-index: 5;
+  filter: none;
+  z-index: 10;
 }
 
-.deck-story-unit.exit-left {
-  opacity: 0;
-  pointer-events: none;
-  transform: translate3d(-60px, 0, 0) scale(0.95);
-}
-
-/* LEFT: Wide White Dossier Card (Ref Image Anatomy) */
-.deck-dossier-card {
-  width: 700px;
-  height: 480px;
+/* LEFT: Floating White Dossier Card (Ref Image Anatomy) */
+.runway-dossier-card {
+  width: 680px;
+  height: 490px;
   background: #ffffff;
   border-radius: 32px;
-  padding: 3.2rem 4rem 3rem 3.5rem;
-  box-shadow: 0 25px 70px -15px rgba(9, 19, 31, 0.08), 0 0 0 1px rgba(0, 157, 196, 0.14);
+  padding: 3.4rem 4rem 3.2rem 3.6rem;
+  box-shadow: 0 30px 80px -20px rgba(0, 157, 196, 0.14), 0 0 0 1px rgba(0, 157, 196, 0.12);
   position: relative;
   z-index: 1;
   box-sizing: border-box;
@@ -2415,8 +2426,8 @@ html, body {
   justify-content: space-between;
 }
 
-/* Dedicated Content Column: STRICT 430px max-width to PREVENT ANY TEXT OVERLAP */
-.dossier-content-column {
+/* STRICT 430px text column: Video NEVER overlaps this column */
+.dossier-text-column {
   max-width: 430px;
   width: 100%;
   display: flex;
@@ -2478,7 +2489,7 @@ html, body {
   margin-bottom: 0.6rem;
 }
 
-/* Reference Image Match: Distinct Ocean Blue Quote Glyph */
+/* Reference Image Match: Coral / Ocean Luxury Quote Glyph */
 .luxury-quote-glyph {
   font-family: var(--font-editorial);
   font-size: 4.8rem;
@@ -2549,7 +2560,7 @@ html, body {
   border-bottom: 2px solid rgba(0, 157, 196, 0.4);
 }
 
-/* Dossier Author Footer */
+/* Author Footer */
 .dossier-author-footer {
   display: flex;
   align-items: center;
@@ -2623,28 +2634,32 @@ html, body {
 /* ==========================================================================
    RIGHT: Overlapping Cinema Video Player (Ref Image Floating Overlap)
    ========================================================================== */
-.deck-video-player-card {
+.runway-video-card {
   position: absolute;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: 560px;
-  height: 380px;
+  width: 540px;
+  height: 370px;
   border-radius: 28px;
   overflow: hidden;
-  z-index: 3;
-  box-shadow: 0 35px 85px -15px rgba(9, 19, 31, 0.42), 0 0 0 2.5px rgba(0, 157, 196, 0.4);
+  z-index: 2;
+  box-shadow: 0 35px 85px -15px rgba(9, 19, 31, 0.45), 0 0 0 2.5px #009DC4;
   background: #09131f;
   transition: transform 0.4s var(--ease-smooth), box-shadow 0.4s ease;
   cursor: pointer;
 }
 
-.deck-video-player-card:hover {
-  transform: translateY(calc(-50% - 4px)) scale(1.015);
-  box-shadow: 0 45px 95px -15px rgba(0, 157, 196, 0.5), 0 0 0 3px #009DC4;
+.runway-card-unit.active .runway-video-card {
+  box-shadow: 0 40px 95px -15px rgba(0, 157, 196, 0.5), 0 0 0 3px #009DC4;
 }
 
-.deck-video-elem {
+.runway-video-card:hover {
+  transform: translateY(calc(-50% - 4px)) scale(1.015);
+  box-shadow: 0 45px 105px -15px rgba(0, 157, 196, 0.6), 0 0 0 3px #009DC4;
+}
+
+.runway-video-elem {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -2709,7 +2724,7 @@ html, body {
 }
 
 /* Floating Play/Pause HUD */
-.deck-play-hud {
+.runway-play-hud {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -2731,14 +2746,14 @@ html, body {
   transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.deck-video-player-card:hover .deck-play-hud {
+.runway-video-card:hover .runway-play-hud {
   transform: translate(-50%, -50%) scale(1.1);
   background: #009DC4;
   color: #ffffff;
   box-shadow: 0 16px 36px rgba(0, 157, 196, 0.55);
 }
 
-.deck-play-hud .hud-play-icon {
+.runway-play-hud .hud-play-icon {
   margin-left: 2px;
 }
 
@@ -2778,7 +2793,7 @@ html, body {
   gap: 0.8rem;
 }
 
-.btn-deck-audio {
+.btn-runway-audio {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -2795,12 +2810,12 @@ html, body {
   transition: all 0.25s ease;
 }
 
-.btn-deck-audio:hover {
+.btn-runway-audio:hover {
   background: #009DC4;
   border-color: #009DC4;
 }
 
-.btn-deck-audio.unmuted {
+.btn-runway-audio.unmuted {
   background: #009DC4;
   border-color: #009DC4;
   box-shadow: 0 0 12px rgba(0, 157, 196, 0.7);
@@ -2821,72 +2836,19 @@ html, body {
 }
 
 /* ==========================================================================
-   3D Ghost Cards Behind Video Card (Visual Depth Stack)
-   ========================================================================== */
-.deck-ghost-card {
-  position: absolute;
-  border-radius: 28px;
-  overflow: hidden;
-  pointer-events: none;
-  transition: transform 0.5s ease, opacity 0.5s ease;
-}
-
-.deck-ghost-card .ghost-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: blur(2px) brightness(0.65);
-}
-
-.deck-ghost-card .ghost-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(9, 19, 31, 0.4);
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-end;
-  padding: 1.2rem;
-}
-
-.ghost-pill {
-  font-family: var(--font-sans);
-  font-size: 0.7rem;
-  font-weight: 800;
-  color: rgba(255, 255, 255, 0.8);
-  letter-spacing: 0.08em;
-  background: rgba(255, 255, 255, 0.15);
-  padding: 0.25rem 0.7rem;
-  border-radius: 6px;
-  backdrop-filter: blur(4px);
-}
-
-.ghost-level-1 {
-  right: -36px;
-  top: calc(50% - 16px);
-  transform: translateY(-50%) rotate(2.4deg) scale(0.92);
-  width: 560px;
-  height: 380px;
-  z-index: 2;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
-}
-
-.ghost-level-2 {
-  right: -72px;
-  top: calc(50% - 32px);
-  transform: translateY(-50%) rotate(4.8deg) scale(0.85);
-  width: 560px;
-  height: 380px;
-  z-index: 1;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
-}
-
-/* ==========================================================================
    Bottom Controls & Progress Scrub Bar
    ========================================================================== */
+.runway-bottom-controls-wrap {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
 .runway-bottom-controls {
   max-width: 1060px;
   margin: 0 auto;
-  width: 100%;
+  width: calc(100% - 3rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -3015,45 +2977,44 @@ html, body {
    Responsive Breakpoints for Section 4
    ========================================================================== */
 @media (max-width: 1120px) {
-  .testimonials-deck-stage {
-    height: 780px;
-    max-width: 680px;
+  .testimonials-runway-track {
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 
-  .deck-story-unit {
+  .runway-card-unit {
+    flex: 0 0 90vw;
+    width: 90vw;
+    height: 720px;
     flex-direction: column-reverse;
     justify-content: center;
   }
 
-  .deck-dossier-card {
+  .runway-dossier-card {
     width: 100%;
     height: auto;
-    min-height: 420px;
+    min-height: 400px;
     padding: 2.8rem 2.2rem 2.4rem;
     margin-top: -40px;
     z-index: 1;
   }
 
-  .dossier-content-column {
+  .dossier-text-column {
     max-width: 100%;
   }
 
-  .deck-video-player-card {
+  .runway-video-card {
     position: relative;
     right: auto;
     top: auto;
     transform: none;
     width: 100%;
-    height: 340px;
+    height: 320px;
     z-index: 3;
   }
 
-  .deck-video-player-card:hover {
+  .runway-video-card:hover {
     transform: translateY(-4px) scale(1.01);
-  }
-
-  .deck-ghost-card {
-    display: none;
   }
 
   .runway-bottom-controls {
@@ -3069,11 +3030,15 @@ html, body {
 
 @media (max-width: 768px) {
   .section-testimonials {
-    padding: 4.5rem 1.25rem 5rem;
+    padding: 4.5rem 0 5rem;
   }
 
-  .deck-video-player-card {
-    height: 260px;
+  .runway-card-unit {
+    height: 640px;
+  }
+
+  .runway-video-card {
+    height: 240px;
   }
 
   .spoken-quote-text {
