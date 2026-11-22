@@ -697,7 +697,7 @@
   </section>
 
   <!-- ==========================================================================
-       SECTION 4: ATELIER VOICES (VIDEO TESTIMONIAL 3D CINEMA STACK)
+       SECTION 4: ATELIER VOICES (OCEAN BLUE CINEMA RUNWAY)
        ========================================================================== -->
   <section class="section-testimonials" id="testimonialsSection">
     <!-- Atmospheric Ocean Blue Light Orbs for Section 4 -->
@@ -706,196 +706,397 @@
 
     <div class="testimonials-container">
       
-      <!-- Section Header with Ocean Blue Accents -->
+      <!-- Section Header with Ocean Blue Accents & Runway Indicator -->
       <div class="testimonials-header-block" id="testimonialsHeaderBlock">
         <div class="testimonials-ocean-pill">
           <span class="sparkle-cyan">✦</span>
           <span>THE ATELIER VOICES • REAL SPEECH TRANSFORMATIONS</span>
         </div>
-        <h2 class="testimonials-title">
-          Hear their <span class="ocean-text-accent">speaking journey</span>
-          <span class="testimonials-halo-line"></span>
-        </h2>
-        <p class="testimonials-desc">
-          Authentic studio recordings from our 1:6 Pallavaram cohorts — documenting the shift from cognitive hesitation to effortless cadence.
-        </p>
-      </div>
-
-      <!-- Main 3D Overlapping Stage (Ref Image Match with 3D Depth Stack) -->
-      <div class="testimonials-cinema-stage" id="testimonialsCinemaStage">
-        
-        <!-- LEFT: Overlapping Quote & Acoustic Dossier Card -->
-        <div class="testimonial-quote-dossier" id="testimonialQuoteCard">
-          
-          <!-- Top Metadata & Rating Row -->
-          <div class="dossier-top-meta">
-            <div class="rating-cluster">
-              <span class="diamond-star">✦</span>
-              <span class="diamond-star">✦</span>
-              <span class="diamond-star">✦</span>
-              <span class="diamond-star">✦</span>
-              <span class="diamond-star">✦</span>
-              <span class="rating-score">5.0 / 5.0</span>
-            </div>
-            <span class="verified-pill">
-              <span class="verified-check">✓</span>
-              <span>VERIFIED ATELIER ALUMNI</span>
-            </span>
-          </div>
-
-          <!-- Big Luxury Ocean Blue Quote Mark & Equalizer Waveform -->
-          <div class="quote-header-row">
-            <span class="luxury-quote-glyph">“</span>
-            
-            <!-- Live Studio Audio Waveform Indicator -->
-            <div class="studio-equalizer" id="studioEqualizer" title="Studio Audio Stream">
-              <span class="eq-bar bar-1"></span>
-              <span class="eq-bar bar-2"></span>
-              <span class="eq-bar bar-3"></span>
-              <span class="eq-bar bar-4"></span>
-              <span class="eq-bar bar-5"></span>
-              <span class="eq-bar bar-6"></span>
-              <span class="eq-bar bar-7"></span>
-              <span class="eq-label">48kHz FLAC STUDIO MASTER</span>
-            </div>
-          </div>
-
-          <!-- Dynamic Kinetic Spoken Caption with Word Highlights -->
-          <div class="spoken-caption-wrap">
-            <p class="spoken-caption-text" id="spokenCaptionText">
-              <!-- Dynamically populated in script.js -->
+        <div class="testimonials-headline-row">
+          <div class="headline-left">
+            <h2 class="testimonials-title">
+              Hear their <span class="ocean-text-accent">speaking journey</span>
+              <span class="testimonials-halo-line"></span>
+            </h2>
+            <p class="testimonials-desc">
+              Authentic studio recordings from our 1:6 Pallavaram cohorts — documenting the shift from cognitive hesitation to effortless cadence.
             </p>
           </div>
-
-          <!-- Transformation Progression Toggle Switch (Week 1 vs Week 12) -->
-          <div class="transformation-switch-row">
-            <span class="switch-label">PROGRESSION TRACK:</span>
-            <div class="phase-switch-pill">
-              <button type="button" class="phase-btn" id="phaseBtnWeek1" data-phase="week1">Week 01 Baseline</button>
-              <button type="button" class="phase-btn active" id="phaseBtnWeek12" data-phase="week12">Week 12 Cadence</button>
+          <!-- Runway Nav Arrows & Counter -->
+          <div class="runway-header-actions">
+            <div class="runway-counter-badge" id="runwayCounterBadge">
+              <span class="current-num" id="runwayActiveNum">01</span>
+              <span class="slash-sep">/</span>
+              <span class="total-num">04</span>
             </div>
-          </div>
-
-          <!-- Student Profile Footer -->
-          <div class="testimonial-author-footer">
-            <div class="author-avatar-wrap">
-              <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=200&q=80" alt="Student Avatar" class="author-avatar-img" id="authorAvatar">
-              <span class="author-ring-badge">CEFR</span>
-            </div>
-            <div class="author-details">
-              <h4 class="author-name" id="authorName">Aarav Sundaram</h4>
-              <p class="author-role" id="authorRole">Scholar Fluency & Debate Lab • Age 14</p>
-              <span class="author-outcome" id="authorOutcome">Outcome: Inter-School Debate Finalist</span>
-            </div>
-            <div class="audio-toggle-action">
-              <button type="button" class="btn-audio-toggle" id="btnAudioToggle" aria-label="Toggle Audio">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="audioIconSvg">
-                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                  <line x1="23" y1="9" x2="17" y2="15"></line>
-                  <line x1="17" y1="9" x2="23" y2="15"></line>
-                </svg>
-                <span class="audio-toggle-label" id="audioToggleLabel">Muted</span>
+            <div class="runway-arrow-group">
+              <button type="button" class="runway-nav-btn btn-prev" id="runwayPrevBtn" aria-label="Scroll left to previous story">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              </button>
+              <button type="button" class="runway-nav-btn btn-next" id="runwayNextBtn" aria-label="Scroll right to next story">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
               </button>
             </div>
           </div>
-
         </div>
-
-        <!-- RIGHT: 3D Overlapping Video Cinema Player & Deck Stack -->
-        <div class="testimonial-video-deck" id="testimonialVideoDeck">
-          
-          <!-- Main Active Video Player (Overlapping Left Card) -->
-          <div class="cinema-player-card" id="cinemaPlayerCard">
-            <video 
-              id="activeTestimonialVideo" 
-              class="cinema-video-element" 
-              playsinline 
-              muted 
-              loop 
-              preload="metadata"
-              poster="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80"
-            >
-              <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
-            </video>
-
-            <!-- Top Cinema Info Overlay -->
-            <div class="cinema-top-overlay">
-              <span class="timecode-badge" id="videoTimecode">TC 00:01:24:18 // PALLAVARAM</span>
-              <span class="live-recording-tag">
-                <span class="rec-red-dot"></span>
-                <span>STUDIO CAM</span>
-              </span>
-            </div>
-
-            <!-- Video Floating Play/Pause HUD -->
-            <button type="button" class="cinema-play-hud" id="cinemaPlayBtn" aria-label="Play or Pause Video">
-              <span class="hud-play-icon" id="hudPlayIcon">▶</span>
-            </button>
-
-            <!-- Bottom Cinema Progress & Duration Overlay -->
-            <div class="cinema-bottom-overlay">
-              <div class="cinema-video-progress">
-                <div class="cinema-progress-fill" id="cinemaProgressFill"></div>
-              </div>
-              <div class="cinema-meta-subline">
-                <span class="cinema-cohort-tag" id="cinemaCohortTag">1:6 ATELIER IMMERSION</span>
-                <span class="cinema-duration-tag" id="cinemaDurationTag">0:48s HD</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- 3D Angled Peeking Deck Cards (Visualizing the stack coming next) -->
-          <div class="peeking-deck-ghost ghost-card-1" id="ghostCard1" title="Next Story">
-            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Upcoming testimonial" class="ghost-img" id="ghostImg1">
-            <div class="ghost-frost-overlay">
-              <span class="ghost-label" id="ghostLabel1">STORY 02</span>
-            </div>
-          </div>
-
-          <div class="peeking-deck-ghost ghost-card-2" id="ghostCard2" title="Story 03">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="Upcoming testimonial" class="ghost-img" id="ghostImg2">
-            <div class="ghost-frost-overlay">
-              <span class="ghost-label" id="ghostLabel2">STORY 03</span>
-            </div>
-          </div>
-
-        </div>
-
       </div>
 
-      <!-- Interactive Deck Navigator with Candidate Tabs & Controls -->
-      <div class="testimonials-controls-row">
-        
-        <!-- 4 Student Quick Selection Tabs -->
-        <div class="testimonial-story-tabs" id="storyTabs">
-          <button type="button" class="story-tab active" data-index="0">
-            <span class="tab-index">01</span>
-            <span class="tab-name">Aarav (Debate Lab)</span>
-          </button>
-          <button type="button" class="story-tab" data-index="1">
-            <span class="tab-index">02</span>
-            <span class="tab-name">Divya (Tech Lead)</span>
-          </button>
-          <button type="button" class="story-tab" data-index="2">
-            <span class="tab-index">03</span>
-            <span class="tab-name">Karthik (IELTS 8.5)</span>
-          </button>
-          <button type="button" class="story-tab" data-index="3">
-            <span class="tab-index">04</span>
-            <span class="tab-name">Priya (Parent)</span>
-          </button>
+      <!-- Horizontal Cinema Runway Track -->
+      <div class="cinema-runway-wrapper" id="cinemaRunwayWrapper">
+        <div class="cinema-runway-track" id="cinemaRunwayTrack">
+          
+          <!-- CARD 01: Aarav Sundaram -->
+          <article class="runway-cinema-card active" data-index="0" id="runwayCard0">
+            <div class="cinema-card-inner">
+              <!-- Top Card Meta -->
+              <div class="cinema-card-top-meta">
+                <div class="card-rating-cluster">
+                  <span class="diamond-star">✦</span>
+                  <span class="diamond-star">✦</span>
+                  <span class="diamond-star">✦</span>
+                  <span class="diamond-star">✦</span>
+                  <span class="diamond-star">✦</span>
+                  <span class="rating-val">5.0</span>
+                </div>
+                <span class="verified-alumni-badge">
+                  <span class="verified-icon">✓</span>
+                  <span>VERIFIED ATELIER ALUMNI</span>
+                </span>
+              </div>
+
+              <!-- Video Window with Local Fast Stream -->
+              <div class="cinema-card-video-box">
+                <video 
+                  class="runway-video-player" 
+                  playsinline 
+                  muted 
+                  loop 
+                  preload="metadata"
+                  poster="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80"
+                  src="/videos/student-1.mp4"
+                ></video>
+
+                <!-- Video HUD Overlay -->
+                <div class="video-hud-overlay">
+                  <span class="video-rec-tag">
+                    <span class="rec-red-dot"></span>
+                    <span>STUDIO CAM</span>
+                  </span>
+                  <span class="video-tc-badge">TC 00:01:24:18 // PALLAVARAM</span>
+                </div>
+
+                <!-- Floating Play/Sound Pill -->
+                <button type="button" class="video-action-hud" aria-label="Play or unmute video">
+                  <span class="hud-play-glyph">▶</span>
+                  <span class="hud-action-text">Preview Audio</span>
+                </button>
+
+                <!-- Duration / Cohort Tag -->
+                <div class="video-footer-meta">
+                  <span class="video-cohort-pill">1:6 DEBATE LAB</span>
+                  <span class="video-duration-pill">0:48s HD</span>
+                </div>
+              </div>
+
+              <!-- Spoken Caption & Audio Waveform -->
+              <div class="cinema-card-caption-block">
+                <div class="caption-header-row">
+                  <span class="quote-symbol">“</span>
+                  <div class="card-audio-equalizer" title="Studio FLAC Stream">
+                    <span class="eq-bar bar-1"></span>
+                    <span class="eq-bar bar-2"></span>
+                    <span class="eq-bar bar-3"></span>
+                    <span class="eq-bar bar-4"></span>
+                    <span class="eq-bar bar-5"></span>
+                  </div>
+                </div>
+                <p class="spoken-caption-copy">
+                  Before Aura, I used to <span class="highlight-cyan">freeze mid-sentence</span> during school debates. Now I structure arguments in real-time — my coach says I sound like a <span class="highlight-cyan">native parliamentary speaker.</span>
+                </p>
+              </div>
+
+              <!-- Student Profile Footer -->
+              <div class="cinema-card-author-footer">
+                <div class="author-avatar-group">
+                  <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=160&q=80" alt="Aarav Sundaram" class="author-avatar-photo">
+                  <span class="author-cefr-pill">CEFR C1</span>
+                </div>
+                <div class="author-info-group">
+                  <h4 class="author-display-name">Aarav Sundaram</h4>
+                  <p class="author-cohort-role">Scholar Fluency & Debate • Age 14</p>
+                  <span class="author-outcome-tag">Outcome: Inter-School Debate Finalist</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARD 02: Divya Raghavan -->
+          <article class="runway-cinema-card" data-index="1" id="runwayCard1">
+            <div class="cinema-card-inner">
+              <div class="cinema-card-top-meta">
+                <div class="card-rating-cluster">
+                  <span class="diamond-star">✦</span>
+                  <span class="diamond-star">✦</span>
+                  <span class="diamond-star">✦</span>
+                  <span class="diamond-star">✦</span>
+                  <span class="diamond-star">✦</span>
+                  <span class="rating-val">5.0</span>
+                </div>
+                <span class="verified-alumni-badge">
+                  <span class="verified-icon">✓</span>
+                  <span>VERIFIED ATELIER ALUMNI</span>
+                </span>
+              </div>
+
+              <div class="cinema-card-video-box">
+                <video 
+                  class="runway-video-player" 
+                  playsinline 
+                  muted 
+                  loop 
+                  preload="metadata"
+                  poster="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80"
+                  src="/videos/student-2.mp4"
+                ></video>
+
+                <div class="video-hud-overlay">
+                  <span class="video-rec-tag">
+                    <span class="rec-red-dot"></span>
+                    <span>STUDIO CAM</span>
+                  </span>
+                  <span class="video-tc-badge">TC 00:02:11:06 // PALLAVARAM</span>
+                </div>
+
+                <button type="button" class="video-action-hud" aria-label="Play or unmute video">
+                  <span class="hud-play-glyph">▶</span>
+                  <span class="hud-action-text">Preview Audio</span>
+                </button>
+
+                <div class="video-footer-meta">
+                  <span class="video-cohort-pill">1:6 TECH CADENCE</span>
+                  <span class="video-duration-pill">1:12s HD</span>
+                </div>
+              </div>
+
+              <div class="cinema-card-caption-block">
+                <div class="caption-header-row">
+                  <span class="quote-symbol">“</span>
+                  <div class="card-audio-equalizer" title="Studio FLAC Stream">
+                    <span class="eq-bar bar-1"></span>
+                    <span class="eq-bar bar-2"></span>
+                    <span class="eq-bar bar-3"></span>
+                    <span class="eq-bar bar-4"></span>
+                    <span class="eq-bar bar-5"></span>
+                  </div>
+                </div>
+                <p class="spoken-caption-copy">
+                  My <span class="highlight-cyan">MTI was holding me back</span> in client calls. After 12 weeks at Aura, my VP said my <span class="highlight-cyan">diction rivals our London team.</span> I lead global standups now with zero hesitation.
+                </p>
+              </div>
+
+              <div class="cinema-card-author-footer">
+                <div class="author-avatar-group">
+                  <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=160&q=80" alt="Divya Raghavan" class="author-avatar-photo">
+                  <span class="author-cefr-pill">CEFR C2</span>
+                </div>
+                <div class="author-info-group">
+                  <h4 class="author-display-name">Divya Raghavan</h4>
+                  <p class="author-cohort-role">Corporate Cadence Accelerator • Tech Lead</p>
+                  <span class="author-outcome-tag">Outcome: Promoted to Global Client Lead</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARD 03: Karthik Venkatesh -->
+          <article class="runway-cinema-card" data-index="2" id="runwayCard2">
+            <div class="cinema-card-inner">
+              <div class="cinema-card-top-meta">
+                <div class="card-rating-cluster">
+                  <span class="diamond-star">✦</span>
+                  <span class="diamond-star">✦</span>
+                  <span class="diamond-star">✦</span>
+                  <span class="diamond-star">✦</span>
+                  <span class="diamond-star">✦</span>
+                  <span class="rating-val">5.0</span>
+                </div>
+                <span class="verified-alumni-badge">
+                  <span class="verified-icon">✓</span>
+                  <span>VERIFIED ATELIER ALUMNI</span>
+                </span>
+              </div>
+
+              <div class="cinema-card-video-box">
+                <video 
+                  class="runway-video-player" 
+                  playsinline 
+                  muted 
+                  loop 
+                  preload="metadata"
+                  poster="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80"
+                  src="/videos/student-3.mp4"
+                ></video>
+
+                <div class="video-hud-overlay">
+                  <span class="video-rec-tag">
+                    <span class="rec-red-dot"></span>
+                    <span>STUDIO CAM</span>
+                  </span>
+                  <span class="video-tc-badge">TC 00:03:04:19 // PALLAVARAM</span>
+                </div>
+
+                <button type="button" class="video-action-hud" aria-label="Play or unmute video">
+                  <span class="hud-play-glyph">▶</span>
+                  <span class="hud-action-text">Preview Audio</span>
+                </button>
+
+                <div class="video-footer-meta">
+                  <span class="video-cohort-pill">1:6 IELTS PRECISION</span>
+                  <span class="video-duration-pill">0:56s HD</span>
+                </div>
+              </div>
+
+              <div class="cinema-card-caption-block">
+                <div class="caption-header-row">
+                  <span class="quote-symbol">“</span>
+                  <div class="card-audio-equalizer" title="Studio FLAC Stream">
+                    <span class="eq-bar bar-1"></span>
+                    <span class="eq-bar bar-2"></span>
+                    <span class="eq-bar bar-3"></span>
+                    <span class="eq-bar bar-4"></span>
+                    <span class="eq-bar bar-5"></span>
+                  </div>
+                </div>
+                <p class="spoken-caption-copy">
+                  I attempted IELTS <span class="highlight-cyan">three times before Aura.</span> Their phonetic placement drills fixed my vowel shifts. <span class="highlight-cyan">Band 8.5 on my first attempt</span> after the program — PR approved in 4 months.
+                </p>
+              </div>
+
+              <div class="cinema-card-author-footer">
+                <div class="author-avatar-group">
+                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80" alt="Karthik Venkatesh" class="author-avatar-photo">
+                  <span class="author-cefr-pill">IELTS 8.5</span>
+                </div>
+                <div class="author-info-group">
+                  <h4 class="author-display-name">Karthik Venkatesh</h4>
+                  <p class="author-cohort-role">IELTS Precision Cohort • Pallavaram</p>
+                  <span class="author-outcome-tag">Outcome: IELTS Band 8.5 — Canada PR</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARD 04: Priya Natarajan -->
+          <article class="runway-cinema-card" data-index="3" id="runwayCard3">
+            <div class="cinema-card-inner">
+              <div class="cinema-card-top-meta">
+                <div class="card-rating-cluster">
+                  <span class="diamond-star">✦</span>
+                  <span class="diamond-star">✦</span>
+                  <span class="diamond-star">✦</span>
+                  <span class="diamond-star">✦</span>
+                  <span class="diamond-star">✦</span>
+                  <span class="rating-val">5.0</span>
+                </div>
+                <span class="verified-alumni-badge">
+                  <span class="verified-icon">✓</span>
+                  <span>VERIFIED ATELIER ALUMNI</span>
+                </span>
+              </div>
+
+              <div class="cinema-card-video-box">
+                <video 
+                  class="runway-video-player" 
+                  playsinline 
+                  muted 
+                  loop 
+                  preload="metadata"
+                  poster="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80"
+                  src="/videos/student-4.mp4"
+                ></video>
+
+                <div class="video-hud-overlay">
+                  <span class="video-rec-tag">
+                    <span class="rec-red-dot"></span>
+                    <span>STUDIO CAM</span>
+                  </span>
+                  <span class="video-tc-badge">TC 00:04:18:22 // PALLAVARAM</span>
+                </div>
+
+                <button type="button" class="video-action-hud" aria-label="Play or unmute video">
+                  <span class="hud-play-glyph">▶</span>
+                  <span class="hud-action-text">Preview Audio</span>
+                </button>
+
+                <div class="video-footer-meta">
+                  <span class="video-cohort-pill">1:6 JUNIOR ORATORS</span>
+                  <span class="video-duration-pill">0:42s HD</span>
+                </div>
+              </div>
+
+              <div class="cinema-card-caption-block">
+                <div class="caption-header-row">
+                  <span class="quote-symbol">“</span>
+                  <div class="card-audio-equalizer" title="Studio FLAC Stream">
+                    <span class="eq-bar bar-1"></span>
+                    <span class="eq-bar bar-2"></span>
+                    <span class="eq-bar bar-3"></span>
+                    <span class="eq-bar bar-4"></span>
+                    <span class="eq-bar bar-5"></span>
+                  </div>
+                </div>
+                <p class="spoken-caption-copy">
+                  My son was <span class="highlight-cyan">terrified of speaking English</span> at school. Within 8 weeks at Aura, he <span class="highlight-cyan">volunteered for the Model UN.</span> The confidence transformation is beyond what I imagined.
+                </p>
+              </div>
+
+              <div class="cinema-card-author-footer">
+                <div class="author-avatar-group">
+                  <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=160&q=80" alt="Priya Natarajan" class="author-avatar-photo">
+                  <span class="author-cefr-pill">PARENT</span>
+                </div>
+                <div class="author-info-group">
+                  <h4 class="author-display-name">Priya Natarajan</h4>
+                  <p class="author-cohort-role">Parent (Son: Age 10 — Junior Orators)</p>
+                  <span class="author-outcome-tag">Outcome: Model UN Delegation Selection</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- Runway Footer Progress & Story Selector Tabs -->
+      <div class="testimonials-runway-controls">
+        <!-- Interactive Horizontal Progress Bar Track -->
+        <div class="runway-progress-track">
+          <div class="runway-progress-fill" id="runwayProgressFill"></div>
         </div>
 
-        <!-- Prev / Next Luxury Buttons -->
-        <div class="deck-arrow-actions">
-          <button type="button" class="deck-nav-btn btn-prev" id="testimonialPrevBtn" aria-label="Previous story">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        <!-- 4 Story Tabs -->
+        <div class="runway-story-tabs" id="runwayStoryTabs">
+          <button type="button" class="runway-tab active" data-index="0">
+            <span class="tab-dot"></span>
+            <span class="tab-num">01</span>
+            <span class="tab-label">Aarav (Debate Lab)</span>
           </button>
-          <button type="button" class="deck-nav-btn btn-next" id="testimonialNextBtn" aria-label="Next story">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          <button type="button" class="runway-tab" data-index="1">
+            <span class="tab-dot"></span>
+            <span class="tab-num">02</span>
+            <span class="tab-label">Divya (Tech Lead)</span>
+          </button>
+          <button type="button" class="runway-tab" data-index="2">
+            <span class="tab-dot"></span>
+            <span class="tab-num">03</span>
+            <span class="tab-label">Karthik (IELTS 8.5)</span>
+          </button>
+          <button type="button" class="runway-tab" data-index="3">
+            <span class="tab-dot"></span>
+            <span class="tab-num">04</span>
+            <span class="tab-label">Priya (Parent)</span>
           </button>
         </div>
-
       </div>
 
     </div>
