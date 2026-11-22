@@ -146,7 +146,9 @@ document.addEventListener('DOMContentLoaded', () => {
     tab.addEventListener('click', () => {
       const idx = parseInt(tab.getAttribute('data-index'), 10);
       setSlide(idx);
-      startCarouselTimer();
+      if (carouselPara) {
+    startCarouselTimer();
+  }
     });
   });
 
@@ -154,11 +156,15 @@ document.addEventListener('DOMContentLoaded', () => {
     dot.addEventListener('click', () => {
       const idx = parseInt(dot.getAttribute('data-index'), 10);
       setSlide(idx);
-      startCarouselTimer();
+      if (carouselPara) {
+    startCarouselTimer();
+  }
     });
   });
 
-  startCarouselTimer();
+  if (carouselPara) {
+    startCarouselTimer();
+  }
 
   // --- 2.2 Boutique Courses Syllabus Dossier Modal Controller ---
   const coursesData = {
@@ -512,56 +518,191 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- 3. A-Z BIG Alphabet Rain Engine ---
+  // --- 3. Real Ocean Sea Waves & 3D Alphabet Splash Engine ---
   if (!canvas) return;
 
   const ctx = canvas.getContext('2d');
+  const viewportCanvas = document.getElementById('viewportCanvas') || document.querySelector('.viewport-canvas');
   let width, height;
 
   function resizeCanvas() {
-    const rect = stage.getBoundingClientRect();
-    width = canvas.width = rect.width * (window.devicePixelRatio || 1);
-    height = canvas.height = rect.height * (window.devicePixelRatio || 1);
+    const rect = viewportCanvas ? viewportCanvas.getBoundingClientRect() : (stage ? stage.getBoundingClientRect() : { width: window.innerWidth, height: window.innerHeight });
+    const dpr = window.devicePixelRatio || 1;
+    width = canvas.width = rect.width * dpr;
+    height = canvas.height = rect.height * dpr;
   }
 
   window.addEventListener('resize', resizeCanvas);
   resizeCanvas();
 
-  // 4 Colors matching reference image — Purple, Blue, Cyan, Lavender
+  // 4 Colors matching reference design — Vibrant Purple, Royal Blue, Cyan, Lavender
   const oceanPalette = [
-    { front: '#8B5CF6', depth: '#6D28D9', highlight: '#DDD6FE' }, // Vibrant Purple (like 'A' in ref)
-    { front: '#3B82F6', depth: '#1D4ED8', highlight: '#BFDBFE' }, // Royal Blue (like 'B' in ref)
-    { front: '#22D3EE', depth: '#0891B2', highlight: '#CFFAFE' }, // Cyan/Teal (like 'C' in ref)
-    { front: '#A78BFA', depth: '#7C3AED', highlight: '#EDE9FE' }, // Soft Lavender (like 'D/E' in ref)
+    { front: '#8B5CF6', depth: '#6D28D9', highlight: '#DDD6FE' },
+    { front: '#3B82F6', depth: '#1D4ED8', highlight: '#BFDBFE' },
+    { front: '#22D3EE', depth: '#0891B2', highlight: '#CFFAFE' },
+    { front: '#A78BFA', depth: '#7C3AED', highlight: '#EDE9FE' },
   ];
 
   const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-  // Settings — 6 letters max, graceful drops, fast 1.8s rest fade so floor is NEVER crowded
   const MAX_ON_SCREEN = 6;
-  const SPAWN_INTERVAL_MS = 1350;
-  const FADE_AFTER_REST_MS = 1800;
-  const FADE_DURATION = 650;
+  const SPAWN_INTERVAL_MS = 1450;
 
-  // Splash Particle
-  class SplashDroplet {
-    constructor(x, y, color) {
+  // --- Real Ocean Wave Model (Multi-Harmonic Gerstner Swells) ---
+  function getSeaWaveHeight(x, time, layer = 'front') {
+    const t = time * 0.001;
+    if (layer === 'back') {
+      const s1 = Math.sin(x * 0.003 + t * 1.2) * 16;
+      const s2 = Math.sin(x * 0.007 - t * 0.9) * 8;
+      return s1 + s2;
+    } else if (layer === 'mid') {
+      const s1 = (Math.pow((Math.sin(x * 0.004 + t * 1.5 + 1.1) + 1) * 0.5, 1.6) * 2 - 1) * 20;
+      const s2 = Math.sin(x * 0.009 - t * 1.1 + 0.6) * 10;
+      const s3 = Math.cos(x * 0.016 + t * 1.8) * 5;
+      return s1 + s2 + s3;
+    } else {
+      // Front prominent swell (Gerstner-style trochoidal peaks with sharp crests)
+      const s1 = (Math.pow((Math.sin(x * 0.0045 + t * 1.9 + 2.1) + 1) * 0.5, 1.8) * 2 - 1) * 24;
+      const s2 = Math.sin(x * 0.011 - t * 1.5 + 1.5) * 11;
+      const s3 = Math.cos(x * 0.022 + t * 2.4) * 6;
+      const s4 = Math.sin(x * 0.042 - t * 3.1) * 3;
+      return s1 + s2 + s3 + s4;
+    }
+  }
+
+  // --- Draw Real Ocean Sea Waves (With Crest Whitecaps & Foam Shimmer) ---
+  function drawRealisticOceanWaves(ctx, width, height, time, layer) {
+    const dpr = window.devicePixelRatio || 1;
+    // 30% Coverage: Sea water starts at 70% height from top (covers bottom 30% of viewport)
+    const baseY = height * 0.70;
+    const step = 8 * dpr;
+
+    if (layer === 'back') {
+      // 1. Back Swell (Distant Soft Ocean Layer)
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(0, height);
+      for (let x = 0; x <= width + step; x += step) {
+        const y = baseY - 28 * dpr + getSeaWaveHeight(x, time, 'back') * dpr;
+        ctx.lineTo(x, y);
+      }
+      ctx.lineTo(width, height);
+      ctx.closePath();
+      const backGrad = ctx.createLinearGradient(0, baseY - 60 * dpr, 0, height);
+      backGrad.addColorStop(0, 'rgba(224, 247, 250, 0.7)');
+      backGrad.addColorStop(0.35, 'rgba(186, 230, 253, 0.55)');
+      backGrad.addColorStop(1, 'rgba(125, 211, 252, 0.45)');
+      ctx.fillStyle = backGrad;
+      ctx.fill();
+      ctx.restore();
+    } else if (layer === 'front') {
+      // 2. Mid Swell Layer (Translucent Turquoise Lagoon)
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(0, height);
+      for (let x = 0; x <= width + step; x += step) {
+        const y = baseY - 14 * dpr + getSeaWaveHeight(x, time, 'mid') * dpr;
+        ctx.lineTo(x, y);
+      }
+      ctx.lineTo(width, height);
+      ctx.closePath();
+      const midGrad = ctx.createLinearGradient(0, baseY - 40 * dpr, 0, height);
+      midGrad.addColorStop(0, 'rgba(34, 211, 238, 0.38)');
+      midGrad.addColorStop(0.4, 'rgba(0, 157, 196, 0.45)');
+      midGrad.addColorStop(1, 'rgba(8, 145, 178, 0.55)');
+      ctx.fillStyle = midGrad;
+      ctx.fill();
+
+      // 3. Front Active Swell Layer (The Main Sea Wave with Crest Foam Whitecaps)
+      const frontPoints = [];
+      ctx.beginPath();
+      ctx.moveTo(0, height);
+      for (let x = 0; x <= width + step; x += step) {
+        const y = baseY + getSeaWaveHeight(x, time, 'front') * dpr;
+        frontPoints.push({ x, y });
+        ctx.lineTo(x, y);
+      }
+      ctx.lineTo(width, height);
+      ctx.closePath();
+      const frontGrad = ctx.createLinearGradient(0, baseY - 25 * dpr, 0, height);
+      frontGrad.addColorStop(0, 'rgba(34, 211, 238, 0.55)');
+      frontGrad.addColorStop(0.3, 'rgba(0, 157, 196, 0.65)');
+      frontGrad.addColorStop(0.7, 'rgba(0, 138, 175, 0.78)');
+      frontGrad.addColorStop(1, 'rgba(1, 102, 130, 0.88)');
+      ctx.fillStyle = frontGrad;
+      ctx.fill();
+
+      // 4. Whitecap Seafoam & Specular Highlights (Matching Reference Photo)
+      for (let i = 0; i < frontPoints.length - 1; i++) {
+        const pt = frontPoints[i];
+        const nextPt = frontPoints[i + 1];
+        const waveAmp = (baseY - pt.y) / dpr;
+
+        // On wave crests (high peaks):
+        if (waveAmp > 7) {
+          const foamAlpha = Math.min(0.95, (waveAmp - 7) / 12);
+
+          // White seafoam cap along crest
+          ctx.beginPath();
+          ctx.moveTo(pt.x, pt.y);
+          ctx.lineTo(nextPt.x, nextPt.y);
+          ctx.strokeStyle = `rgba(255, 255, 255, ${foamAlpha * 0.94})`;
+          ctx.lineWidth = (3.5 + (waveAmp - 7) * 0.35) * dpr;
+          ctx.lineCap = 'round';
+          ctx.stroke();
+
+          // Delicate sparkling spray foam glints on highest peaks
+          if (waveAmp > 14 && (i % 3 === 0)) {
+            ctx.beginPath();
+            ctx.arc(pt.x, pt.y - 1.5 * dpr, 2.5 * dpr, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 255, 255, ${foamAlpha})`;
+            ctx.shadowColor = '#ffffff';
+            ctx.shadowBlur = 8 * dpr;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+          }
+        }
+      }
+
+      // 5. Multi-depth Caustic Rays & Water Texture across 35% depth
+      ctx.beginPath();
+      for (let cx = 15 * dpr; cx < width; cx += 40 * dpr) {
+        const waveY = baseY + getSeaWaveHeight(cx, time, 'front') * dpr;
+        for (let depthOffset of [30, 75, 135]) {
+          const cy = waveY + (depthOffset + Math.sin(cx * 0.04 + time * 0.0025 + depthOffset) * 14) * dpr;
+          if (cy < height - 10 * dpr) {
+            ctx.moveTo(cx - 15 * dpr, cy);
+            ctx.lineTo(cx + 15 * dpr, cy + 5 * dpr);
+          }
+        }
+      }
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.22)';
+      ctx.lineWidth = 1.6 * dpr;
+      ctx.stroke();
+
+      ctx.restore();
+    }
+  }
+
+  // --- Real Ocean Water Splash Droplets ---
+  class OceanSplashDroplet {
+    constructor(x, y, vx, vy, color, size) {
       const dpr = window.devicePixelRatio || 1;
       this.x = x;
       this.y = y;
-      this.vx = (Math.random() - 0.5) * 10 * dpr;
-      this.vy = -(Math.random() * 7 + 3) * dpr;
-      this.gravity = 0.3 * dpr;
-      this.radius = (Math.random() * 3.5 + 2) * dpr;
+      this.vx = vx;
+      this.vy = vy;
+      this.gravity = 0.38 * dpr;
+      this.radius = (size || (Math.random() * 4 + 2)) * dpr;
       this.alpha = 1;
-      this.color = color || 'rgba(0, 157, 196, 0.6)';
+      this.color = color || '#ffffff';
+      this.decay = Math.random() * 0.02 + 0.025;
     }
 
     update() {
       this.vy += this.gravity;
       this.x += this.vx;
       this.y += this.vy;
-      this.alpha -= 0.028;
+      this.alpha -= this.decay;
     }
 
     draw() {
@@ -571,29 +712,30 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
       ctx.fillStyle = this.color;
-      ctx.shadowColor = 'rgba(0, 157, 196, 0.5)';
+      ctx.shadowColor = 'rgba(255, 255, 255, 0.8)';
       ctx.shadowBlur = 8;
       ctx.fill();
       ctx.restore();
     }
   }
 
-  // Ripple Ring
-  class LiquidRipple {
-    constructor(x, y) {
+  // --- Water Impact Concentric Rings ---
+  class OceanWaveRipple {
+    constructor(x, y, intensity) {
       const dpr = window.devicePixelRatio || 1;
       this.x = x;
       this.y = y;
-      this.rX = 10 * dpr;
-      this.rY = 4 * dpr;
-      this.alpha = 0.7;
-      this.speed = (Math.random() * 1.5 + 2.5) * dpr;
+      this.rX = (6 + intensity * 4) * dpr;
+      this.rY = (2.5 + intensity * 1.5) * dpr;
+      this.alpha = 0.85;
+      this.speed = (2.2 + intensity * 1.2) * dpr;
+      this.lineWidth = (2.5 + intensity * 0.5) * dpr;
     }
 
     update() {
       this.rX += this.speed;
-      this.rY += this.speed * 0.3;
-      this.alpha -= 0.018;
+      this.rY += this.speed * 0.32;
+      this.alpha -= 0.022;
     }
 
     draw() {
@@ -602,8 +744,10 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.globalAlpha = Math.max(0, this.alpha);
       ctx.beginPath();
       ctx.ellipse(this.x, this.y, this.rX, this.rY, 0, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(0, 157, 196, 0.4)';
-      ctx.lineWidth = 2.5 * (window.devicePixelRatio || 1);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+      ctx.lineWidth = this.lineWidth;
+      ctx.shadowColor = 'rgba(34, 211, 238, 0.6)';
+      ctx.shadowBlur = 6;
       ctx.stroke();
       ctx.restore();
     }
@@ -612,19 +756,37 @@ document.addEventListener('DOMContentLoaded', () => {
   const splashes = [];
   const ripples = [];
 
-  function triggerSplash(x, y, intensity, color) {
+  function triggerWaterSplash(x, y, speed, letterColor) {
     const dpr = window.devicePixelRatio || 1;
-    const count = Math.min(16, Math.floor(10 * intensity));
+    const intensity = Math.min(3.2, Math.max(1, speed / (2.5 * dpr)));
+    const count = Math.floor(22 * intensity);
+
+    const colors = [
+      '#ffffff',
+      'rgba(255, 255, 255, 0.95)',
+      'rgba(224, 247, 250, 0.9)',
+      'rgba(34, 211, 238, 0.85)',
+      letterColor || 'rgba(0, 157, 196, 0.8)'
+    ];
+
     for (let i = 0; i < count; i++) {
-      splashes.push(new SplashDroplet(
-        x + (Math.random() - 0.5) * 40 * dpr, y, color
+      const angle = (Math.PI / 6) + Math.random() * (2 * Math.PI / 3);
+      const vel = (Math.random() * 8 + 4) * intensity * dpr;
+      const vx = Math.cos(angle) * (Math.random() > 0.5 ? 1 : -1) * (vel * 0.7);
+      const vy = -Math.sin(angle) * vel;
+      const col = colors[Math.floor(Math.random() * colors.length)];
+      splashes.push(new OceanSplashDroplet(
+        x + (Math.random() - 0.5) * 35 * dpr,
+        y - 4 * dpr,
+        vx, vy, col, Math.random() * 3.5 + 1.8
       ));
     }
-    ripples.push(new LiquidRipple(x, y));
+
+    ripples.push(new OceanWaveRipple(x, y, intensity));
+    ripples.push(new OceanWaveRipple(x, y, intensity * 0.65));
   }
 
   // --- Ambient Floating Ocean Micro-Bubbles ---
-  // Fills the stage with gentle atmospheric light particles so it's never empty
   class AmbientBubble {
     constructor() {
       this.reset(true);
@@ -632,8 +794,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     reset(initial = false) {
       const dpr = window.devicePixelRatio || 1;
-      this.x = Math.random() * (width || 600);
-      this.y = initial ? Math.random() * (height || 520) : (height || 520) + 15 * dpr;
+      this.x = Math.random() * (width || 800);
+      this.y = initial ? Math.random() * (height || 600) : (height || 600) + 15 * dpr;
       this.radius = (Math.random() * 3 + 1.8) * dpr;
       this.speed = (Math.random() * 0.45 + 0.25) * dpr;
       this.driftPhase = Math.random() * Math.PI * 2;
@@ -670,11 +832,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const ambientBubbles = [];
-  for (let b = 0; b < 26; b++) {
+  for (let b = 0; b < 28; b++) {
     ambientBubbles.push(new AmbientBubble());
   }
 
-  // BIG 3D Clay Alphabet with full lifecycle
+  // --- 3D Clay Alphabet with Real Ocean Buoyancy ---
   class ClayAlphabet {
     constructor(charData, x, y) {
       this.dpr = window.devicePixelRatio || 1;
@@ -685,20 +847,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
       this.x = x;
       this.y = y;
-      this.vx = (Math.random() - 0.5) * 3 * this.dpr;
-      this.vy = (Math.random() * 1 + 0.5) * this.dpr;
+      this.vx = (Math.random() - 0.5) * 2.2 * this.dpr;
+      this.vy = (Math.random() * 1.2 + 0.8) * this.dpr;
 
       this.gravity = 0.22 * this.dpr;
       this.bounce = 0.55;
-      this.friction = 0.986;
+      this.friction = 0.988;
 
-      // Good visible size — 68px to 88px
-      this.fontSize = (Math.random() * 20 + 68) * this.dpr;
+      this.fontSize = (Math.random() * 18 + 66) * this.dpr;
       this.extrusion = 14 * this.dpr;
       this.radius = this.fontSize * 0.42;
 
       this.rotation = (Math.random() - 0.5) * 0.35;
-      this.rotSpeed = (Math.random() - 0.5) * 0.03;
+      this.rotSpeed = (Math.random() - 0.5) * 0.025;
 
       this.scaleX = 1;
       this.scaleY = 1;
@@ -707,14 +868,13 @@ document.addEventListener('DOMContentLoaded', () => {
       this.dragOffsetY = 0;
       this.idlePhase = Math.random() * Math.PI * 2;
 
-      // Lifecycle: falling → resting → fading → dead
+      // Lifecycle
       this.state = 'falling';
-      this.restStartTime = 0;
+      this.floatStartTime = 0;
       this.fadeAlpha = 1;
       this.dead = false;
       this.hasLanded = false;
-
-      // Entry animation — start slightly scaled up then settle
+      this.inWater = false;
       this.entryScale = 1.15;
     }
 
@@ -728,10 +888,11 @@ document.addEventListener('DOMContentLoaded', () => {
         this.state = 'falling';
         this.fadeAlpha = 1;
         this.hasLanded = false;
+        this.inWater = false;
         return;
       }
 
-      // Physics
+      // Gravity & Air physics
       this.vy += this.gravity;
       this.vx *= this.friction;
       this.vy *= 0.993;
@@ -742,7 +903,7 @@ document.addEventListener('DOMContentLoaded', () => {
       this.rotation += this.rotSpeed;
       this.rotSpeed *= 0.992;
 
-      // Anti-Clumping Repulsion between letters on the ground
+      // Repulsion between floating letters
       if (allLetters) {
         for (let j = 0; j < allLetters.length; j++) {
           const other = allLetters[j];
@@ -762,58 +923,68 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // Floor Collision
-      const floor = height - 60 * this.dpr;
-      if (this.y > floor) {
-        const impactSpeed = Math.abs(this.vy);
-        this.y = floor;
-        this.vy = -this.vy * this.bounce;
-        this.vx *= 0.82;
-        this.rotSpeed *= 0.75;
+      // Ocean Water Surface Collision & Archimedes Buoyancy (30% Bottom Coverage)
+      const baseY = height * 0.70;
+      const waterY = baseY + getSeaWaveHeight(this.x, now, 'front') * this.dpr;
+      const bottomY = this.y + this.radius * 0.45;
 
-        if (impactSpeed > 2 * this.dpr) {
-          triggerSplash(
-            this.x, floor + 10 * this.dpr,
-            impactSpeed / (4.5 * this.dpr),
-            this.frontColor + '70'
-          );
-          this.scaleX = 1 + impactSpeed * 0.018;
-          this.scaleY = Math.max(0.8, 1 - impactSpeed * 0.018);
-        }
+      if (bottomY >= waterY) {
+        this.inWater = true;
 
-        if (!this.hasLanded && impactSpeed < 1.4 * this.dpr) {
+        // Splash trigger on entry
+        if (!this.hasLanded) {
           this.hasLanded = true;
-          this.state = 'resting';
-          this.restStartTime = now;
+          this.state = 'floating';
+          this.floatStartTime = now;
+          const impactSpeed = Math.abs(this.vy);
+          if (impactSpeed > 1.2 * this.dpr) {
+            triggerWaterSplash(this.x, waterY, impactSpeed, this.frontColor);
+            this.scaleX = 1 + Math.min(0.35, impactSpeed * 0.035);
+            this.scaleY = Math.max(0.7, 1 - Math.min(0.3, impactSpeed * 0.035));
+          }
         }
 
-        if (this.hasLanded) {
-          this.y = floor + Math.sin(this.idlePhase) * 1.2 * this.dpr;
+        // Archimedes Buoyancy Force
+        const submerged = bottomY - waterY;
+        const buoyantForce = Math.min(submerged * 0.15, 2.8 * this.dpr);
+        this.vy -= buoyantForce;
+
+        // Water resistance damping
+        this.vy *= 0.86;
+        this.vx *= 0.94;
+        this.rotSpeed *= 0.85;
+
+        // Gentle drift with ocean current
+        this.vx += 0.07 * this.dpr;
+
+        // Micro ripples while floating
+        if (Math.random() < 0.04) {
+          ripples.push(new OceanWaveRipple(this.x, waterY, 0.35));
+        }
+      } else {
+        this.inWater = false;
+        if (this.hasLanded && this.vy < -1.8 * this.dpr) {
+          this.hasLanded = false; // Player flung it into the air!
         }
       }
 
-      // Wall Collision
+      // Left/Right Wall boundary
       const halfW = this.radius;
       if (this.x < halfW) {
         this.x = halfW;
-        this.vx = -this.vx * 0.6;
+        this.vx = Math.abs(this.vx) * 0.55;
       } else if (this.x > width - halfW) {
         this.x = width - halfW;
-        this.vx = -this.vx * 0.6;
-      }
-
-      // Ceiling
-      if (this.y < -this.radius * 2) {
-        // Allow letters to be above canvas when spawning
+        this.vx = -Math.abs(this.vx) * 0.55;
       }
 
       // Lifecycle transitions
-      if (this.state === 'resting' && (now - this.restStartTime) > FADE_AFTER_REST_MS) {
+      if (this.state === 'floating' && (now - this.floatStartTime) > 4200) {
         this.state = 'fading';
       }
 
       if (this.state === 'fading') {
-        this.fadeAlpha -= (16.67 / FADE_DURATION);
+        this.fadeAlpha -= (16.67 / 850);
         if (this.fadeAlpha <= 0) {
           this.fadeAlpha = 0;
           this.dead = true;
@@ -827,17 +998,18 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.save();
       ctx.globalAlpha = Math.max(0, this.fadeAlpha);
 
-      // Floor drop-shadow
-      const floor = height - 55 * this.dpr;
-      const distFromFloor = Math.max(0, floor - this.y);
-      const shadowFactor = Math.max(0, 1 - distFromFloor / (300 * this.dpr));
+      // Water reflection / shadow (30% Bottom Coverage)
+      const baseY = height * 0.70;
+      const waterY = baseY + getSeaWaveHeight(this.x, performance.now(), 'front') * this.dpr;
+      const distFromWater = Math.max(0, waterY - this.y);
+      const shadowFactor = Math.max(0, 1 - distFromWater / (250 * this.dpr));
 
-      if (shadowFactor > 0.02) {
-        const shadowRx = (this.radius * (0.75 + (1 - shadowFactor) * 0.5)) * this.scaleX;
-        const shadowRy = shadowRx * 0.25;
+      if (shadowFactor > 0.05) {
+        const shadowRx = (this.radius * 0.8) * this.scaleX;
+        const shadowRy = shadowRx * 0.28;
         ctx.beginPath();
-        ctx.ellipse(this.x, floor + 15 * this.dpr, shadowRx, shadowRy, 0, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 70, 95, ${shadowFactor * 0.2 * this.fadeAlpha})`;
+        ctx.ellipse(this.x, waterY, shadowRx, shadowRy, 0, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0, 110, 140, ${shadowFactor * 0.25 * this.fadeAlpha})`;
         ctx.fill();
       }
 
@@ -893,7 +1065,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const lettersPool = [];
   let nextCharIdx = 0;
   let lastSpawnTime = 0;
-  let spawnLane = 0;
 
   function getNextChar() {
     const char = ALPHABET[nextCharIdx % 26];
@@ -917,21 +1088,29 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const dpr = window.devicePixelRatio || 1;
-    // 4 distinct lanes across width so letters drop across the entire stage
-    const lanes = [0.18, 0.38, 0.58, 0.78];
-    const laneX = lanes[spawnLane % lanes.length] * width;
-    spawnLane++;
+    const stageRect = stage ? stage.getBoundingClientRect() : null;
+    const canvasRect = canvas.getBoundingClientRect();
 
-    const x = Math.max(width * 0.12, Math.min(width * 0.88, laneX + (Math.random() - 0.5) * (width * 0.1)));
-    const y = -(Math.random() * 70 + 50) * dpr;
+    let x, y;
+    if (stageRect) {
+      const minX = (stageRect.left - canvasRect.left + stageRect.width * 0.15) * dpr;
+      const maxX = (stageRect.left - canvasRect.left + stageRect.width * 0.85) * dpr;
+      x = minX + Math.random() * (maxX - minX);
+      y = (stageRect.top - canvasRect.top + (Math.random() - 0.5) * 40) * dpr;
+    } else {
+      x = (width * 0.25) + (Math.random() - 0.5) * (width * 0.2);
+      y = 80 * dpr;
+    }
 
     lettersPool.push(new ClayAlphabet(charData, x, y));
   }
 
-  // Initial batch — 3 letters staggered cleanly across lanes
+  // Initial batch — 3 letters
   function spawnInitialBatch() {
     const dpr = window.devicePixelRatio || 1;
-    const lanes = [0.25, 0.50, 0.75];
+    const stageRect = stage ? stage.getBoundingClientRect() : null;
+    const canvasRect = canvas.getBoundingClientRect();
+
     for (let i = 0; i < 3; i++) {
       const char = getNextChar();
       const colorIdx = i % oceanPalette.length;
@@ -944,8 +1123,15 @@ document.addEventListener('DOMContentLoaded', () => {
         highlight: color.highlight,
       };
 
-      const x = lanes[i] * width + (Math.random() - 0.5) * (width * 0.05);
-      const y = -(Math.random() * 50 + 30) * dpr - (i * 80 * dpr);
+      let x, y;
+      if (stageRect) {
+        const laneOffsets = [0.25, 0.5, 0.75];
+        x = (stageRect.left - canvasRect.left + stageRect.width * laneOffsets[i]) * dpr;
+        y = (stageRect.top - canvasRect.top - (i * 90) + 30) * dpr;
+      } else {
+        x = (0.2 + i * 0.12) * width;
+        y = (80 - i * 80) * dpr;
+      }
 
       lettersPool.push(new ClayAlphabet(charData, x, y));
     }
@@ -953,26 +1139,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
   spawnInitialBatch();
 
-  // --- Drag & Toss ---
+  // --- Interactive Drag & Throw into Ocean ---
   let draggedLetter = null;
   let lastX = 0;
   let lastY = 0;
   let tossVx = 0;
   let tossVy = 0;
 
-  stage.addEventListener('mousedown', (e) => {
+  window.addEventListener('mousedown', (e) => {
+    if (!canvas) return;
     const rect = canvas.getBoundingClientRect();
-    const clickX = (e.clientX - rect.left) * (window.devicePixelRatio || 1);
-    const clickY = (e.clientY - rect.top) * (window.devicePixelRatio || 1);
+    const dpr = window.devicePixelRatio || 1;
+    const clickX = (e.clientX - rect.left) * dpr;
+    const clickY = (e.clientY - rect.top) * dpr;
 
     for (let i = lettersPool.length - 1; i >= 0; i--) {
       const letter = lettersPool[i];
       if (letter.dead) continue;
       const dist = Math.hypot(clickX - letter.x, clickY - letter.y);
 
-      if (dist < letter.radius * 1.3) {
+      if (dist < letter.radius * 1.45) {
         draggedLetter = letter;
         draggedLetter.isDragging = true;
+        draggedLetter.hasLanded = false; // Allow re-splashing when thrown!
         draggedLetter.dragOffsetX = letter.x - clickX;
         draggedLetter.dragOffsetY = letter.y - clickY;
 
@@ -989,20 +1178,36 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   window.addEventListener('mousemove', (e) => {
-    if (!draggedLetter) return;
-
+    if (!canvas) return;
     const rect = canvas.getBoundingClientRect();
-    const curX = (e.clientX - rect.left) * (window.devicePixelRatio || 1);
-    const curY = (e.clientY - rect.top) * (window.devicePixelRatio || 1);
+    const dpr = window.devicePixelRatio || 1;
+    const curX = (e.clientX - rect.left) * dpr;
+    const curY = (e.clientY - rect.top) * dpr;
 
-    tossVx = (curX - lastX) * 0.9;
-    tossVy = (curY - lastY) * 0.9;
+    if (!draggedLetter) {
+      let isOver = false;
+      for (let i = 0; i < lettersPool.length; i++) {
+        const letter = lettersPool[i];
+        if (!letter.dead && Math.hypot(curX - letter.x, curY - letter.y) < letter.radius * 1.3) {
+          isOver = true;
+          break;
+        }
+      }
+      if (viewportCanvas) {
+        viewportCanvas.style.cursor = isOver ? 'grab' : '';
+      }
+      return;
+    }
+
+    tossVx = (curX - lastX) * 0.95;
+    tossVy = (curY - lastY) * 0.95;
 
     draggedLetter.x = curX + draggedLetter.dragOffsetX;
     draggedLetter.y = curY + draggedLetter.dragOffsetY;
 
     lastX = curX;
     lastY = curY;
+    if (viewportCanvas) viewportCanvas.style.cursor = 'grabbing';
   });
 
   window.addEventListener('mouseup', () => {
@@ -1012,6 +1217,7 @@ document.addEventListener('DOMContentLoaded', () => {
       draggedLetter.vy = tossVy * 1.25;
       draggedLetter.rotSpeed = tossVx * 0.015;
       draggedLetter = null;
+      if (viewportCanvas) viewportCanvas.style.cursor = '';
     }
   });
 
@@ -1027,19 +1233,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     ctx.clearRect(0, 0, width, height);
 
-    // 0. Update & Draw Ambient Ocean Micro-Bubbles (Background Atmosphere)
+    // 1. Ambient Ocean Micro-Bubbles
     for (let b = 0; b < ambientBubbles.length; b++) {
       ambientBubbles[b].update();
       ambientBubbles[b].draw();
     }
 
-    // Spawn new letters
-    if (timestamp - lastSpawnTime > SPAWN_INTERVAL_MS) {
-      spawnLetter(timestamp);
-      lastSpawnTime = timestamp;
-    }
+    // 2. Draw Back Ocean Swell (Distant Horizon Sea Layer)
+    drawRealisticOceanWaves(ctx, width, height, timestamp, 'back');
 
-    // Ripples
+    // 3. Update & Draw Water Surface Ripples
     for (let i = ripples.length - 1; i >= 0; i--) {
       const r = ripples[i];
       r.update();
@@ -1047,7 +1250,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (r.alpha <= 0) ripples.splice(i, 1);
     }
 
-    // Letters
+    // 4. Update & Draw 3D Clay Alphabet Letters
     for (let i = lettersPool.length - 1; i >= 0; i--) {
       const letter = lettersPool[i];
       letter.update(timestamp, lettersPool);
@@ -1057,7 +1260,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Splashes
+    // 5. Draw Mid & Front Ocean Wave Swell (With Crest Whitecaps & Foam Shimmer)
+    // This renders over the submerged part of the floating letters, naturally dipping them in the ocean!
+    drawRealisticOceanWaves(ctx, width, height, timestamp, 'front');
+
+    // 6. Update & Draw Water Spray Splashes
     for (let i = splashes.length - 1; i >= 0; i--) {
       const s = splashes[i];
       s.update();
@@ -1065,11 +1272,17 @@ document.addEventListener('DOMContentLoaded', () => {
       if (s.alpha <= 0) splashes.splice(i, 1);
     }
 
+    // Spawn new letters
+    if (timestamp - lastSpawnTime > SPAWN_INTERVAL_MS) {
+      spawnLetter(timestamp);
+      lastSpawnTime = timestamp;
+    }
+
     canvasFrameId = requestAnimationFrame(animate);
   }
 
   // Canvas Intersection Observer — pause physics canvas when user scrolls down
-  if ('IntersectionObserver' in window && stage) {
+  if ('IntersectionObserver' in window && viewportCanvas) {
     const canvasObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         isCanvasActive = entry.isIntersecting;
@@ -1078,7 +1291,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }, { threshold: 0.05 });
-    canvasObserver.observe(stage);
+    canvasObserver.observe(viewportCanvas);
   }
 
   canvasFrameId = requestAnimationFrame(animate);
@@ -1086,17 +1299,33 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- 4. Sticky Frosted Header & Scroll Controller (Zero Jank / 120 FPS Native) ---
   const studioNav = document.getElementById('studioNav');
   const navScrollProgress = document.getElementById('navScrollProgress');
-  const navLinkHero = document.getElementById('navLinkHero');
+  const navLinkHome = document.getElementById('navLinkHome');
   const navLinkCourses = document.getElementById('navLinkCourses');
-  const navLinkLearn = document.getElementById('navLinkLearn');
+  const navLinkBlogs = document.getElementById('navLinkBlogs');
+  const navLinkImpacts = document.getElementById('navLinkImpacts');
+  const navLinkAbout = document.getElementById('navLinkAbout');
   const coursesSection = document.getElementById('coursesSection');
+  const impactSection = document.getElementById('impactSection');
   const learnSection = document.getElementById('learnSection');
+  const aboutSection = document.getElementById('aboutSection');
   const coursesHeaderBlock = document.getElementById('coursesHeaderBlock');
   const coursesGrid = document.querySelector('.courses-grid');
   const coursesGridDuo = document.querySelector('.courses-grid-duo');
   const learnCardsTrack = document.getElementById('learnCardsTrack');
   const orbLeft = document.getElementById('orbLeft');
   const orbRight = document.getElementById('orbRight');
+
+  const navLinksArray = [navLinkHome, navLinkCourses, navLinkBlogs, navLinkImpacts, navLinkAbout].filter(Boolean);
+
+  function setActiveNavLink(activeLink) {
+    navLinksArray.forEach(link => {
+      if (link === activeLink) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
 
   function handleScroll() {
     const scrollY = window.scrollY || window.pageYOffset;
@@ -1117,24 +1346,22 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // C. Active Section Indicator Spy
-    if (navLinkHero && navLinkCourses) {
-      const coursesTop = coursesSection ? coursesSection.offsetTop - 240 : 800;
-      const learnTop = learnSection ? learnSection.offsetTop - 240 : 1800;
+    // C. Active Section Indicator Spy for 5 Sections
+    const aboutTop = aboutSection ? aboutSection.offsetTop - 280 : Infinity;
+    const blogsTop = learnSection ? learnSection.offsetTop - 280 : Infinity;
+    const impactsTop = impactSection ? impactSection.offsetTop - 280 : Infinity;
+    const coursesTop = coursesSection ? coursesSection.offsetTop - 280 : 800;
 
-      if (learnSection && scrollY >= learnTop) {
-        if (navLinkLearn) navLinkLearn.classList.add('active');
-        navLinkCourses.classList.remove('active');
-        navLinkHero.classList.remove('active');
-      } else if (coursesSection && scrollY >= coursesTop) {
-        navLinkCourses.classList.add('active');
-        navLinkHero.classList.remove('active');
-        if (navLinkLearn) navLinkLearn.classList.remove('active');
-      } else {
-        navLinkHero.classList.add('active');
-        navLinkCourses.classList.remove('active');
-        if (navLinkLearn) navLinkLearn.classList.remove('active');
-      }
+    if (scrollY >= aboutTop) {
+      setActiveNavLink(navLinkAbout);
+    } else if (scrollY >= blogsTop) {
+      setActiveNavLink(navLinkBlogs);
+    } else if (scrollY >= impactsTop) {
+      setActiveNavLink(navLinkImpacts);
+    } else if (scrollY >= coursesTop) {
+      setActiveNavLink(navLinkCourses);
+    } else {
+      setActiveNavLink(navLinkHome);
     }
 
     // D. Lightweight Parallax for Ambient Ocean Blue Orbs
@@ -1385,6 +1612,124 @@ document.addEventListener('DOMContentLoaded', () => {
   if (learnNextBtn && learnTrack) {
     learnNextBtn.addEventListener('click', () => {
       learnTrack.scrollBy({ left: 420, behavior: 'smooth' });
+    });
+  }
+
+  // --- 8. 12-Card Fast Continuous Non-Stop Interactive Gallery Carousel ---
+  const galleryViewport = document.getElementById('galleryViewport');
+  const galleryTrack = document.getElementById('galleryTrack');
+  const galleryPrevBtn = document.getElementById('galleryPrevBtn');
+  const galleryNextBtn = document.getElementById('galleryNextBtn');
+
+  if (galleryViewport && galleryTrack) {
+    let isPaused = false;
+    let autoScrollRaf = null;
+    const scrollSpeed = 5.0; // Fast and dynamic continuous speed
+    let resumeTimeout = null;
+
+    // Clone cards once to create an infinite wrap loop
+    const originalCards = Array.from(galleryTrack.children);
+    originalCards.forEach((card) => {
+      const clone = card.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      galleryTrack.appendChild(clone);
+    });
+
+    // A. Fast Continuous Auto-Move Engine (Non-Stop, never pauses on hover)
+    function autoScrollLoop() {
+      if (!isPaused && galleryViewport) {
+        galleryViewport.scrollLeft += scrollSpeed;
+        const halfWidth = galleryTrack.scrollWidth / 2;
+        if (galleryViewport.scrollLeft >= halfWidth) {
+          galleryViewport.scrollLeft -= halfWidth;
+        }
+      }
+      autoScrollRaf = requestAnimationFrame(autoScrollLoop);
+    }
+    autoScrollRaf = requestAnimationFrame(autoScrollLoop);
+
+    function tempPause(duration = 800) {
+      isPaused = true;
+      if (resumeTimeout) clearTimeout(resumeTimeout);
+      resumeTimeout = setTimeout(() => {
+        isPaused = false;
+      }, duration);
+    }
+
+    // B. Interactive Arrow Navigation Buttons (Below images, right-aligned)
+    const STEP_AMOUNT = 350;
+    if (galleryPrevBtn) {
+      galleryPrevBtn.addEventListener('click', () => {
+        tempPause(600);
+        galleryViewport.scrollBy({ left: -STEP_AMOUNT, behavior: 'smooth' });
+      });
+    }
+
+    if (galleryNextBtn) {
+      galleryNextBtn.addEventListener('click', () => {
+        tempPause(600);
+        galleryViewport.scrollBy({ left: STEP_AMOUNT, behavior: 'smooth' });
+      });
+    }
+
+    // C. Double Tap / Double Click Gesture (Forward or Backward)
+    galleryViewport.addEventListener('dblclick', (e) => {
+      tempPause(700);
+      const rect = galleryViewport.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      if (clickX > rect.width / 2) {
+        galleryViewport.scrollBy({ left: STEP_AMOUNT, behavior: 'smooth' });
+      } else {
+        galleryViewport.scrollBy({ left: -STEP_AMOUNT, behavior: 'smooth' });
+      }
+    });
+
+    // Mobile double-tap detection
+    let lastTapTime = 0;
+    galleryViewport.addEventListener('touchend', (e) => {
+      const currentTime = performance.now();
+      const tapInterval = currentTime - lastTapTime;
+      if (tapInterval < 320 && tapInterval > 0) {
+        tempPause(700);
+        const touch = e.changedTouches[0];
+        const rect = galleryViewport.getBoundingClientRect();
+        const tapX = touch.clientX - rect.left;
+        if (tapX > rect.width / 2) {
+          galleryViewport.scrollBy({ left: STEP_AMOUNT, behavior: 'smooth' });
+        } else {
+          galleryViewport.scrollBy({ left: -STEP_AMOUNT, behavior: 'smooth' });
+        }
+      }
+      lastTapTime = currentTime;
+    }, { passive: true });
+
+    // D. Drag-to-Scroll Support (Cursor hover NEVER stops or pauses movement)
+    let isDown = false;
+    let startX = 0;
+    let initialScroll = 0;
+
+    galleryViewport.addEventListener('mousedown', (e) => {
+      isDown = true;
+      galleryViewport.classList.add('is-dragging');
+      startX = e.pageX - galleryViewport.offsetLeft;
+      initialScroll = galleryViewport.scrollLeft;
+      isPaused = true;
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isDown) {
+        isDown = false;
+        galleryViewport.classList.remove('is-dragging');
+        isPaused = false;
+      }
+    });
+
+    galleryViewport.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - galleryViewport.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      galleryViewport.scrollLeft = initialScroll - walk;
     });
   }
 });

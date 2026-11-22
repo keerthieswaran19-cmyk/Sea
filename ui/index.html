@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aura English | Boutique Language Training • Pallavaram, Chennai</title>
   
-  <!-- Elite Typography: Fraunces + Plus Jakarta Sans 900 + BJCree -->
+  <!-- Elite Typography: Caveat + Dancing Script + Fraunces + Plus Jakarta Sans 900 + BJCree -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600;1,9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Dancing+Script:wght@600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600;1,9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/bjcree@latest/index.css">
   
   <link rel="stylesheet" href="styles.css">
@@ -16,36 +16,32 @@
 <body>
 
   <!-- Fullscreen Luxury Viewport (Pure White Canvas) -->
-  <div class="viewport-canvas">
+  <div class="viewport-canvas" id="viewportCanvas">
+
+    <!-- Real Ocean Waves & 3D Alphabet Splash Canvas (Full Hero Viewport) -->
+    <canvas id="alphabetCanvas" class="alphabet-viewport-canvas"></canvas>
 
     <!-- Minimalist Studio Floating Frosted Header (Ocean Blue Light Glass) -->
     <header class="studio-nav" id="studioNav">
       <!-- Scroll Depth Indicator Line -->
       <div class="nav-scroll-progress" id="navScrollProgress"></div>
 
-      <div class="nav-brand">
-        <span class="brand-crest-mark">
-          <span class="crest-shimmer"></span>
-        </span>
-        <div class="brand-typography">
-          <span class="brand-title">AURA ENGLISH</span>
-          <span class="brand-subtitle">PALLAVARAM • CHENNAI</span>
-        </div>
-      </div>
+      <!-- S.E.A Brand Identity (Left) -->
+      <a href="#" class="nav-brand-logo" aria-label="S.E.A Home">
+        <img src="sea-logo.png?v=2" alt="S.E.A - Sathya's English Academy" class="nav-brand-img">
+      </a>
 
-      <!-- Live Atelier Cohort Status Pill -->
-      <div class="nav-status-badge">
-        <span class="status-pulse-dot"></span>
-        <span>1:6 Studio Cohorts Open • Pallavaram</span>
-      </div>
+      <!-- 5 Navigation Sections (Center) -->
+      <nav class="nav-links-cluster">
+        <a href="#" class="nav-link-item active" id="navLinkHome">Home</a>
+        <a href="#coursesSection" class="nav-link-item" id="navLinkCourses">Courses</a>
+        <a href="#learnSection" class="nav-link-item" id="navLinkBlogs">Blogs</a>
+        <a href="#impactSection" class="nav-link-item" id="navLinkImpacts">Our Impacts</a>
+        <a href="#aboutSection" class="nav-link-item" id="navLinkAbout">About Us</a>
+      </nav>
 
+      <!-- Right Action CTA -->
       <div class="nav-actions">
-        <nav class="nav-links-cluster">
-          <a href="#" class="nav-link-item active" id="navLinkHero">Overview</a>
-          <a href="#coursesSection" class="nav-link-item" id="navLinkCourses">Boutique Cohorts</a>
-          <a href="#learnSection" class="nav-link-item" id="navLinkLearn">Learn With Us</a>
-        </nav>
-        
         <button class="nav-consult-pill" id="navModalTrigger">
           <span>Schedule Visit</span>
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -59,13 +55,9 @@
     <!-- Main Viewport Layout -->
     <main class="hero-layout">
       
-      <!-- LEFT: 3D Alphabet Playground + Action Cluster -->
+      <!-- LEFT: 3D Alphabet Playground with Ambient Orbitals & Floating Satellite Cards -->
       <div class="visual-column-left">
         <div class="visual-stage-left" id="visualStage">
-          
-          <!-- Interactive 3D Clay Alphabet Physics Canvas -->
-          <canvas id="alphabetCanvas" class="alphabet-canvas"></canvas>
-
           <!-- Floating Boutique Satellite Cards (Symmetrical Round Formation) -->
           <div class="floating-satellite-card card-fluency">
             <span class="satellite-pill">01</span>
@@ -114,106 +106,57 @@
               <small>In-Person Sessions</small>
             </div>
           </div>
-
-        </div>
-
-        <!-- Luxury Action Cluster (Shifted under Alphabet Dropping Stage) -->
-        <div class="cta-cluster cta-left">
-          <button class="btn-magnetic-luxury" id="heroModalTrigger">
-            <span class="btn-ambient-foil"></span>
-            <span class="btn-text">Book Free Diagnostic Session</span>
-            <div class="btn-arrow-ring">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="7 7 17 7 17 17"></polyline>
-              </svg>
-            </div>
-          </button>
-
-          <a href="tel:+919840000000" class="btn-whisper-call">
-            <span class="call-pulse"></span>
-            <span>Speak with Senior Mentor</span>
-          </a>
         </div>
       </div>
 
-      <!-- RIGHT: Editorial Masterpiece with Dynamic Carousel -->
-      <div class="editorial-stage-right" id="editorialStage">
-
-        <!-- Master Headline -->
-        <h1 class="headline-editorial">
-          <span class="line-lead">Speak English with</span>
+      <!-- RIGHT: Clean S.E.A Brand Identity & Luxury Manifesto -->
+      <div class="editorial-stage-right manifesto-stage" id="editorialStage">
+        <div class="manifesto-card">
           
-          <span class="emphasis-block">
-            <span class="word-card" id="wordConfidence">
-              <span class="metallic-word">Confidence,</span>
+          <!-- Official S.E.A Brand Emblem (Image 2) & Cursive Tagline -->
+          <div class="hero-brand-emblem">
+            <img src="sea-logo.png?v=2" alt="S.E.A - Sathya's English Academy" class="hero-main-logo">
+            <span class="hero-cursive-tagline">your ocean of english</span>
+          </div>
+
+          <!-- Centered High-Fashion Manifesto Headline -->
+          <h1 class="manifesto-title">
+            <span class="manifesto-title-lead">We don’t just teach English.</span>
+            <span class="manifesto-title-emphasis">
+              We shape how the world <em class="ocean-shimmer-word">hears you.</em>
             </span>
+          </h1>
 
-            <span class="word-card" id="wordClarity">
-              <span class="metallic-word">Clarity,</span>
-            </span>
+          <!-- Minimalist Luxury Action Buttons -->
+          <div class="manifesto-action-cluster">
+            <button class="btn-manifesto-action" id="heroModalTrigger">
+              <span class="btn-shimmer-foil"></span>
+              <span class="btn-action-label">Book Free Assessment</span>
+              <div class="btn-action-arrow">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </div>
+            </button>
 
-            <span class="and-connector">and</span>
+            <a href="#coursesSection" class="btn-manifesto-whisper">
+              <span>Explore Courses</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </a>
+          </div>
 
-            <span class="word-card" id="wordEase">
-              <span class="metallic-word">Ease.</span>
-            </span>
-          </span>
-        </h1>
-
-        <!-- Pedagogical Interactive Carousel Ticker -->
-        <div class="pedagogy-ticker" id="carouselTabs">
-          <button class="ticker-item active-glow" data-index="0" type="button">
-            <span class="ticker-badge">01</span>
-            <span class="ticker-title">Spoken Fluency</span>
-          </button>
-          <span class="ticker-sep">•</span>
-          <button class="ticker-item" data-index="1" type="button">
-            <span class="ticker-badge">02</span>
-            <span class="ticker-title">Applied Grammar</span>
-          </button>
-          <span class="ticker-sep">•</span>
-          <button class="ticker-item" data-index="2" type="button">
-            <span class="ticker-badge">03</span>
-            <span class="ticker-title">Natural Pronunciation</span>
-          </button>
         </div>
-
-        <!-- Dynamic Carousel Sub-headline Paragraph -->
-        <div class="para-carousel-wrapper">
-          <p class="para-bjcree carousel-para active" id="carouselPara">
-            Boutique, personalized English language training in Pallavaram, Chennai. We transform hesitant speakers into articulate communicators, instilling effortless cadence, spontaneous conversational flow, and stage poise in a warm, supportive environment.
-          </p>
-
-          <!-- Carousel Progress Indicator Dots -->
-          <div class="carousel-dots-row">
-            <span class="carousel-dot active" data-index="0"></span>
-            <span class="carousel-dot" data-index="1"></span>
-            <span class="carousel-dot" data-index="2"></span>
-          </div>
-        </div>
-
-        <!-- Boutique Atelier Trust Pillars -->
-        <div class="atelier-trust-pillars">
-          <div class="pillar-item">
-            <span class="pillar-dot"></span>
-            <span class="pillar-label">1:6 Boutique Ratio</span>
-          </div>
-          <span class="pillar-divider">•</span>
-          <div class="pillar-item">
-            <span class="pillar-dot"></span>
-            <span class="pillar-label">CEFR Fluency Framework</span>
-          </div>
-          <span class="pillar-divider">•</span>
-          <div class="pillar-item">
-            <span class="pillar-dot"></span>
-            <span class="pillar-label">Weekly Audio Review</span>
-          </div>
-        </div>
-
       </div>
 
     </main>
+
+    <!-- Ambient Ocean Light Glow Backdrop for Real Canvas Waves -->
+    <div class="hero-ocean-light-waves" aria-hidden="true">
+      <div class="waves-ambient-glow"></div>
+    </div>
 
   </div>
 
@@ -581,6 +524,172 @@
   </section>
 
   <!-- ==========================================================================
+       SECTION: OUR IMPACTS — REAL RESULTS & PROVEN CONFIDENCE
+       ========================================================================== -->
+  <section class="section-impacts" id="impactSection">
+    <div class="impacts-container">
+      <div class="impacts-header-block">
+        <h2 class="gallery-big-heading">
+          GALLERIES
+          <span class="title-halo-line"></span>
+        </h2>
+      </div>
+
+
+      <!-- 12-Card Continuous Slow Moving Interactive Gallery Track -->
+      <div class="gallery-reel-viewport" id="galleryViewport" tabindex="0">
+        <div class="gallery-reel-track" id="galleryTrack">
+          
+          <!-- CARD 1 -->
+          <article class="gallery-reel-card" data-idx="1">
+            <div class="gallery-reel-img-wrap">
+              <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=700&q=80" alt="1:6 Intimate Studio Immersion" class="gallery-reel-img" loading="lazy">
+            </div>
+            <div class="gallery-reel-content">
+              <h4>1:6 Studio Immersion</h4>
+              <p>Personalized spoken airtime and direct phonetics coaching in Pallavaram.</p>
+            </div>
+          </article>
+
+          <!-- CARD 2 -->
+          <article class="gallery-reel-card" data-idx="2">
+            <div class="gallery-reel-img-wrap">
+              <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=700&q=80" alt="Phonetic Precision Drills" class="gallery-reel-img" loading="lazy">
+            </div>
+            <div class="gallery-reel-content">
+              <h4>Acoustic Precision Drills</h4>
+              <p>Phonetic tongue placement, natural vowel sounds, and eliminating hesitation.</p>
+            </div>
+          </article>
+
+          <!-- CARD 3 -->
+          <article class="gallery-reel-card" data-idx="3">
+            <div class="gallery-reel-img-wrap">
+              <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=700&q=80" alt="Public Speaking Poise" class="gallery-reel-img" loading="lazy">
+            </div>
+            <div class="gallery-reel-content">
+              <h4>Public Speaking Poise</h4>
+              <p>Microphone technique, stage composure, and overcoming performance anxiety.</p>
+            </div>
+          </article>
+
+          <!-- CARD 4 -->
+          <article class="gallery-reel-card" data-idx="4">
+            <div class="gallery-reel-img-wrap">
+              <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=700&q=80" alt="Conversational Circles" class="gallery-reel-img" loading="lazy">
+            </div>
+            <div class="gallery-reel-content">
+              <h4>Conversational Circles</h4>
+              <p>Fast-paced spontaneous debates without internal regional translation lag.</p>
+            </div>
+          </article>
+
+          <!-- CARD 5 -->
+          <article class="gallery-reel-card" data-idx="5">
+            <div class="gallery-reel-img-wrap">
+              <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=700&q=80" alt="Boardroom Rhetoric" class="gallery-reel-img" loading="lazy">
+            </div>
+            <div class="gallery-reel-content">
+              <h4>Executive Rhetoric</h4>
+              <p>Mastering boardroom influence, articulate summaries, and persuasive speech.</p>
+            </div>
+          </article>
+
+          <!-- CARD 6 -->
+          <article class="gallery-reel-card" data-idx="6">
+            <div class="gallery-reel-img-wrap">
+              <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=700&q=80" alt="Dialogue Masterclasses" class="gallery-reel-img" loading="lazy">
+            </div>
+            <div class="gallery-reel-content">
+              <h4>Dialogue Masterclasses</h4>
+              <p>Interactive peer simulations with instantaneous vocal diagnostic feedback.</p>
+            </div>
+          </article>
+
+          <!-- CARD 7 -->
+          <article class="gallery-reel-card" data-idx="7">
+            <div class="gallery-reel-img-wrap">
+              <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=700&q=80" alt="Acoustic Speech Library" class="gallery-reel-img" loading="lazy">
+            </div>
+            <div class="gallery-reel-content">
+              <h4>Acoustic Speech Library</h4>
+              <p>High-fidelity audio recordings to refine cadence and intonation rhythms.</p>
+            </div>
+          </article>
+
+          <!-- CARD 8 -->
+          <article class="gallery-reel-card" data-idx="8">
+            <div class="gallery-reel-img-wrap">
+              <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=700&q=80" alt="Confidence In Numbers" class="gallery-reel-img" loading="lazy">
+            </div>
+            <div class="gallery-reel-content">
+              <h4>Confidence In Numbers</h4>
+              <p>Encouraging boutique cohorts where every student speaks in every hour.</p>
+            </div>
+          </article>
+
+          <!-- CARD 9 -->
+          <article class="gallery-reel-card" data-idx="9">
+            <div class="gallery-reel-img-wrap">
+              <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=700&q=80" alt="Spontaneous Expression" class="gallery-reel-img" loading="lazy">
+            </div>
+            <div class="gallery-reel-content">
+              <h4>Spontaneous Expression</h4>
+              <p>Framing impromptu narratives and captivating storytelling with ease.</p>
+            </div>
+          </article>
+
+          <!-- CARD 10 -->
+          <article class="gallery-reel-card" data-idx="10">
+            <div class="gallery-reel-img-wrap">
+              <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=80" alt="Auditory Voice Mapping" class="gallery-reel-img" loading="lazy">
+            </div>
+            <div class="gallery-reel-content">
+              <h4>Auditory Voice Mapping</h4>
+              <p>1-on-1 phonetic analysis identifying native tongue influence and vowel shifts.</p>
+            </div>
+          </article>
+
+          <!-- CARD 11 -->
+          <article class="gallery-reel-card" data-idx="11">
+            <div class="gallery-reel-img-wrap">
+              <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=700&q=80" alt="Global Benchmarking" class="gallery-reel-img" loading="lazy">
+            </div>
+            <div class="gallery-reel-content">
+              <h4>Global Benchmarks</h4>
+              <p>CEFR aligned fluency markers preparing candidates for global opportunities.</p>
+            </div>
+          </article>
+
+          <!-- CARD 12 -->
+          <article class="gallery-reel-card" data-idx="12">
+            <div class="gallery-reel-img-wrap">
+              <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=700&q=80" alt="Articulation Excellence" class="gallery-reel-img" loading="lazy">
+            </div>
+            <div class="gallery-reel-content">
+              <h4>Articulation Honors</h4>
+              <p>Celebrating fluent communicators who lead debates and speak without hesitation.</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- Controls Bar: Bottom Right Nav Arrow Buttons -->
+      <div class="gallery-controls-bar">
+        <div class="gallery-nav-arrows">
+          <button class="gallery-arrow-btn" id="galleryPrevBtn" type="button" aria-label="Previous gallery cards">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <button class="gallery-arrow-btn" id="galleryNextBtn" type="button" aria-label="Next gallery cards">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
        SECTION 3: LEARN WITH US (EDITORIAL BLOGS & MASTERCLASSES - REF LAYOUT)
        ========================================================================== -->
   <section class="section-learn" id="learnSection">
@@ -692,6 +801,48 @@
 
       </div>
 
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION: ABOUT US — SATHYA'S ENGLISH ACADEMY (YOUR OCEAN OF ENGLISH)
+       ========================================================================== -->
+  <section class="section-about" id="aboutSection">
+    <div class="about-container">
+      <div class="about-card-banner">
+        <div class="about-brand-side">
+          <img src="sea-logo.png?v=2" alt="S.E.A - Sathya's English Academy" class="about-brand-logo">
+          <span class="hero-cursive-tagline">your ocean of english</span>
+          <h3 class="about-tagline">We don't just teach English. We shape how the world hears you.</h3>
+          <p class="about-text">
+            Sathya's English Academy (S.E.A) is Chennai's premier boutique speech & conversational fluency atelier located in Pallavaram. We specialize in intimate 1:6 studio cohorts, phonetics, and speech psychology.
+          </p>
+        </div>
+
+        <div class="about-details-side">
+          <div class="about-info-item">
+            <span class="info-icon">📍</span>
+            <div>
+              <strong>Studio Atelier</strong>
+              <p>2nd Main Road, Pallavaram, Chennai, Tamil Nadu</p>
+            </div>
+          </div>
+          <div class="about-info-item">
+            <span class="info-icon">🎙️</span>
+            <div>
+              <strong>Pedagogical Method</strong>
+              <p>1:6 Intimate Studio Immersion & Acoustic Speech Precision</p>
+            </div>
+          </div>
+          <div class="about-info-item">
+            <span class="info-icon">💬</span>
+            <div>
+              <strong>Admissions & Diagnostics</strong>
+              <p>Direct WhatsApp & Voice: +91 98400 00000</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
