@@ -1400,191 +1400,244 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================================================
-  // SECTION 4: ATELIER VOICES — OCEAN BLUE CINEMA RUNWAY CONTROLLER
+  // SECTION 4: ATELIER VOICES — HORIZONTAL STICKY PINNING CINEMA CONTROLLER
   // ==========================================================================
 
-  const cinemaRunwayWrapper = document.getElementById('cinemaRunwayWrapper');
-  const cinemaRunwayTrack = document.getElementById('cinemaRunwayTrack');
-  const runwayCards = Array.from(document.querySelectorAll('.runway-cinema-card'));
+  const testimonialsStickyViewport = document.getElementById('testimonialsStickyViewport');
+  const testimonialsHorizontalRail = document.getElementById('testimonialsHorizontalRail');
+  const runwayItems = Array.from(document.querySelectorAll('.testimonial-runway-item'));
+  const runwayCounterCurrent = document.getElementById('runwayCounterCurrent');
+  const runwayScrubFill = document.getElementById('runwayScrubFill');
+  const runwayPillTabs = document.querySelectorAll('.runway-pill-tab');
   const runwayPrevBtn = document.getElementById('runwayPrevBtn');
   const runwayNextBtn = document.getElementById('runwayNextBtn');
-  const runwayActiveNum = document.getElementById('runwayActiveNum');
-  const runwayProgressFill = document.getElementById('runwayProgressFill');
-  const runwayStoryTabs = document.getElementById('runwayStoryTabs');
-  const runwayTabs = Array.from(document.querySelectorAll('.runway-tab'));
   const testimonialsHeaderBlock = document.getElementById('testimonialsHeaderBlock');
 
-  let activeCardIndex = 0;
-  let isRunwaySectionVisible = false;
+  let activeRunwayIndex = 0;
+  let isSectionInView = false;
 
-  // --- Update Runway Progress & Active Card on Scroll ---
-  function updateRunwayState() {
-    if (!cinemaRunwayWrapper || runwayCards.length === 0) return;
-
-    const wrapperRect = cinemaRunwayWrapper.getBoundingClientRect();
-    const wrapperCenter = wrapperRect.left + wrapperRect.width / 2;
-
-    let closestIdx = 0;
-    let closestDist = Infinity;
-
-    runwayCards.forEach((card, idx) => {
-      const cardRect = card.getBoundingClientRect();
-      const cardCenter = cardRect.left + cardRect.width / 2;
-      const dist = Math.abs(wrapperCenter - cardCenter);
-      if (dist < closestDist) {
-        closestDist = dist;
-        closestIdx = idx;
-      }
-    });
-
-    if (closestIdx !== activeCardIndex) {
-      activeCardIndex = closestIdx;
-
-      // Update Active Card Class
-      runwayCards.forEach((c, i) => {
-        const isActive = i === activeCardIndex;
-        c.classList.toggle('active', isActive);
-
-        const video = c.querySelector('.runway-video-player');
-        if (video) {
-          if (isActive && isRunwaySectionVisible) {
-            video.play().catch(() => {});
-          } else {
-            video.pause();
-          }
-        }
-      });
-
-      // Update Active Number Badge
-      if (runwayActiveNum) {
-        runwayActiveNum.textContent = String(activeCardIndex + 1).padStart(2, '0');
-      }
-
-      // Update Story Tabs
-      runwayTabs.forEach((tab, i) => {
-        tab.classList.toggle('active', i === activeCardIndex);
-      });
-    }
-
-    // Update Progress Bar
-    const maxScroll = cinemaRunwayWrapper.scrollWidth - cinemaRunwayWrapper.clientWidth;
-    if (maxScroll > 0 && runwayProgressFill) {
-      const pct = (cinemaRunwayWrapper.scrollLeft / maxScroll) * 100;
-      runwayProgressFill.style.width = `${Math.max(15, Math.min(100, pct))}%`;
-    }
+  // --- Format Timecode TC HH:MM:SS:FF ---
+  function formatTC(seconds) {
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = Math.floor(seconds % 60);
+    const f = Math.floor((seconds % 1) * 24);
+    const pad = (n) => String(n).padStart(2, '0');
+    return `TC ${pad(h)}:${pad(m)}:${pad(s)}:${pad(f)} // PALLAVARAM`;
   }
 
-  // Smooth scroll listener with RAF throttle
-  let runwayScrollTicking = false;
-  if (cinemaRunwayWrapper) {
-    cinemaRunwayWrapper.addEventListener('scroll', () => {
-      if (!runwayScrollTicking) {
-        requestAnimationFrame(() => {
-          updateRunwayState();
-          runwayScrollTicking = false;
-        });
-        runwayScrollTicking = true;
-      }
-    }, { passive: true });
-  }
+  // --- Video Setup & Bulletproof Playback Conductor ---
+  runwayItems.forEach((item, index) => {
+    const video = item.querySelector('.runway-video-elem');
+    const playHud = item.querySelector('.runway-play-hud');
+    const hudIcon = item.querySelector('.hud-play-icon');
+    const audioBtn = item.querySelector('.btn-runway-audio');
+    const audioLabel = audioBtn ? audioBtn.querySelector('.audio-label') : null;
+    const progressFill = item.querySelector('.cinema-progress-fill');
+    const timecodeElem = item.querySelector('.timecode-badge');
+    const equalizer = item.querySelector('.studio-equalizer');
+    const videoCard = item.querySelector('.runway-video-card');
 
-  // --- Scroll to Card Index Helper ---
-  function scrollToCard(index) {
-    if (index < 0 || index >= runwayCards.length || !cinemaRunwayWrapper) return;
-    const targetCard = runwayCards[index];
-    const wrapperWidth = cinemaRunwayWrapper.clientWidth;
-    const cardWidth = targetCard.offsetWidth;
-    const targetLeft = targetCard.offsetLeft - (wrapperWidth - cardWidth) / 2;
+    if (!video) return;
 
-    cinemaRunwayWrapper.scrollTo({
-      left: Math.max(0, targetLeft),
-      behavior: 'smooth'
-    });
-  }
+    // Ensure initial attributes
+    video.muted = true;
+    video.playsInline = true;
 
-  // --- Navigation Buttons (Prev / Next) ---
-  if (runwayPrevBtn) {
-    runwayPrevBtn.addEventListener('click', () => {
-      const prevIdx = Math.max(0, activeCardIndex - 1);
-      scrollToCard(prevIdx);
-    });
-  }
-
-  if (runwayNextBtn) {
-    runwayNextBtn.addEventListener('click', () => {
-      const nextIdx = Math.min(runwayCards.length - 1, activeCardIndex + 1);
-      scrollToCard(nextIdx);
-    });
-  }
-
-  // --- Story Tab Clicks ---
-  runwayTabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      const idx = parseInt(tab.getAttribute('data-index'), 10);
-      if (!isNaN(idx)) {
-        scrollToCard(idx);
-      }
-    });
-  });
-
-  // --- Click on Card Body to Center It ---
-  runwayCards.forEach((card, idx) => {
-    card.addEventListener('click', (e) => {
-      // Don't override if clicking the play HUD specifically
-      if (!e.target.closest('.video-action-hud')) {
-        if (idx !== activeCardIndex) {
-          scrollToCard(idx);
-        }
-      }
-    });
-
-    // Interactive Video & Audio HUD Click Handler
-    const actionHud = card.querySelector('.video-action-hud');
-    const video = card.querySelector('.runway-video-player');
-    const hudText = card.querySelector('.hud-action-text');
-    const hudGlyph = card.querySelector('.hud-play-glyph');
-
-    if (actionHud && video) {
-      actionHud.addEventListener('click', (e) => {
+    // Click Play HUD to Play/Pause
+    if (playHud) {
+      playHud.addEventListener('click', (e) => {
         e.stopPropagation();
         if (video.paused) {
-          video.play().then(() => {
-            if (hudGlyph) hudGlyph.textContent = '⏸';
-            if (hudText) hudText.textContent = 'Pause Audio';
-          }).catch(() => {});
-        } else if (video.muted) {
-          // Unmute for crystal clear sound
-          video.muted = false;
-          if (hudGlyph) hudGlyph.textContent = '🔊';
-          if (hudText) hudText.textContent = 'Mute Audio';
+          video.play().catch(() => {});
         } else {
-          // Mute again
-          video.muted = true;
-          if (hudGlyph) hudGlyph.textContent = '▶';
-          if (hudText) hudText.textContent = 'Preview Audio';
+          video.pause();
         }
       });
     }
+
+    // Clicking the video card toggles play/pause
+    if (videoCard) {
+      videoCard.addEventListener('click', (e) => {
+        if (e.target.closest('.btn-runway-audio')) return;
+        if (video.paused) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }
+
+    // Audio Toggle (Mute / Live Sound)
+    if (audioBtn) {
+      audioBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        video.muted = !video.muted;
+        if (video.muted) {
+          audioBtn.classList.remove('unmuted');
+          if (audioLabel) audioLabel.textContent = 'Tap for Sound';
+          audioBtn.innerHTML = `
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+            <span class="audio-label">Tap for Sound</span>
+          `;
+        } else {
+          audioBtn.classList.add('unmuted');
+          audioBtn.innerHTML = `
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+            <span class="audio-label">Live Audio</span>
+          `;
+          if (video.paused) video.play().catch(() => {});
+        }
+      });
+    }
+
+    // Timeupdate handler: progress bar & timecode
+    video.addEventListener('timeupdate', () => {
+      if (video.duration && isFinite(video.duration)) {
+        const pct = (video.currentTime / video.duration) * 100;
+        if (progressFill) progressFill.style.width = pct + '%';
+        if (timecodeElem) timecodeElem.textContent = formatTC(video.currentTime);
+      }
+    });
+
+    // Play event
+    video.addEventListener('play', () => {
+      if (hudIcon) hudIcon.textContent = '⏸';
+      if (equalizer) equalizer.classList.add('playing');
+    });
+
+    // Pause event
+    video.addEventListener('pause', () => {
+      if (hudIcon) hudIcon.textContent = '▶';
+      if (equalizer) equalizer.classList.remove('playing');
+    });
   });
 
-  // --- Mouse Wheel Horizontal Scrolling on Runway ---
-  if (cinemaRunwayWrapper) {
-    cinemaRunwayWrapper.addEventListener('wheel', (e) => {
-      // If user scrolls vertically over the runway, translate to horizontal scroll
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        const atStart = cinemaRunwayWrapper.scrollLeft <= 0;
-        const atEnd = cinemaRunwayWrapper.scrollLeft >= (cinemaRunwayWrapper.scrollWidth - cinemaRunwayWrapper.clientWidth - 2);
+  // --- Switch Active Runway Card & Play Active Video ---
+  function setActiveRunwayCard(newIndex, playVideo = true) {
+    if (newIndex < 0 || newIndex >= runwayItems.length) return;
+    activeRunwayIndex = newIndex;
 
-        // Only hijack if runway has room to scroll in that direction
-        if ((e.deltaY > 0 && !atEnd) || (e.deltaY < 0 && !atStart)) {
-          e.preventDefault();
-          cinemaRunwayWrapper.scrollLeft += e.deltaY * 0.9;
+    // Update runway counter
+    if (runwayCounterCurrent) {
+      runwayCounterCurrent.textContent = String(newIndex + 1).padStart(2, '0');
+    }
+
+    // Update pill tabs
+    runwayPillTabs.forEach((tab, idx) => {
+      tab.classList.toggle('active', idx === newIndex);
+    });
+
+    // Update cards active state & playback conductor
+    runwayItems.forEach((item, idx) => {
+      const isActive = idx === newIndex;
+      item.classList.toggle('active', isActive);
+
+      const video = item.querySelector('.runway-video-elem');
+      if (video) {
+        if (isActive && isSectionInView && playVideo) {
+          video.play().catch(() => {});
+        } else if (!isActive) {
+          if (!video.paused) video.pause();
         }
       }
-    }, { passive: false });
+    });
   }
 
-  // --- IntersectionObserver for Section 4 (Header Reveal + Auto-Play Muted) ---
+  // --- Horizontal Sticky Scrub Scroll Math ---
+  function handleRunwayScroll() {
+    if (!testimonialsSection || !testimonialsHorizontalRail || runwayItems.length === 0) return;
+
+    // Check if desktop / pinned mode
+    if (window.innerWidth < 1024) return;
+
+    const sectionRect = testimonialsSection.getBoundingClientRect();
+    const sectionTop = testimonialsSection.offsetTop;
+    const sectionHeight = testimonialsSection.offsetHeight;
+    const viewportHeight = window.innerHeight;
+    const scrollY = window.scrollY || window.pageYOffset;
+    const maxScroll = sectionHeight - viewportHeight;
+
+    if (maxScroll <= 0) return;
+
+    // Calculate how far inside the 380vh section we have scrolled
+    const scrollInside = scrollY - sectionTop;
+    const progress = Math.min(1, Math.max(0, scrollInside / maxScroll));
+
+    // Calculate total rail width and translation distance
+    const railScrollWidth = testimonialsHorizontalRail.scrollWidth;
+    const viewportWidth = window.innerWidth;
+    // Translate from starting padding to reveal last card at center
+    const maxTranslate = railScrollWidth - viewportWidth + (viewportWidth * 0.12);
+    const translateX = -(progress * maxTranslate);
+
+    testimonialsHorizontalRail.style.transform = `translate3d(${translateX.toFixed(1)}px, 0, 0)`;
+
+    // Update bottom scrub fill line
+    if (runwayScrubFill) {
+      runwayScrubFill.style.width = `${Math.min(100, Math.max(5, progress * 100))}%`;
+    }
+
+    // Find card closest to viewport center (window.innerWidth / 2)
+    const screenCenter = viewportWidth / 2;
+    let closestIndex = 0;
+    let minDistance = Infinity;
+
+    runwayItems.forEach((item, idx) => {
+      const rect = item.getBoundingClientRect();
+      const itemCenter = rect.left + rect.width / 2;
+      const dist = Math.abs(screenCenter - itemCenter);
+      if (dist < minDistance) {
+        minDistance = dist;
+        closestIndex = idx;
+      }
+    });
+
+    if (closestIndex !== activeRunwayIndex) {
+      setActiveRunwayCard(closestIndex, true);
+    }
+  }
+
+  // Attach to window scroll via requestAnimationFrame
+  window.addEventListener('scroll', () => {
+    handleRunwayScroll();
+  }, { passive: true });
+
+  // --- Click Pill Tabs: Smooth Scroll to that Card ---
+  runwayPillTabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const idx = parseInt(tab.getAttribute('data-index'), 10);
+      if (!isNaN(idx) && testimonialsSection) {
+        const sectionTop = testimonialsSection.offsetTop;
+        const maxScroll = testimonialsSection.offsetHeight - window.innerHeight;
+        const targetScroll = sectionTop + (idx / (runwayItems.length - 1)) * maxScroll;
+        window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // --- Prev / Next Arrow Navigation ---
+  if (runwayPrevBtn && testimonialsSection) {
+    runwayPrevBtn.addEventListener('click', () => {
+      const targetIdx = Math.max(0, activeRunwayIndex - 1);
+      const sectionTop = testimonialsSection.offsetTop;
+      const maxScroll = testimonialsSection.offsetHeight - window.innerHeight;
+      const targetScroll = sectionTop + (targetIdx / (runwayItems.length - 1)) * maxScroll;
+      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+    });
+  }
+
+  if (runwayNextBtn && testimonialsSection) {
+    runwayNextBtn.addEventListener('click', () => {
+      const targetIdx = Math.min(runwayItems.length - 1, activeRunwayIndex + 1);
+      const sectionTop = testimonialsSection.offsetTop;
+      const maxScroll = testimonialsSection.offsetHeight - window.innerHeight;
+      const targetScroll = sectionTop + (targetIdx / (runwayItems.length - 1)) * maxScroll;
+      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+    });
+  }
+
+  // --- IntersectionObserver for Section 4 (Auto-Play Active Video) ---
   if ('IntersectionObserver' in window) {
     if (testimonialsHeaderBlock) {
       const headerObs = new IntersectionObserver((entries) => {
@@ -1595,36 +1648,36 @@ document.addEventListener('DOMContentLoaded', () => {
             testimonialsHeaderBlock.classList.remove('revealed');
           }
         });
-      }, { threshold: 0.2 });
+      }, { threshold: 0.15 });
       headerObs.observe(testimonialsHeaderBlock);
     }
 
     if (testimonialsSection) {
       const sectionObs = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-          isRunwaySectionVisible = entry.isIntersecting;
+          isSectionInView = entry.isIntersecting;
           if (entry.isIntersecting) {
             testimonialsSection.classList.add('revealed');
             // Play active card video
-            const activeCard = runwayCards[activeCardIndex];
-            if (activeCard) {
-              const video = activeCard.querySelector('.runway-video-player');
+            const activeItem = runwayItems[activeRunwayIndex];
+            if (activeItem) {
+              const video = activeItem.querySelector('.runway-video-elem');
               if (video) video.play().catch(() => {});
             }
           } else {
-            // Pause all videos when scrolled out of view (saves battery & GPU)
-            runwayCards.forEach((c) => {
-              const video = c.querySelector('.runway-video-player');
+            // Pause all videos when section is off screen to save memory & battery
+            runwayItems.forEach((item) => {
+              const video = item.querySelector('.runway-video-elem');
               if (video && !video.paused) video.pause();
             });
           }
         });
-      }, { threshold: 0.15 });
+      }, { threshold: 0.05 });
       sectionObs.observe(testimonialsSection);
     }
   }
 
-  // Initial State Check
-  updateRunwayState();
-
+  // Initial trigger
+  setActiveRunwayCard(0, false);
+  handleRunwayScroll();
 });
