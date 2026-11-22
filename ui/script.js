@@ -1302,11 +1302,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinkHome = document.getElementById('navLinkHome');
   const navLinkCourses = document.getElementById('navLinkCourses');
   const navLinkBlogs = document.getElementById('navLinkBlogs');
+  const navLinkLearn = document.getElementById('navLinkLearn') || navLinkBlogs;
+  const navLinkTestimonials = document.getElementById('navLinkTestimonials');
   const navLinkImpacts = document.getElementById('navLinkImpacts');
   const navLinkAbout = document.getElementById('navLinkAbout');
   const coursesSection = document.getElementById('coursesSection');
   const impactSection = document.getElementById('impactSection');
   const learnSection = document.getElementById('learnSection');
+  const testimonialsSection = document.getElementById('testimonialsSection');
   const aboutSection = document.getElementById('aboutSection');
   const coursesHeaderBlock = document.getElementById('coursesHeaderBlock');
   const coursesGrid = document.querySelector('.courses-grid');
@@ -1315,7 +1318,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const orbLeft = document.getElementById('orbLeft');
   const orbRight = document.getElementById('orbRight');
 
-  const navLinksArray = [navLinkHome, navLinkCourses, navLinkBlogs, navLinkImpacts, navLinkAbout].filter(Boolean);
+  const navLinksArray = [navLinkHome, navLinkCourses, navLinkBlogs, navLinkLearn, navLinkTestimonials, navLinkImpacts, navLinkAbout].filter(Boolean);
 
   function setActiveNavLink(activeLink) {
     navLinksArray.forEach(link => {
@@ -1346,18 +1349,21 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // C. Active Section Indicator Spy for 5 Sections
+    // C. Active Section Indicator Spy
     const aboutTop = aboutSection ? aboutSection.offsetTop - 280 : Infinity;
-    const blogsTop = learnSection ? learnSection.offsetTop - 280 : Infinity;
+    const testTop = testimonialsSection ? testimonialsSection.offsetTop - 280 : Infinity;
     const impactsTop = impactSection ? impactSection.offsetTop - 280 : Infinity;
+    const blogsTop = learnSection ? learnSection.offsetTop - 280 : Infinity;
     const coursesTop = coursesSection ? coursesSection.offsetTop - 280 : 800;
 
     if (scrollY >= aboutTop) {
       setActiveNavLink(navLinkAbout);
-    } else if (scrollY >= blogsTop) {
-      setActiveNavLink(navLinkBlogs);
+    } else if (scrollY >= testTop) {
+      setActiveNavLink(navLinkTestimonials);
     } else if (scrollY >= impactsTop) {
       setActiveNavLink(navLinkImpacts);
+    } else if (scrollY >= blogsTop) {
+      setActiveNavLink(navLinkBlogs || navLinkLearn);
     } else if (scrollY >= coursesTop) {
       setActiveNavLink(navLinkCourses);
     } else {
@@ -1732,4 +1738,318 @@ document.addEventListener('DOMContentLoaded', () => {
       galleryViewport.scrollLeft = initialScroll - walk;
     });
   }
+
+        // ==========================================================================
+  // SECTION 4: ATELIER VOICES — APPLE STUDIO HORIZONTAL HORIZON
+  // position:sticky + 400vh + translate3d driven by window scroll
+  // ==========================================================================
+
+  const stickyViewport = document.getElementById('testimonialsStickyViewport');
+  const runwayViewport = document.getElementById('testimonialsRunwayViewport');
+  const runwayTrack = document.getElementById('testimonialsRunwayTrack');
+  const runwayCards = Array.from(document.querySelectorAll('.runway-card-unit'));
+  const runwayCounterCurrent = document.getElementById('runwayCounterCurrent');
+  const runwayScrubFill = document.getElementById('runwayScrubFill');
+  const runwayPillTabs = document.querySelectorAll('.runway-pill-tab');
+  const runwayPrevBtn = document.getElementById('runwayPrevBtn');
+  const runwayNextBtn = document.getElementById('runwayNextBtn');
+  const testimonialsHeaderBlock = document.getElementById('testimonialsHeaderBlock');
+  
+  // Note: testimonialsSection already declared at line ~1095 for scroll spy
+
+  let activeRunwayIdx = 0;
+  let isSectionVisible = false;
+  const TOTAL_CARDS = runwayCards.length;
+  
+  // --- Check if we're in mobile/tablet mode (no sticky scroll) ---
+  function isMobileMode() {
+    return window.innerWidth <= 1120;
+  }
+
+  // --- Format Timecode TC HH:MM:SS:FF ---
+  function formatTC(seconds) {
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = Math.floor(seconds % 60);
+    const f = Math.floor((seconds % 1) * 24);
+    const pad = (n) => String(n).padStart(2, '0');
+    return `TC ${pad(h)}:${pad(m)}:${pad(s)}:${pad(f)} // PALLAVARAM`;
+  }
+
+  // --- Update Active Card & Play Active Video ---
+  function updateActiveCard(newIdx) {
+    if (newIdx < 0 || newIdx >= TOTAL_CARDS) return;
+    if (newIdx === activeRunwayIdx && runwayCards[newIdx]?.classList.contains('active')) return;
+    activeRunwayIdx = newIdx;
+
+    // Update Counter
+    if (runwayCounterCurrent) {
+      runwayCounterCurrent.textContent = String(newIdx + 1).padStart(2, '0');
+    }
+
+    // Update Scrub Fill
+    if (runwayScrubFill) {
+      const pct = ((newIdx + 1) / TOTAL_CARDS) * 100;
+      runwayScrubFill.style.width = pct + '%';
+    }
+
+    // Update Pill Tabs
+    runwayPillTabs.forEach((tab, idx) => {
+      tab.classList.toggle('active', idx === newIdx);
+    });
+
+    // Update Card Active State & Video Conductor
+    runwayCards.forEach((card, idx) => {
+      const isActive = idx === newIdx;
+      card.classList.toggle('active', isActive);
+
+      const video = card.querySelector('.runway-video-elem');
+      if (video) {
+        if (isActive && isSectionVisible) {
+          video.play().catch(() => {});
+        } else if (!isActive) {
+          if (!video.paused) video.pause();
+        }
+      }
+    });
+  }
+
+  // ==========================================================================
+  // CORE: Scroll-to-Horizontal Mapping (window.scroll -> translate3d on rail)
+  // ==========================================================================
+  let rafId = null;
+  
+  function handleScrollToHorizontal() {
+    if (!testimonialsSection || !runwayTrack || !runwayViewport || isMobileMode()) return;
+
+    const sectionTop = testimonialsSection.offsetTop;
+    const sectionHeight = testimonialsSection.offsetHeight; // 400vh
+    const viewportHeight = window.innerHeight; // 100vh
+    const maxScroll = sectionHeight - viewportHeight; // 300vh of usable scroll
+    const scrollInside = window.scrollY - sectionTop;
+    
+    // Clamp progress 0 to 1
+    const progress = Math.max(0, Math.min(1, scrollInside / maxScroll));
+
+    // Calculate how far the rail needs to translate
+    const railWidth = runwayTrack.scrollWidth;
+    const viewportWidth = runwayViewport.clientWidth;
+    const maxTranslate = railWidth - viewportWidth;
+    
+    if (maxTranslate <= 0) return;
+    
+    const translateX = -(progress * maxTranslate);
+    
+    // Apply transform — GPU-accelerated, single property, 120fps butter
+    runwayTrack.style.transform = `translate3d(${translateX}px, 0, 0)`;
+
+    // Determine which card is "centered" based on progress
+    const cardProgress = progress * (TOTAL_CARDS - 1);
+    const closestIdx = Math.round(cardProgress);
+    
+    if (closestIdx !== activeRunwayIdx) {
+      updateActiveCard(closestIdx);
+    }
+  }
+
+  // Throttle scroll with rAF for butter-smooth 120fps
+  function onWindowScroll() {
+    if (rafId) return;
+    rafId = requestAnimationFrame(() => {
+      handleScrollToHorizontal();
+      rafId = null;
+    });
+  }
+
+  window.addEventListener('scroll', onWindowScroll, { passive: true });
+
+  // --- Navigate to a card by scrolling the PAGE to the right vertical position ---
+  function scrollToCard(index) {
+    if (!testimonialsSection || isMobileMode()) return;
+    const sectionTop = testimonialsSection.offsetTop;
+    const sectionHeight = testimonialsSection.offsetHeight;
+    const viewportHeight = window.innerHeight;
+    const maxScroll = sectionHeight - viewportHeight;
+    
+    // Map card index to scroll progress
+    const progress = index / (TOTAL_CARDS - 1);
+    const targetScrollY = sectionTop + (progress * maxScroll);
+    
+    window.scrollTo({ top: targetScrollY, behavior: 'smooth' });
+  }
+
+  // --- Pill Tab Click Handlers ---
+  runwayPillTabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const idx = parseInt(tab.getAttribute('data-index'), 10);
+      if (!isNaN(idx)) {
+        if (isMobileMode()) {
+          // Mobile: scroll the overflow container
+          const targetCard = runwayCards[idx];
+          if (targetCard && runwayViewport) {
+            const targetScroll = targetCard.offsetLeft - (runwayViewport.clientWidth - targetCard.clientWidth) / 2;
+            runwayViewport.scrollTo({ left: targetScroll, behavior: 'smooth' });
+          }
+        } else {
+          scrollToCard(idx);
+        }
+      }
+    });
+  });
+
+  // --- Prev / Next Arrow Actions ---
+  if (runwayPrevBtn) {
+    runwayPrevBtn.addEventListener('click', () => {
+      const prevIdx = Math.max(0, activeRunwayIdx - 1);
+      if (isMobileMode()) {
+        const targetCard = runwayCards[prevIdx];
+        if (targetCard && runwayViewport) {
+          runwayViewport.scrollTo({ left: targetCard.offsetLeft - (runwayViewport.clientWidth - targetCard.clientWidth) / 2, behavior: 'smooth' });
+        }
+      } else {
+        scrollToCard(prevIdx);
+      }
+    });
+  }
+
+  if (runwayNextBtn) {
+    runwayNextBtn.addEventListener('click', () => {
+      const nextIdx = Math.min(TOTAL_CARDS - 1, activeRunwayIdx + 1);
+      if (isMobileMode()) {
+        const targetCard = runwayCards[nextIdx];
+        if (targetCard && runwayViewport) {
+          runwayViewport.scrollTo({ left: targetCard.offsetLeft - (runwayViewport.clientWidth - targetCard.clientWidth) / 2, behavior: 'smooth' });
+        }
+      } else {
+        scrollToCard(nextIdx);
+      }
+    });
+  }
+
+  // --- Setup Video Listeners for All Cards ---
+  runwayCards.forEach((card) => {
+    const video = card.querySelector('.runway-video-elem');
+    const playHud = card.querySelector('.runway-play-hud');
+    const hudIcon = card.querySelector('.hud-play-icon');
+    const audioBtn = card.querySelector('.btn-runway-audio');
+    const progressFill = card.querySelector('.cinema-progress-fill');
+    const timecodeElem = card.querySelector('.timecode-badge');
+    const equalizer = card.querySelector('.studio-equalizer');
+    const videoCard = card.querySelector('.runway-video-card');
+
+    if (!video) return;
+
+    video.muted = true;
+    video.playsInline = true;
+
+    // Click Play HUD
+    if (playHud) {
+      playHud.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (video.paused) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }
+
+    // Click video card toggles play/pause
+    if (videoCard) {
+      videoCard.addEventListener('click', (e) => {
+        if (e.target.closest('.btn-runway-audio')) return;
+        if (video.paused) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }
+
+    // Audio Toggle
+    if (audioBtn) {
+      audioBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        video.muted = !video.muted;
+        if (video.muted) {
+          audioBtn.classList.remove('unmuted');
+          audioBtn.innerHTML = `
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+            <span class="audio-label">Tap for Sound</span>
+          `;
+        } else {
+          audioBtn.classList.add('unmuted');
+          audioBtn.innerHTML = `
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+            <span class="audio-label">Live Audio</span>
+          `;
+          if (video.paused) video.play().catch(() => {});
+        }
+      });
+    }
+
+    // Timeupdate
+    video.addEventListener('timeupdate', () => {
+      if (video.duration && isFinite(video.duration)) {
+        const pct = (video.currentTime / video.duration) * 100;
+        if (progressFill) progressFill.style.width = pct + '%';
+        if (timecodeElem) timecodeElem.textContent = formatTC(video.currentTime);
+      }
+    });
+
+    // Play event
+    video.addEventListener('play', () => {
+      if (hudIcon) hudIcon.textContent = '⏸';
+      if (equalizer) equalizer.classList.add('playing');
+    });
+
+    // Pause event
+    video.addEventListener('pause', () => {
+      if (hudIcon) hudIcon.textContent = '▶';
+      if (equalizer) equalizer.classList.remove('playing');
+    });
+  });
+
+  // --- IntersectionObserver for Section 4 ---
+  if ('IntersectionObserver' in window) {
+    if (testimonialsHeaderBlock) {
+      const headerObs = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            testimonialsHeaderBlock.classList.add('revealed');
+          } else if (entry.boundingClientRect.top > 0) {
+            testimonialsHeaderBlock.classList.remove('revealed');
+          }
+        });
+      }, { threshold: 0.15 });
+      headerObs.observe(testimonialsHeaderBlock);
+    }
+
+    if (testimonialsSection) {
+      const sectionObs = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          isSectionVisible = entry.isIntersecting;
+          if (entry.isIntersecting) {
+            testimonialsSection.classList.add('revealed');
+            const activeCard = runwayCards[activeRunwayIdx];
+            if (activeCard) {
+              const video = activeCard.querySelector('.runway-video-elem');
+              if (video) video.play().catch(() => {});
+            }
+          } else {
+            // Pause all videos when scrolled away
+            runwayCards.forEach((card) => {
+              const video = card.querySelector('.runway-video-elem');
+              if (video && !video.paused) video.pause();
+            });
+          }
+        });
+      }, { threshold: 0.05 });
+      sectionObs.observe(testimonialsSection);
+    }
+  }
+
+  // --- Initial state ---
+  handleScrollToHorizontal();
+
 });
