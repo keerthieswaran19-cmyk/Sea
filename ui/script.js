@@ -168,199 +168,160 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- 2.2 Boutique Courses Syllabus Dossier Modal Controller ---
   const coursesData = {
-    junior: {
-      age: 'AGES 6 – 10',
-      title: 'Junior Articulators Studio',
-      tagline: 'Foundational Spoken Cadence, Storytelling & Phonics',
+    ripples: {
+      age: 'AGES 8 – 10 / 8+',
+      title: 'Little Ripples',
+      tagline: 'Warm, playful, and instantly attractive foundational fluency',
       duration: '12 Weeks • 24 Studio Hours',
-      focusKey: 'pronunciation',
+      focusKey: 'junior',
       phases: [
         {
           num: 'PHASE 01',
           weeks: 'Weeks 1 – 3',
-          title: 'Acoustic Phonetics & Vocal Projection',
-          desc: 'Breaking hesitation barriers, correcting vowel articulation, and training diaphragmatic breath support through playful sound drills.'
+          title: 'Joyful Vocal Exploration & Sound Play',
+          desc: 'Overcoming initial shyness through interactive rhythm games, vocal tongue-twisters, and lively peer storytelling.'
         },
         {
           num: 'PHASE 02',
           weeks: 'Weeks 4 – 6',
-          title: 'Thought-to-Speech Sentence Architecture',
-          desc: 'Eliminating mental mother-tongue translation. Students learn to frame full spontaneous English sentences through rapid picture prompts.'
+          title: 'Everyday Dialogue & Expressive Words',
+          desc: 'Building vibrant everyday vocabulary and natural sentence building through playful classroom simulations.'
         },
         {
           num: 'PHASE 03',
           weeks: 'Weeks 7 – 9',
-          title: 'Expressive Storytelling & Conversational Poise',
-          desc: 'Mastering voice modulation, natural pacing, and small-group interactive dialogue in a supportive, zero-judgment studio setting.'
+          title: 'Interactive Show & Tell Sessions',
+          desc: 'Holding the microphone, describing favorite books, characters, and hobbies with smiling confidence.'
         },
         {
           num: 'PHASE 04',
           weeks: 'Weeks 10 – 12',
-          title: 'Live Studio Showcase & Audio Portfolio',
-          desc: 'Solo storytelling presentation in the atelier and graduation speech review. Audio progress dossier shared directly with parents.'
+          title: 'Little Orators Studio Showcase',
+          desc: 'Celebrating growth with an intimate stage recital in front of parents and cohort friends.'
         }
       ],
       outcomes: [
-        'Zero Hesitation in Peer Dialogue',
-        'Natural Phonetic Articulation',
-        'Self-Correcting Grammar Reflex',
-        'Stage Poise & Vocal Presence'
+        'Zero Fear of Speaking in Groups',
+        'Warm, Expressive Pronunciation',
+        'Intuitive Sentence Flow',
+        'Day-One Confidence & Smiles'
       ]
     },
-    scholar: {
-      age: 'AGES 11 – 17',
-      title: 'Scholar Fluency & Debate Lab',
-      tagline: 'Applied Grammar, Public Speaking & Academic Poise',
+    character_quest: {
+      age: 'AGES 10 – 12',
+      title: 'Character Quest',
+      tagline: 'An engaging, gamified fluency adventure',
       duration: '12 Weeks • 24 Studio Hours',
-      focusKey: 'fluency',
+      focusKey: 'scholar',
       phases: [
         {
           num: 'PHASE 01',
           weeks: 'Weeks 1 – 3',
-          title: 'MTI Neutralization & Acoustic Cadence',
-          desc: 'Neutralizing regional accent and mother-tongue phonetic influence. Mastering natural English rhythm, syllable stress, and thought-chunking.'
+          title: 'Roleplay Worlds & Narrative Sparks',
+          desc: 'Stepping into exciting characters, detectives, and explorers to practice dynamic dialogue and quick thinking.'
         },
         {
           num: 'PHASE 02',
           weeks: 'Weeks 4 – 6',
-          title: 'Applied Grammar & Rhetorical Syntax',
-          desc: 'Internalizing sophisticated sentence transitions, complex clauses, and precise academic vocabulary through active verbal discourse.'
+          title: 'Verbal Quests & Collaborative Debates',
+          desc: 'Solving mystery challenges and defending team ideas with structured, clear English sentences.'
         },
         {
           num: 'PHASE 03',
           weeks: 'Weeks 7 – 9',
-          title: 'Extempore Drills & Parliamentary Debate',
-          desc: 'Impromptu 2-minute speeches, cross-examination drills, defending arguments, and handling audience counter-questions with composure.'
+          title: 'Emotional Range & Vocal Modulation',
+          desc: 'Mastering pauses, expressive pitch, and body language to captivate any audience.'
         },
         {
           num: 'PHASE 04',
           weeks: 'Weeks 10 – 12',
-          title: 'Formal Elocution & Audio Graduation Audit',
-          desc: 'Comprehensive persuasive speech performance, recorded acoustic evaluation, and personalized lifelong fluency blueprint.'
+          title: 'The Grand Quest Presentation',
+          desc: 'A live cohort presentation showcasing imaginative storytelling and poised public speaking.'
         }
       ],
       outcomes: [
-        'Commanding Impromptu Speaking',
-        'Neutralized Regional Diction',
-        'Structured Academic Debate Poise',
-        'Advanced Lexical Precision'
+        'Quick-Thinking Impromptu Fluency',
+        'Rich Descriptive Vocabulary',
+        'Expressive Tone & Modulation',
+        'Leadership & Team Discourse Poise'
       ]
     },
-    executive: {
-      age: 'AGES 18+ / ADULTS',
-      title: 'Executive Diction & Rhetoric',
-      tagline: 'Professional Boardroom Poise & Spoken Nuance',
-      duration: '8 Weeks • 16 Intensive Studio Hours',
-      focusKey: 'all',
+    stage_voice: {
+      age: 'SCHOOL STUDENTS / TEENS',
+      title: 'Stage & Voice',
+      tagline: 'Modern, bold, and tells teens and parents the exact skill they will master',
+      duration: '12 Weeks • 24 Studio Hours',
+      focusKey: 'scholar',
       phases: [
         {
           num: 'PHASE 01',
-          weeks: 'Weeks 1 – 2',
-          title: 'Executive Speech Audit & Pitch Calibration',
-          desc: 'Diagnostic voice recording analysis, eliminating filler words, vocal fry, and stabilizing pitch for authoritative delivery.'
+          weeks: 'Weeks 1 – 3',
+          title: 'Vocal Projection & Diction Calibration',
+          desc: 'Breathing mechanics, eliminating nervous tremors, and projecting voice clearly across any auditorium.'
         },
         {
           num: 'PHASE 02',
-          weeks: 'Weeks 3 – 4',
-          title: 'Strategic Boardroom Dialogue & Diplomatic Nuance',
-          desc: 'Mastering assertive yet graceful phrasing, diplomatic pushback, and cross-cultural corporate communication subtleties.'
+          weeks: 'Weeks 4 – 6',
+          title: 'Speech Structure & Rhetorical Hooks',
+          desc: 'Crafting persuasive speeches, TED-style introductions, and memorable conclusions that stick.'
         },
         {
           num: 'PHASE 03',
-          weeks: 'Weeks 5 – 6',
-          title: 'High-Stakes Interview & Pitch Articulation',
-          desc: 'Live simulation of senior leadership interviews, investor pitches, and spontaneous crisis communication under observation.'
+          weeks: 'Weeks 7 – 9',
+          title: 'Extempore Drills & Stage Movement',
+          desc: 'Mastering impromptu topics on the spot with commanding posture, eye contact, and stage poise.'
         },
         {
           num: 'PHASE 04',
-          weeks: 'Weeks 7 – 8',
-          title: 'Keynote Delivery & Audio Dossier Sign-Off',
-          desc: 'Delivering an executive keynote in the atelier, final acoustic speech audit, and tailored executive articulation roadmap.'
+          weeks: 'Weeks 10 – 12',
+          title: 'Keynote Showcase & Audio Portfolio',
+          desc: 'Delivering a signature keynote with studio microphone critique and verified speaker audit.'
         }
       ],
       outcomes: [
-        'Boardroom Verbal Authority',
-        'Interview & Negotiation Mastery',
-        'Polished International Cadence',
-        'Strategic Linguistic Diplomatic Nuance'
+        'Fearless Auditorium Stage Presence',
+        'Crisp Diction & Resonant Vocal Delivery',
+        'Impromptu Speaking Without Hesitation',
+        'Standout Inter-School Competition Poise'
       ]
     },
-    ielts: {
-      age: 'ACADEMIC • AGES 16+',
-      title: 'IELTS & Academic Fluency Studio',
-      tagline: 'Band 8.0+ Speaking & Structured Cognitive Argumentation',
+    global_currents: {
+      age: 'ADULTS & PROFESSIONALS',
+      title: 'Global Currents',
+      tagline: 'Sleek, aspirational international accent and executive communication',
       duration: '10 Weeks • 20 Studio Hours',
-      focusKey: 'all',
+      focusKey: 'executive',
       phases: [
         {
           num: 'PHASE 01',
           weeks: 'Weeks 1 – 2',
-          title: 'Lexical Resource & Fluency Descriptors',
-          desc: 'Internalizing advanced idiomatic vocabulary, collocations, and spontaneous topic transition without hesitation markers.'
+          title: 'Global Acoustic Cadence & Rhythm',
+          desc: 'Neutralizing local acoustic barriers, mastering international English rhythm, linking, and natural stress patterns.'
         },
         {
           num: 'PHASE 02',
           weeks: 'Weeks 3 – 5',
-          title: 'Grammatical Range & Acoustic Accuracy',
-          desc: 'Mastering mixed conditionals, inversions, and complex subordinate structures under strict 2-minute speaking clock.'
+          title: 'Executive Phrasing & Diplomatic Tact',
+          desc: 'High-level business idiom, boardroom negotiation nuances, assertive brevity, and diplomatic tact.'
         },
         {
           num: 'PHASE 03',
           weeks: 'Weeks 6 – 8',
-          title: 'Part 3 Deep Discourse & Abstract Rhetoric',
-          desc: 'Handling philosophical, sociological, and abstract examiner counter-questions with poise, depth, and coherence.'
+          title: 'Global Presentations & Demo Poise',
+          desc: 'Leading cross-border client calls, product walk-throughs, and handling spontaneous Q&A effortlessly.'
         },
         {
           num: 'PHASE 04',
           weeks: 'Weeks 9 – 10',
-          title: 'Live Examiner Simulation & Mock Score Sign-Off',
-          desc: 'Full diagnostic audio interview with certified examiner breakdown across all 4 CEFR band criteria.'
+          title: 'Executive Sound Signature Audit',
+          desc: 'Final acoustic diagnostic portfolio recording and bespoke global communication roadmap.'
         }
       ],
       outcomes: [
-        'Target Band 8.0+ Speaking Cadence',
-        'Zero Pause Fluency Reflex',
-        'Sophisticated Academic Discourse',
-        'Error-Free Complex Syntax'
-      ]
-    },
-    oratory: {
-      age: 'WEEKEND • PROFESSIONALS',
-      title: 'Corporate Oratory & Stage Poise Lab',
-      tagline: 'TEDx-Style Keynotes, Spoken Grace & Voice Resonance',
-      duration: '8 Weeks • 16 Intensive Studio Hours',
-      focusKey: 'pronunciation',
-      phases: [
-        {
-          num: 'PHASE 01',
-          weeks: 'Weeks 1 – 2',
-          title: 'Diaphragmatic Breath & Acoustic Resonance',
-          desc: 'Eliminating vocal strain, stabilizing pitch modulation, and building warm acoustic room presence without a microphone.'
-        },
-        {
-          num: 'PHASE 02',
-          weeks: 'Weeks 3 – 4',
-          title: 'Rhetorical Storytelling & Cognitive Hooks',
-          desc: 'Structuring speeches using the hero arc, sensory metaphors, and persuasive pauses to hold room attention effortlessly.'
-        },
-        {
-          num: 'PHASE 03',
-          weeks: 'Weeks 5 – 6',
-          title: 'Stage Mechanics, Gaze & Nonverbal Cadence',
-          desc: 'Mastering open stage movement, expressive hand choreography, and micro-expressions that project undeniable credibility.'
-        },
-        {
-          num: 'PHASE 04',
-          weeks: 'Weeks 7 – 8',
-          title: 'Atelier Keynote Showcase & Audio Portfolio',
-          desc: 'Delivering a live 8-minute keynote to studio cohort with high-definition audio critique and personal speaking signature.'
-        }
-      ],
-      outcomes: [
-        'Commanding Keynote & Stage Presence',
-        'Warm Resonant Vocal Projection',
-        'Compelling Narrative Persuasion',
-        'Fearless Spontaneous Stage Poise'
+        'Polished International Sound Signature',
+        'Effortless Cross-Border Business Fluency',
+        'Executive Boardroom Authority',
+        'Diplomatic Persuasion Under Pressure'
       ]
     }
   };
@@ -572,8 +533,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Draw Real Ocean Sea Waves (With Crest Whitecaps & Foam Shimmer) ---
   function drawRealisticOceanWaves(ctx, width, height, time, layer) {
     const dpr = window.devicePixelRatio || 1;
-    // 30% Coverage: Sea water starts at 70% height from top (covers bottom 30% of viewport)
-    const baseY = height * 0.70;
+    // Lowered base (~15% coverage) + Right side dipped lower to clear text & buttons
+    const baseY = height * 0.85;
     const step = 8 * dpr;
 
     if (layer === 'back') {
@@ -582,12 +543,13 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.beginPath();
       ctx.moveTo(0, height);
       for (let x = 0; x <= width + step; x += step) {
-        const y = baseY - 28 * dpr + getSeaWaveHeight(x, time, 'back') * dpr;
+        const rightDip = (x / width) * 45 * dpr;
+        const y = baseY + rightDip - 18 * dpr + getSeaWaveHeight(x, time, 'back') * dpr * 0.75;
         ctx.lineTo(x, y);
       }
       ctx.lineTo(width, height);
       ctx.closePath();
-      const backGrad = ctx.createLinearGradient(0, baseY - 60 * dpr, 0, height);
+      const backGrad = ctx.createLinearGradient(0, baseY - 50 * dpr, 0, height);
       backGrad.addColorStop(0, 'rgba(224, 247, 250, 0.7)');
       backGrad.addColorStop(0.35, 'rgba(186, 230, 253, 0.55)');
       backGrad.addColorStop(1, 'rgba(125, 211, 252, 0.45)');
@@ -600,12 +562,13 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.beginPath();
       ctx.moveTo(0, height);
       for (let x = 0; x <= width + step; x += step) {
-        const y = baseY - 14 * dpr + getSeaWaveHeight(x, time, 'mid') * dpr;
+        const rightDip = (x / width) * 50 * dpr;
+        const y = baseY + rightDip - 8 * dpr + getSeaWaveHeight(x, time, 'mid') * dpr * 0.75;
         ctx.lineTo(x, y);
       }
       ctx.lineTo(width, height);
       ctx.closePath();
-      const midGrad = ctx.createLinearGradient(0, baseY - 40 * dpr, 0, height);
+      const midGrad = ctx.createLinearGradient(0, baseY - 35 * dpr, 0, height);
       midGrad.addColorStop(0, 'rgba(34, 211, 238, 0.38)');
       midGrad.addColorStop(0.4, 'rgba(0, 157, 196, 0.45)');
       midGrad.addColorStop(1, 'rgba(8, 145, 178, 0.55)');
@@ -617,7 +580,8 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.beginPath();
       ctx.moveTo(0, height);
       for (let x = 0; x <= width + step; x += step) {
-        const y = baseY + getSeaWaveHeight(x, time, 'front') * dpr;
+        const rightDip = (x / width) * 55 * dpr;
+        const y = baseY + rightDip + getSeaWaveHeight(x, time, 'front') * dpr * 0.75;
         frontPoints.push({ x, y });
         ctx.lineTo(x, y);
       }
@@ -923,9 +887,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // Ocean Water Surface Collision & Archimedes Buoyancy (30% Bottom Coverage)
-      const baseY = height * 0.70;
-      const waterY = baseY + getSeaWaveHeight(this.x, now, 'front') * this.dpr;
+      // Ocean Water Surface Collision & Archimedes Buoyancy (Synchronized with realistic waves)
+      const rightDip = (this.x / width) * 55 * this.dpr;
+      const baseY = height * 0.85 + rightDip;
+      const waterY = baseY + getSeaWaveHeight(this.x, now, 'front') * this.dpr * 0.75;
       const bottomY = this.y + this.radius * 0.45;
 
       if (bottomY >= waterY) {
@@ -997,21 +962,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       ctx.save();
       ctx.globalAlpha = Math.max(0, this.fadeAlpha);
-
-      // Water reflection / shadow (30% Bottom Coverage)
-      const baseY = height * 0.70;
-      const waterY = baseY + getSeaWaveHeight(this.x, performance.now(), 'front') * this.dpr;
-      const distFromWater = Math.max(0, waterY - this.y);
-      const shadowFactor = Math.max(0, 1 - distFromWater / (250 * this.dpr));
-
-      if (shadowFactor > 0.05) {
-        const shadowRx = (this.radius * 0.8) * this.scaleX;
-        const shadowRy = shadowRx * 0.28;
-        ctx.beginPath();
-        ctx.ellipse(this.x, waterY, shadowRx, shadowRy, 0, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 110, 140, ${shadowFactor * 0.25 * this.fadeAlpha})`;
-        ctx.fill();
-      }
 
       // 3D Letter
       ctx.translate(this.x, this.y);
@@ -1093,12 +1043,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let x, y;
     if (stageRect) {
-      const minX = (stageRect.left - canvasRect.left + stageRect.width * 0.15) * dpr;
-      const maxX = (stageRect.left - canvasRect.left + stageRect.width * 0.85) * dpr;
+      // Direct alphabet letters to fall into the Left Sea Wave zone (12% to 42% width)
+      const minX = (stageRect.left - canvasRect.left + stageRect.width * 0.12) * dpr;
+      const maxX = (stageRect.left - canvasRect.left + stageRect.width * 0.42) * dpr;
       x = minX + Math.random() * (maxX - minX);
-      y = (stageRect.top - canvasRect.top + (Math.random() - 0.5) * 40) * dpr;
+      y = (stageRect.top - canvasRect.top + 20 + Math.random() * 40) * dpr;
     } else {
-      x = (width * 0.25) + (Math.random() - 0.5) * (width * 0.2);
+      x = (width * 0.22) + (Math.random() - 0.5) * (width * 0.18);
       y = 80 * dpr;
     }
 
@@ -1125,11 +1076,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       let x, y;
       if (stageRect) {
-        const laneOffsets = [0.25, 0.5, 0.75];
+        const laneOffsets = [0.15, 0.28, 0.40];
         x = (stageRect.left - canvasRect.left + stageRect.width * laneOffsets[i]) * dpr;
-        y = (stageRect.top - canvasRect.top - (i * 90) + 30) * dpr;
+        y = (stageRect.top - canvasRect.top - (i * 90) + 40) * dpr;
       } else {
-        x = (0.2 + i * 0.12) * width;
+        x = (0.16 + i * 0.12) * width;
         y = (80 - i * 80) * dpr;
       }
 
@@ -1311,6 +1262,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const coursesHeaderBlock = document.getElementById('coursesHeaderBlock');
   const coursesGrid = document.querySelector('.courses-grid');
   const coursesGridDuo = document.querySelector('.courses-grid-duo');
+  const coursesBottomRow = document.getElementById('coursesBottomRow');
   const learnCardsTrack = document.getElementById('learnCardsTrack');
   const orbLeft = document.getElementById('orbLeft');
   const orbRight = document.getElementById('orbRight');
@@ -1405,7 +1357,7 @@ document.addEventListener('DOMContentLoaded', () => {
       headerObserver.observe(coursesHeaderBlock);
     }
 
-    // Courses Grid (Row 1 Fan-Out) Observer
+    // Courses Grid (Row 1 Fan-Out) Observer — Triggers smoothly right as top edge enters viewport
     if (coursesGrid) {
       const gridObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
@@ -1415,7 +1367,7 @@ document.addEventListener('DOMContentLoaded', () => {
             coursesGrid.classList.remove('fanned-out');
           }
         });
-      }, { threshold: 0.15 });
+      }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
       gridObserver.observe(coursesGrid);
     }
 
@@ -1429,8 +1381,22 @@ document.addEventListener('DOMContentLoaded', () => {
             coursesGridDuo.classList.remove('fanned-out');
           }
         });
-      }, { threshold: 0.15 });
+      }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
       duoObserver.observe(coursesGridDuo);
+    }
+
+    // Courses Bottom Row (1 Solo Card Fan-Out) Observer
+    if (coursesBottomRow) {
+      const bottomObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            coursesBottomRow.classList.add('fanned-out');
+          } else if (entry.boundingClientRect.top > 0) {
+            coursesBottomRow.classList.remove('fanned-out');
+          }
+        });
+      }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+      bottomObserver.observe(coursesBottomRow);
     }
 
     // Learn With Us (Section 3) Observer
@@ -1448,6 +1414,21 @@ document.addEventListener('DOMContentLoaded', () => {
       }, { threshold: 0.15 });
       learnObserver.observe(learnSection);
     }
+
+    // Studio Footer Cinematic Wave Surge Observer
+    const studioFooter = document.getElementById('studioFooter');
+    if (studioFooter) {
+      const footerObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            studioFooter.classList.add('wave-surged');
+          } else if (entry.boundingClientRect.top > 0) {
+            studioFooter.classList.remove('wave-surged');
+          }
+        });
+      }, { threshold: 0.12 });
+      footerObserver.observe(studioFooter);
+    }
   } else {
     // Fallback if IntersectionObserver not supported
     if (coursesHeaderBlock) coursesHeaderBlock.classList.add('revealed');
@@ -1455,7 +1436,156 @@ document.addEventListener('DOMContentLoaded', () => {
     if (coursesGridDuo) coursesGridDuo.classList.add('fanned-out');
     if (learnSection) learnSection.classList.add('revealed');
     if (learnCardsTrack) learnCardsTrack.classList.add('fanned-out');
+    const studioFooterFallback = document.getElementById('studioFooter');
+    if (studioFooterFallback) studioFooterFallback.classList.add('wave-surged');
   }
+
+  // Interactive Replay for Ocean Wave Surge in Footer
+  const btnReplayWaveSurge = document.getElementById('btnReplayWaveSurge');
+  const footerForReplay = document.getElementById('studioFooter');
+  if (btnReplayWaveSurge && footerForReplay) {
+    btnReplayWaveSurge.addEventListener('click', (e) => {
+      e.preventDefault();
+      footerForReplay.classList.remove('wave-surged');
+      // Trigger DOM reflow so the transition restarts from scratch
+      void footerForReplay.offsetHeight;
+      setTimeout(() => {
+        footerForReplay.classList.add('wave-surged');
+      }, 50);
+    });
+  }
+
+  // --- About Showcase Segmented Pill Switcher (with Scroll-Driven Morph) ---
+  const btnAboutAtelier = document.getElementById('btnAboutAtelier');
+  const btnAboutTrainer = document.getElementById('btnAboutTrainer');
+  const panelAboutAtelier = document.getElementById('panelAboutAtelier');
+  const panelAboutTrainer = document.getElementById('panelAboutTrainer');
+
+  function switchAboutTab(tabName) {
+    if (tabName === 'trainer') {
+      if (btnAboutTrainer) {
+        btnAboutTrainer.classList.add('active');
+        btnAboutTrainer.setAttribute('aria-selected', 'true');
+      }
+      if (btnAboutAtelier) {
+        btnAboutAtelier.classList.remove('active');
+        btnAboutAtelier.setAttribute('aria-selected', 'false');
+      }
+      if (panelAboutTrainer) panelAboutTrainer.classList.add('active');
+      if (panelAboutAtelier) panelAboutAtelier.classList.remove('active');
+    } else {
+      if (btnAboutAtelier) {
+        btnAboutAtelier.classList.add('active');
+        btnAboutAtelier.setAttribute('aria-selected', 'true');
+      }
+      if (btnAboutTrainer) {
+        btnAboutTrainer.classList.remove('active');
+        btnAboutTrainer.setAttribute('aria-selected', 'false');
+      }
+      if (panelAboutAtelier) panelAboutAtelier.classList.add('active');
+      if (panelAboutTrainer) panelAboutTrainer.classList.remove('active');
+    }
+  }
+
+  // In-Place Scroll Swap: Swaps between About Us and About Trainer on the spot without scrolling away
+  const aboutSectionEl = document.getElementById('aboutSection');
+  if (aboutSectionEl) {
+    let swapCooldown = false;
+    function triggerCooldown() {
+      swapCooldown = true;
+      setTimeout(() => { swapCooldown = false; }, 450);
+    }
+
+    if (btnAboutAtelier) {
+      btnAboutAtelier.addEventListener('click', () => {
+        switchAboutTab('atelier');
+        triggerCooldown();
+      });
+    }
+    if (btnAboutTrainer) {
+      btnAboutTrainer.addEventListener('click', () => {
+        switchAboutTab('trainer');
+        triggerCooldown();
+      });
+    }
+
+    // Wheel listener: intercepts wheel at this section to swap in-place
+    aboutSectionEl.addEventListener('wheel', (e) => {
+      const rect = aboutSectionEl.getBoundingClientRect();
+      const winH = window.innerHeight;
+      // Active viewing zone (section is prominent in the screen)
+      const inView = rect.top <= winH * 0.5 && rect.bottom >= winH * 0.4;
+
+      if (!inView || swapCooldown) return;
+
+      if (e.deltaY > 15 && panelAboutAtelier && panelAboutAtelier.classList.contains('active')) {
+        // Scrolling down on About Us: stop scroll from moving away, swap to Trainer in place!
+        e.preventDefault();
+        switchAboutTab('trainer');
+        triggerCooldown();
+      } else if (e.deltaY < -15 && panelAboutTrainer && panelAboutTrainer.classList.contains('active')) {
+        // Scrolling up on About Trainer: stop scroll from moving away, swap to Atelier in place!
+        e.preventDefault();
+        switchAboutTab('atelier');
+        triggerCooldown();
+      }
+    }, { passive: false });
+
+    // Touch swipe listener for mobile:
+    let touchStartY = 0;
+    aboutSectionEl.addEventListener('touchstart', (e) => {
+      if (e.touches && e.touches.length > 0) {
+        touchStartY = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    aboutSectionEl.addEventListener('touchmove', (e) => {
+      if (!touchStartY || swapCooldown) return;
+      const rect = aboutSectionEl.getBoundingClientRect();
+      const winH = window.innerHeight;
+      const inView = rect.top <= winH * 0.55 && rect.bottom >= winH * 0.35;
+      if (!inView) return;
+
+      const currentY = e.touches[0].clientY;
+      const diffY = touchStartY - currentY;
+
+      if (diffY > 30 && panelAboutAtelier && panelAboutAtelier.classList.contains('active')) {
+        // Swipe up: swap to Trainer
+        e.preventDefault();
+        switchAboutTab('trainer');
+        triggerCooldown();
+        touchStartY = 0;
+      } else if (diffY < -30 && panelAboutTrainer && panelAboutTrainer.classList.contains('active')) {
+        // Swipe down: swap to Atelier
+        e.preventDefault();
+        switchAboutTab('atelier');
+        triggerCooldown();
+        touchStartY = 0;
+      }
+    }, { passive: false });
+  }
+
+  // Handle hash changes (e.g. clicking #aboutTrainerSection link in footer)
+  function checkAboutHash() {
+    if (window.location.hash === '#aboutTrainerSection') {
+      switchAboutTab('trainer');
+    } else if (window.location.hash === '#aboutSection') {
+      switchAboutTab('atelier');
+    }
+  }
+  window.addEventListener('hashchange', checkAboutHash);
+  checkAboutHash();
+
+  document.querySelectorAll('a[href="#aboutTrainerSection"]').forEach(link => {
+    link.addEventListener('click', () => {
+      switchAboutTab('trainer');
+    });
+  });
+  document.querySelectorAll('a[href="#aboutSection"]').forEach(link => {
+    link.addEventListener('click', () => {
+      switchAboutTab('atelier');
+    });
+  });
 
   // --- 6. Interactive Card 3D Magnetic Tilt & Spotlight (Apple / Stripe style) ---
   const allInteractiveCards = document.querySelectorAll('.course-card');
@@ -1623,9 +1753,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (galleryViewport && galleryTrack) {
     let isPaused = false;
-    let autoScrollRaf = null;
-    const scrollSpeed = 5.0; // Fast and dynamic continuous speed
-    let resumeTimeout = null;
+    let isDown = false;
+    let startX = 0;
+    let initialScroll = 0;
+    let galleryAutoTimer = null;
 
     // Clone cards once to create an infinite wrap loop
     const originalCards = Array.from(galleryTrack.children);
@@ -1635,53 +1766,86 @@ document.addEventListener('DOMContentLoaded', () => {
       galleryTrack.appendChild(clone);
     });
 
-    // A. Fast Continuous Auto-Move Engine (Non-Stop, never pauses on hover)
-    function autoScrollLoop() {
-      if (!isPaused && galleryViewport) {
-        galleryViewport.scrollLeft += scrollSpeed;
-        const halfWidth = galleryTrack.scrollWidth / 2;
-        if (galleryViewport.scrollLeft >= halfWidth) {
-          galleryViewport.scrollLeft -= halfWidth;
-        }
+    // A. 2-Second Step Carousel Engine
+    function getCardStep() {
+      const firstCard = galleryTrack.querySelector('.gallery-reel-card');
+      if (!firstCard) return 335;
+      const style = window.getComputedStyle(galleryTrack);
+      const gap = parseFloat(style.gap) || 25;
+      return firstCard.offsetWidth + gap;
+    }
+
+    function slideGalleryNext() {
+      if (!galleryViewport) return;
+      const step = getCardStep();
+      const halfWidth = galleryTrack.scrollWidth / 2;
+      if (galleryViewport.scrollLeft >= halfWidth - 5) {
+        galleryViewport.style.scrollBehavior = 'auto';
+        galleryViewport.scrollLeft = 0;
+        void galleryViewport.offsetHeight;
+        galleryViewport.style.scrollBehavior = 'smooth';
       }
-      autoScrollRaf = requestAnimationFrame(autoScrollLoop);
-    }
-    autoScrollRaf = requestAnimationFrame(autoScrollLoop);
-
-    function tempPause(duration = 800) {
-      isPaused = true;
-      if (resumeTimeout) clearTimeout(resumeTimeout);
-      resumeTimeout = setTimeout(() => {
-        isPaused = false;
-      }, duration);
+      galleryViewport.scrollBy({ left: step, behavior: 'smooth' });
     }
 
-    // B. Interactive Arrow Navigation Buttons (Below images, right-aligned)
-    const STEP_AMOUNT = 350;
+    function slideGalleryPrev() {
+      if (!galleryViewport) return;
+      const step = getCardStep();
+      const halfWidth = galleryTrack.scrollWidth / 2;
+      if (galleryViewport.scrollLeft <= 5) {
+        galleryViewport.style.scrollBehavior = 'auto';
+        galleryViewport.scrollLeft = halfWidth;
+        void galleryViewport.offsetHeight;
+        galleryViewport.style.scrollBehavior = 'smooth';
+      }
+      galleryViewport.scrollBy({ left: -step, behavior: 'smooth' });
+    }
+
+    function startGalleryAutoTimer() {
+      if (galleryAutoTimer) clearInterval(galleryAutoTimer);
+      galleryAutoTimer = setInterval(() => {
+        if (!isPaused && !isDown) {
+          slideGalleryNext();
+        }
+      }, 2000); // 2 Seconds Auto Slide
+    }
+
+    function resetGalleryAutoTimer() {
+      if (galleryAutoTimer) clearInterval(galleryAutoTimer);
+      startGalleryAutoTimer();
+    }
+
+    startGalleryAutoTimer();
+
+    // Pause on hover
+    galleryViewport.addEventListener('mouseenter', () => { isPaused = true; });
+    galleryViewport.addEventListener('mouseleave', () => { if (!isDown) isPaused = false; });
+
+    // B. Interactive Arrow Navigation Buttons
     if (galleryPrevBtn) {
       galleryPrevBtn.addEventListener('click', () => {
-        tempPause(600);
-        galleryViewport.scrollBy({ left: -STEP_AMOUNT, behavior: 'smooth' });
+        slideGalleryPrev();
+        resetGalleryAutoTimer();
       });
     }
 
     if (galleryNextBtn) {
       galleryNextBtn.addEventListener('click', () => {
-        tempPause(600);
-        galleryViewport.scrollBy({ left: STEP_AMOUNT, behavior: 'smooth' });
+        slideGalleryNext();
+        resetGalleryAutoTimer();
       });
     }
 
     // C. Double Tap / Double Click Gesture (Forward or Backward)
     galleryViewport.addEventListener('dblclick', (e) => {
-      tempPause(700);
       const rect = galleryViewport.getBoundingClientRect();
       const clickX = e.clientX - rect.left;
       if (clickX > rect.width / 2) {
-        galleryViewport.scrollBy({ left: STEP_AMOUNT, behavior: 'smooth' });
+        slideGalleryNext();
       } else {
-        galleryViewport.scrollBy({ left: -STEP_AMOUNT, behavior: 'smooth' });
+        slideGalleryPrev();
       }
+      resetGalleryAutoTimer();
     });
 
     // Mobile double-tap detection
@@ -1690,27 +1854,24 @@ document.addEventListener('DOMContentLoaded', () => {
       const currentTime = performance.now();
       const tapInterval = currentTime - lastTapTime;
       if (tapInterval < 320 && tapInterval > 0) {
-        tempPause(700);
         const touch = e.changedTouches[0];
         const rect = galleryViewport.getBoundingClientRect();
         const tapX = touch.clientX - rect.left;
         if (tapX > rect.width / 2) {
-          galleryViewport.scrollBy({ left: STEP_AMOUNT, behavior: 'smooth' });
+          slideGalleryNext();
         } else {
-          galleryViewport.scrollBy({ left: -STEP_AMOUNT, behavior: 'smooth' });
+          slideGalleryPrev();
         }
+        resetGalleryAutoTimer();
       }
       lastTapTime = currentTime;
     }, { passive: true });
 
-    // D. Drag-to-Scroll Support (Cursor hover NEVER stops or pauses movement)
-    let isDown = false;
-    let startX = 0;
-    let initialScroll = 0;
-
+    // D. Drag-to-Scroll Support
     galleryViewport.addEventListener('mousedown', (e) => {
       isDown = true;
       galleryViewport.classList.add('is-dragging');
+      galleryViewport.style.scrollBehavior = 'auto';
       startX = e.pageX - galleryViewport.offsetLeft;
       initialScroll = galleryViewport.scrollLeft;
       isPaused = true;
@@ -1720,7 +1881,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isDown) {
         isDown = false;
         galleryViewport.classList.remove('is-dragging');
+        galleryViewport.style.scrollBehavior = 'smooth';
         isPaused = false;
+        resetGalleryAutoTimer();
       }
     });
 
@@ -1731,5 +1894,830 @@ document.addEventListener('DOMContentLoaded', () => {
       const walk = (x - startX) * 1.5;
       galleryViewport.scrollLeft = initialScroll - walk;
     });
+
+    // E. Gallery Photo Click to Open Lightbox
+    const oceanImageModal = document.getElementById('oceanImageModal');
+    const oceanLightboxImg = document.getElementById('oceanLightboxImg');
+    const modalImageTitle = document.getElementById('modalImageTitle');
+    const modalImageDesc = document.getElementById('modalImageDesc');
+    const closeImageModalBtn = document.getElementById('closeImageModalBtn');
+
+    function openImageModal(card) {
+      if (!oceanImageModal || !card) return;
+      const img = card.querySelector('.gallery-reel-img');
+      const h4 = card.querySelector('h4');
+      const p = card.querySelector('p');
+
+      if (oceanLightboxImg && img) {
+        oceanLightboxImg.src = img.src;
+        oceanLightboxImg.alt = img.alt || 'Studio Gallery View';
+      }
+      if (modalImageTitle && h4) {
+        modalImageTitle.textContent = h4.textContent;
+      }
+      if (modalImageDesc && p) {
+        modalImageDesc.textContent = p.textContent;
+      }
+
+      if (typeof oceanImageModal.showModal === 'function') {
+        oceanImageModal.showModal();
+      } else {
+        oceanImageModal.setAttribute('open', '');
+      }
+    }
+
+    if (closeImageModalBtn && oceanImageModal) {
+      closeImageModalBtn.addEventListener('click', () => {
+        if (typeof oceanImageModal.close === 'function') {
+          oceanImageModal.close();
+        } else {
+          oceanImageModal.removeAttribute('open');
+        }
+      });
+
+      oceanImageModal.addEventListener('click', (e) => {
+        if (e.target === oceanImageModal) {
+          if (typeof oceanImageModal.close === 'function') {
+            oceanImageModal.close();
+          } else {
+            oceanImageModal.removeAttribute('open');
+          }
+        }
+      });
+    }
+
+    galleryTrack.addEventListener('click', (e) => {
+      const card = e.target.closest('.gallery-reel-card');
+      if (card) {
+        openImageModal(card);
+      }
+    });
   }
+
+  // ==========================================================================
+  // --- 9. The Cinema Stage & Holographic Review Deck (Testimonials) ---
+  // ==========================================================================
+
+  // A. Video Cinema Stage Engine
+  const cinemaActiveVideo = document.getElementById('cinemaActiveVideo');
+  const cinemaVideoSource = document.getElementById('cinemaVideoSource');
+  const cinemaVideoType = document.getElementById('cinemaVideoType');
+  const cinemaVideoTitle = document.getElementById('cinemaVideoTitle');
+  const cinemaAmbientGlow = document.getElementById('cinemaAmbientGlow');
+  const cinemaTabs = document.querySelectorAll('.cinema-selector-tab');
+  const cinemaPlayerBox = document.getElementById('cinemaPlayerBox');
+  const cinemaPlayTrigger = document.getElementById('cinemaPlayTrigger');
+
+  const videoReelsData = [
+    {
+      src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+      poster: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=900&q=80',
+      type: '0:52 • SPEECH REEL',
+      title: 'From Hesitation to Assembly Anchor',
+      glow: 'radial-gradient(circle at 35% 40%, rgba(34, 211, 238, 0.38) 0%, rgba(0, 157, 196, 0.18) 45%, rgba(255, 107, 107, 0.28) 80%, transparent 100%)'
+    },
+    {
+      src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+      poster: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=80',
+      type: '1:18 • CORPORATE REEL',
+      title: 'Eliminating Internal Translation Lag',
+      glow: 'radial-gradient(circle at 40% 45%, rgba(0, 157, 196, 0.4) 0%, rgba(255, 107, 107, 0.22) 50%, rgba(8, 45, 56, 0.15) 80%, transparent 100%)'
+    },
+    {
+      src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+      poster: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=900&q=80',
+      type: '0:45 • STORYTELLING REEL',
+      title: 'Spontaneous Storytelling Without Pauses',
+      glow: 'radial-gradient(circle at 35% 40%, rgba(255, 107, 107, 0.35) 0%, rgba(34, 211, 238, 0.28) 50%, rgba(0, 157, 196, 0.15) 80%, transparent 100%)'
+    },
+    {
+      src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
+      poster: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80',
+      type: '1:04 • IELTS SPEAKING',
+      title: 'IELTS Speaking: Band 6.0 → Band 8.0',
+      glow: 'radial-gradient(circle at 40% 40%, rgba(0, 112, 138, 0.4) 0%, rgba(255, 107, 107, 0.25) 50%, rgba(34, 211, 238, 0.2) 80%, transparent 100%)'
+    }
+  ];
+
+  function updatePlayTriggerState(isPlaying) {
+    if (!cinemaPlayerBox) return;
+    const playIcon = cinemaPlayTrigger ? cinemaPlayTrigger.querySelector('.play-icon') : null;
+    const pauseIcon = cinemaPlayTrigger ? cinemaPlayTrigger.querySelector('.pause-icon') : null;
+    if (isPlaying) {
+      cinemaPlayerBox.classList.add('is-playing');
+      if (playIcon) playIcon.style.display = 'none';
+      if (pauseIcon) pauseIcon.style.display = 'block';
+    } else {
+      cinemaPlayerBox.classList.remove('is-playing');
+      if (playIcon) playIcon.style.display = 'block';
+      if (pauseIcon) pauseIcon.style.display = 'none';
+    }
+  }
+
+  function toggleCinemaPlay() {
+    if (!cinemaActiveVideo) return;
+    if (cinemaActiveVideo.paused || cinemaActiveVideo.ended) {
+      cinemaActiveVideo.play().then(() => {
+        updatePlayTriggerState(true);
+      }).catch(err => {
+        console.warn('Cinema video playback err:', err);
+      });
+    } else {
+      cinemaActiveVideo.pause();
+      updatePlayTriggerState(false);
+    }
+  }
+
+  if (cinemaPlayTrigger) {
+    cinemaPlayTrigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleCinemaPlay();
+    });
+  }
+
+  if (cinemaPlayerBox) {
+    cinemaPlayerBox.addEventListener('click', (e) => {
+      if (e.target !== cinemaActiveVideo) {
+        toggleCinemaPlay();
+      }
+    });
+  }
+
+  if (cinemaActiveVideo) {
+    cinemaActiveVideo.addEventListener('play', () => updatePlayTriggerState(true));
+    cinemaActiveVideo.addEventListener('pause', () => updatePlayTriggerState(false));
+    cinemaActiveVideo.addEventListener('ended', () => updatePlayTriggerState(false));
+  }
+
+  function switchCinemaVideo(index) {
+    if (!cinemaActiveVideo || !videoReelsData[index]) return;
+    const data = videoReelsData[index];
+
+    // Update active tab styling
+    cinemaTabs.forEach((tab, i) => {
+      if (i === index) {
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+      } else {
+        tab.classList.remove('active');
+        tab.setAttribute('aria-selected', 'false');
+      }
+    });
+
+    // Update overlay text
+    if (cinemaVideoType) cinemaVideoType.textContent = data.type;
+    if (cinemaVideoTitle) cinemaVideoTitle.textContent = data.title;
+    if (cinemaAmbientGlow) cinemaAmbientGlow.style.background = data.glow;
+
+    // Transition video source
+    cinemaActiveVideo.pause();
+    updatePlayTriggerState(false);
+    cinemaActiveVideo.poster = data.poster;
+    if (cinemaVideoSource) {
+      cinemaVideoSource.src = data.src;
+      cinemaActiveVideo.load();
+    }
+  }
+
+  cinemaTabs.forEach((tab, idx) => {
+    tab.addEventListener('click', () => switchCinemaVideo(idx));
+  });
+
+  // B. Holographic Review Deck Engine (2-Second Step)
+  const reviewCards = document.querySelectorAll('.holographic-review-card');
+  const deckPrevBtn = document.getElementById('deckPrevBtn');
+  const deckNextBtn = document.getElementById('deckNextBtn');
+  const deckCounter = document.getElementById('deckCounter');
+  let currentReviewIdx = 0;
+  let deckAutoTimer = null;
+
+  function showReviewCard(index) {
+    if (reviewCards.length === 0) return;
+    
+    // Bounds wrapping
+    if (index >= reviewCards.length) currentReviewIdx = 0;
+    else if (index < 0) currentReviewIdx = reviewCards.length - 1;
+    else currentReviewIdx = index;
+
+    reviewCards.forEach((card, i) => {
+      if (i === currentReviewIdx) {
+        card.classList.add('active');
+      } else {
+        card.classList.remove('active');
+      }
+    });
+
+    if (deckCounter) {
+      deckCounter.textContent = `0${currentReviewIdx + 1} / 0${reviewCards.length}`;
+    }
+  }
+
+  if (deckPrevBtn) {
+    deckPrevBtn.addEventListener('click', () => {
+      showReviewCard(currentReviewIdx - 1);
+      resetDeckAutoTimer();
+    });
+  }
+
+  if (deckNextBtn) {
+    deckNextBtn.addEventListener('click', () => {
+      showReviewCard(currentReviewIdx + 1);
+      resetDeckAutoTimer();
+    });
+  }
+
+  function startDeckAutoTimer() {
+    if (deckAutoTimer) clearInterval(deckAutoTimer);
+    deckAutoTimer = setInterval(() => {
+      // Don't auto-rotate review if video is actively playing
+      if (cinemaPlayerBox && cinemaPlayerBox.classList.contains('is-playing')) {
+        return;
+      }
+      showReviewCard(currentReviewIdx + 1);
+    }, 2000); // 2 Seconds Auto Advance
+  }
+
+  function resetDeckAutoTimer() {
+    if (deckAutoTimer) clearInterval(deckAutoTimer);
+    startDeckAutoTimer();
+  }
+
+  const reviewsDeckCarousel = document.getElementById('reviewsDeckCarousel');
+  if (reviewsDeckCarousel) {
+    reviewsDeckCarousel.addEventListener('mouseenter', () => {
+      if (deckAutoTimer) clearInterval(deckAutoTimer);
+    });
+    reviewsDeckCarousel.addEventListener('mouseleave', () => {
+      startDeckAutoTimer();
+    });
+  }
+
+  startDeckAutoTimer();
+
+  // C. Interactive Voice Note Snippet Simulation
+  const voiceCapsuleBtns = document.querySelectorAll('.voice-capsule-btn');
+  voiceCapsuleBtns.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const capsule = btn.closest('.coral-voice-capsule');
+      if (!capsule) return;
+
+      const isPlaying = capsule.classList.contains('is-playing');
+      const playSvg = btn.querySelector('.v-play-svg');
+      const pauseSvg = btn.querySelector('.v-pause-svg');
+
+      // Stop all others
+      document.querySelectorAll('.coral-voice-capsule').forEach((c) => {
+        c.classList.remove('is-playing');
+        const b = c.querySelector('.voice-capsule-btn');
+        if (b) {
+          const pSvg = b.querySelector('.v-play-svg');
+          const psSvg = b.querySelector('.v-pause-svg');
+          if (pSvg) pSvg.style.display = 'block';
+          if (psSvg) psSvg.style.display = 'none';
+        }
+      });
+
+      if (!isPlaying) {
+        capsule.classList.add('is-playing');
+        if (playSvg) playSvg.style.display = 'none';
+        if (pauseSvg) pauseSvg.style.display = 'block';
+
+        setTimeout(() => {
+          capsule.classList.remove('is-playing');
+          if (playSvg) playSvg.style.display = 'block';
+          if (pauseSvg) pauseSvg.style.display = 'none';
+        }, 5500);
+      }
+    });
+  });
+
+  // D. Deck Schedule CTA Button -> Triggers Diagnostic Dialog
+  const deckScheduleBtn = document.getElementById('deckScheduleBtn');
+  if (deckScheduleBtn) {
+    deckScheduleBtn.addEventListener('click', () => {
+      const diagModal = document.getElementById('diagnosticDialog');
+      if (diagModal) {
+        if (typeof diagModal.showModal === 'function') diagModal.showModal();
+        else diagModal.setAttribute('open', '');
+      }
+    });
+  }
+
+  // E. About Us & About Trainer Slide Switch Controller (Manual Button Driven)
+  const aboutSlide1 = document.getElementById('aboutSlide1');
+  const aboutSlide2 = document.getElementById('aboutSlide2');
+  const aboutBackdrop1 = document.getElementById('aboutBackdrop1');
+  const aboutBackdrop2 = document.getElementById('aboutBackdrop2');
+  const btnSlideAboutUs = document.getElementById('btnSlideAboutUs');
+  const btnSlideAboutTrainer = document.getElementById('btnSlideAboutTrainer');
+
+  function switchToAboutSlide(slideIndex) {
+    if (slideIndex === 1) {
+      if (aboutBackdrop1) aboutBackdrop1.classList.add('active');
+      if (aboutBackdrop2) aboutBackdrop2.classList.remove('active');
+      if (aboutSlide1) aboutSlide1.classList.add('active');
+      if (aboutSlide2) aboutSlide2.classList.remove('active');
+      if (btnSlideAboutUs) btnSlideAboutUs.classList.add('active');
+      if (btnSlideAboutTrainer) btnSlideAboutTrainer.classList.remove('active');
+    } else {
+      if (aboutBackdrop1) aboutBackdrop1.classList.remove('active');
+      if (aboutBackdrop2) aboutBackdrop2.classList.add('active');
+      if (aboutSlide1) aboutSlide1.classList.remove('active');
+      if (aboutSlide2) aboutSlide2.classList.add('active');
+      if (btnSlideAboutUs) btnSlideAboutUs.classList.remove('active');
+      if (btnSlideAboutTrainer) btnSlideAboutTrainer.classList.add('active');
+    }
+  }
+
+  if (btnSlideAboutUs) {
+    btnSlideAboutUs.addEventListener('click', (e) => {
+      e.preventDefault();
+      switchToAboutSlide(1);
+    });
+  }
+  if (btnSlideAboutTrainer) {
+    btnSlideAboutTrainer.addEventListener('click', (e) => {
+      e.preventDefault();
+      switchToAboutSlide(2);
+    });
+  }
+
+  // ==========================================================================
+  // F. SEA 1-MINUTE ENGLISH LEVEL TEST (HUD COCKPIT CONTROLLER)
+  // ==========================================================================
+  const hudCockpitDrawer = document.getElementById('hudCockpitDrawer');
+  const levelTestHeroBtn = document.getElementById('levelTestHeroBtn');
+  const hudDismissBtn = document.getElementById('hudDismissBtn');
+  const hudStageQuiz = document.getElementById('hudStageQuiz');
+  const hudStageResult = document.getElementById('hudStageResult');
+  
+  // Timer & Clock elements
+  const hudClockCluster = document.getElementById('hudClockCluster');
+  const clockDigitsDisplay = document.getElementById('clockDigitsDisplay');
+  const clockProgressCircle = document.getElementById('clockProgressCircle');
+  const hudSetText = document.getElementById('hudSetText');
+  
+  // Quiz controls
+  const qCurrentNum = document.getElementById('qCurrentNum');
+  const quizTrackFill = document.getElementById('quizTrackFill');
+  const quizPhaseTag = document.getElementById('quizPhaseTag');
+  const quizQuestionText = document.getElementById('quizQuestionText');
+  const quizOptionsGrid = document.getElementById('quizOptionsGrid');
+  const quizPrevBtn = document.getElementById('quizPrevBtn');
+  const quizNextBtn = document.getElementById('quizNextBtn');
+  
+  // Results elements
+  const resultTierTitle = document.getElementById('resultTierTitle');
+  const resultMantraTitle = document.getElementById('resultMantraTitle');
+  const resultMantraDesc = document.getElementById('resultMantraDesc');
+  const resultRetakeBtn = document.getElementById('resultRetakeBtn');
+  const resultCohortBtn = document.getElementById('resultCohortBtn');
+
+  const levelTestQuestions = [
+    // Set 1: Fast Basics (1 pt each)
+    {
+      set: 1,
+      setName: "Set 1: Fast Basics",
+      phase: "Fast Basics (1 pt)",
+      pts: 1,
+      q: "Hi! ______ name is Arjun.",
+      options: ["He", "My", "Me", "I"],
+      ansIndex: 1 // B
+    },
+    {
+      set: 1,
+      setName: "Set 1: Fast Basics",
+      phase: "Fast Basics (1 pt)",
+      pts: 1,
+      q: "We ______ two dogs and a cat.",
+      options: ["has", "having", "have", "is"],
+      ansIndex: 2 // C
+    },
+    {
+      set: 1,
+      setName: "Set 1: Fast Basics",
+      phase: "Fast Basics (1 pt)",
+      pts: 1,
+      q: '"______ is your English class?" "At 5:00 PM."',
+      options: ["Where", "What", "Who", "When"],
+      ansIndex: 3 // D
+    },
+    {
+      set: 1,
+      setName: "Set 1: Fast Basics",
+      phase: "Fast Basics (1 pt)",
+      pts: 1,
+      q: "She ______ coffee every morning.",
+      options: ["drink", "drinks", "drinking", "drunk"],
+      ansIndex: 1 // B
+    },
+    {
+      set: 1,
+      setName: "Set 1: Fast Basics",
+      phase: "Fast Basics (1 pt)",
+      pts: 1,
+      q: "There ______ many people in the park today.",
+      options: ["is", "was", "are", "be"],
+      ansIndex: 2 // C
+    },
+
+    // Set 2: Everyday Flow (2 pts each)
+    {
+      set: 2,
+      setName: "Set 2: Everyday Flow",
+      phase: "Everyday Flow (2 pts)",
+      pts: 2,
+      q: "Last week, we ______ to the beach.",
+      options: ["go", "goes", "went", "going"],
+      ansIndex: 2 // C
+    },
+    {
+      set: 2,
+      setName: "Set 2: Everyday Flow",
+      phase: "Everyday Flow (2 pts)",
+      pts: 2,
+      q: "This movie is ______ than the book.",
+      options: ["exciting", "more exciting", "most exciting", "much exciting"],
+      ansIndex: 1 // B
+    },
+    {
+      set: 2,
+      setName: "Set 2: Everyday Flow",
+      phase: "Everyday Flow (2 pts)",
+      pts: 2,
+      q: "Please call me when you ______ home.",
+      options: ["reach", "will reach", "reached", "reaching"],
+      ansIndex: 0 // A
+    },
+    {
+      set: 2,
+      setName: "Set 2: Everyday Flow",
+      phase: "Everyday Flow (2 pts)",
+      pts: 2,
+      q: "They have lived here ______ 2022.",
+      options: ["for", "since", "in", "at"],
+      ansIndex: 1 // B
+    },
+    {
+      set: 2,
+      setName: "Set 2: Everyday Flow",
+      phase: "Everyday Flow (2 pts)",
+      pts: 2,
+      q: "I ______ dinner right now, so can I call you back?",
+      options: ["cook", "cooked", "am cooking", "have cooked"],
+      ansIndex: 2 // C
+    },
+
+    // Set 3: Sharp & Natural (3 pts each)
+    {
+      set: 3,
+      setName: "Set 3: Sharp & Natural",
+      phase: "Sharp & Natural (3 pts)",
+      pts: 3,
+      q: "He didn't come to the meeting, ______ surprised everyone.",
+      options: ["what", "which", "who", "that"],
+      ansIndex: 1 // B
+    },
+    {
+      set: 3,
+      setName: "Set 3: Sharp & Natural",
+      phase: "Sharp & Natural (3 pts)",
+      pts: 3,
+      q: "If I ______ more time yesterday, I would have finished the report.",
+      options: ["have", "had", "would have", "was having"],
+      ansIndex: 1 // B
+    },
+    {
+      set: 3,
+      setName: "Set 3: Sharp & Natural",
+      phase: "Sharp & Natural (3 pts)",
+      pts: 3,
+      q: "Hardly ______ the room when the phone rang.",
+      options: ["she entered", "did she enter", "had she entered", "she had entered"],
+      ansIndex: 2 // C
+    },
+    {
+      set: 3,
+      setName: "Set 3: Sharp & Natural",
+      phase: "Sharp & Natural (3 pts)",
+      pts: 3,
+      q: 'Someone who is "diplomatic" usually ______.',
+      options: [
+        "travels abroad every month",
+        "handles sensitive situations with tact and calm",
+        "speaks only formal written English",
+        "avoids talking to people altogether"
+      ],
+      ansIndex: 1 // B
+    },
+    {
+      set: 3,
+      setName: "Set 3: Sharp & Natural",
+      phase: "Sharp & Natural (3 pts)",
+      pts: 3,
+      q: "It is high time we ______ a clear plan for next month.",
+      options: ["make", "made", "making", "will make"],
+      ansIndex: 1 // B
+    }
+  ];
+
+  const levelTiers = {
+    basics: {
+      code: "A1-A2",
+      badgeText: "Basics Focus (A1–A2)",
+      mantra: "Build core words, simple lines, day-one confidence with SEA.",
+      desc: "A solid baseline to eliminate hesitation. In our 1:6 studio cohort, you will command fundamental speech patterns, daily conversation structures, and authentic spoken confidence from day one.",
+      symbol: "🌱",
+      ladderId: "resStepA",
+      headerPillId: "ladderPillA"
+    },
+    fluency: {
+      code: "B1",
+      badgeText: "Fluency Focus (B1)",
+      mantra: "Build smooth flow, tense ease, natural sparks with SEA.",
+      desc: "You have strong foundation lines and are ready for effortless momentum. Our signature microphone drills help you master automatic tenses, reduce translation lag, and speak with spontaneous ease.",
+      symbol: "🌊",
+      ladderId: "resStepB1",
+      headerPillId: "ladderPillB1"
+    },
+    vocabulary: {
+      code: "B2",
+      badgeText: "Vocabulary Focus (B2)",
+      mantra: "Build bold words, snappy idioms, standout style with SEA.",
+      desc: "Your speech is clear and fluid; now it's time to refine your vocal color and executive diction. Master high-impact idioms, persuasive rhetoric, and distinct boardroom presence.",
+      symbol: "✨",
+      ladderId: "resStepB2",
+      headerPillId: "ladderPillB2"
+    },
+    mastery: {
+      code: "C1-C2",
+      badgeText: "Mastery Focus (C1–C2)",
+      mantra: "Build crisp nuance, rich tone, effortless command with SEA.",
+      desc: "Exceptional command of language. We refine subtle phonetic inflection, debate nuance, diplomatic composure, and high-stakes presentation leadership.",
+      symbol: "👑",
+      ladderId: "resStepC",
+      headerPillId: "ladderPillC"
+    }
+  };
+
+  let currentQIdx = 0;
+  let userAnswers = new Array(levelTestQuestions.length).fill(null);
+  let timerInterval = null;
+  let timeRemaining = 60; // 60 seconds
+  const totalDuration = 60;
+  const circumference = 2 * Math.PI * 16; // r=16 -> ~100.53
+
+  function formatTime(secs) {
+    const m = Math.floor(secs / 60);
+    const s = secs % 60;
+    return `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+  }
+
+  function startQuestionTimer() {
+    stopTimer();
+    timeRemaining = 60;
+    updateClockVisual();
+    timerInterval = setInterval(() => {
+      timeRemaining--;
+      updateClockVisual();
+      if (timeRemaining <= 0) {
+        stopTimer();
+        // 60 seconds finished on this question -> auto-advance to next question!
+        if (currentQIdx < levelTestQuestions.length - 1) {
+          renderQuestion(currentQIdx + 1);
+        } else {
+          calculateAndShowResult();
+        }
+      }
+    }, 1000);
+  }
+
+  function stopTimer() {
+    if (timerInterval) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
+  }
+
+  function updateClockVisual() {
+    if (clockDigitsDisplay) {
+      clockDigitsDisplay.textContent = formatTime(Math.max(0, timeRemaining));
+    }
+    if (clockProgressCircle) {
+      const fraction = (totalDuration - timeRemaining) / totalDuration;
+      const offset = circumference * fraction;
+      clockProgressCircle.style.strokeDashoffset = offset;
+    }
+    if (hudClockCluster) {
+      if (timeRemaining <= 12) {
+        hudClockCluster.classList.add('time-warning');
+      } else {
+        hudClockCluster.classList.remove('time-warning');
+      }
+    }
+  }
+
+  function renderQuestion(idx) {
+    if (idx < 0 || idx >= levelTestQuestions.length) return;
+    currentQIdx = idx;
+    const item = levelTestQuestions[idx];
+
+    // Reset and start 60s clock for this question
+    startQuestionTimer();
+
+    // Counter & progress line
+    if (qCurrentNum) qCurrentNum.textContent = idx + 1;
+    if (quizTrackFill) {
+      const pct = ((idx + 1) / levelTestQuestions.length) * 100;
+      quizTrackFill.style.width = `${pct}%`;
+    }
+    if (quizPhaseTag) quizPhaseTag.textContent = item.phase;
+    if (hudSetText) hudSetText.textContent = item.setName;
+
+    // Highlight CEFR ladder pill in header bar
+    document.querySelectorAll('.ladder-pill').forEach(pill => pill.classList.remove('active-ladder'));
+    if (item.set === 1) {
+      document.getElementById('ladderPillA')?.classList.add('active-ladder');
+    } else if (item.set === 2) {
+      document.getElementById('ladderPillB1')?.classList.add('active-ladder');
+    } else {
+      document.getElementById('ladderPillB2')?.classList.add('active-ladder');
+    }
+
+    // Question text
+    if (quizQuestionText) quizQuestionText.textContent = item.q;
+
+    // Options grid
+    if (quizOptionsGrid) {
+      quizOptionsGrid.innerHTML = '';
+      const letters = ['A', 'B', 'C', 'D'];
+      item.options.forEach((optText, optIdx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'quiz-option-btn';
+        if (userAnswers[idx] === optIdx) {
+          btn.classList.add('is-selected');
+        }
+
+        btn.innerHTML = `
+          <span class="quiz-option-badge">${letters[optIdx]}</span>
+          <span class="quiz-option-label">${optText}</span>
+        `;
+
+        btn.addEventListener('click', () => {
+          selectOption(idx, optIdx);
+        });
+
+        quizOptionsGrid.appendChild(btn);
+      });
+    }
+
+    // Navigation buttons state
+    if (quizPrevBtn) quizPrevBtn.disabled = idx === 0;
+    if (quizNextBtn) {
+      if (idx === levelTestQuestions.length - 1) {
+        quizNextBtn.innerHTML = `<span>See Level</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>`;
+      } else {
+        quizNextBtn.innerHTML = `<span>Next</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>`;
+      }
+    }
+  }
+
+  function selectOption(qIdx, optIdx) {
+    userAnswers[qIdx] = optIdx;
+
+    // Highlight selected button
+    if (quizOptionsGrid) {
+      const allBtns = quizOptionsGrid.querySelectorAll('.quiz-option-btn');
+      allBtns.forEach((b, i) => {
+        b.classList.toggle('is-selected', i === optIdx);
+      });
+    }
+
+    // Auto-advance after 180ms
+    setTimeout(() => {
+      if (qIdx < levelTestQuestions.length - 1) {
+        renderQuestion(qIdx + 1);
+      } else {
+        calculateAndShowResult();
+      }
+    }, 180);
+  }
+
+  // Developer Note: INTERNAL SCORING ONLY
+  // Never display points, marks, or negative language!
+  function calculateAndShowResult() {
+    stopTimer();
+
+    let internalScore = 0;
+    userAnswers.forEach((ans, idx) => {
+      if (ans !== null && ans === levelTestQuestions[idx].ansIndex) {
+        internalScore += levelTestQuestions[idx].pts;
+      }
+    });
+
+    let assignedTierKey = 'basics';
+    if (internalScore >= 25) {
+      assignedTierKey = 'mastery';
+    } else if (internalScore >= 17) {
+      assignedTierKey = 'vocabulary';
+    } else if (internalScore >= 9) {
+      assignedTierKey = 'fluency';
+    } else {
+      assignedTierKey = 'basics';
+    }
+
+    const tier = levelTiers[assignedTierKey];
+
+    // Populate result elements
+    if (resultTierTitle) resultTierTitle.textContent = tier.badgeText;
+    if (resultMantraTitle) resultMantraTitle.textContent = tier.mantra;
+    if (resultMantraDesc) resultMantraDesc.textContent = tier.desc;
+
+    // Highlight the ladder in result card
+    document.querySelectorAll('.res-ladder-step').forEach(step => step.classList.remove('tier-earned'));
+    const earnedStepEl = document.getElementById(tier.ladderId);
+    if (earnedStepEl) earnedStepEl.classList.add('tier-earned');
+
+    // Switch stage views
+    if (hudStageQuiz) hudStageQuiz.style.display = 'none';
+    if (hudStageResult) hudStageResult.style.display = 'block';
+
+    // Update set badge
+    if (hudSetText) hudSetText.textContent = `Completed • ${tier.badgeText}`;
+  }
+
+  function openLevelTestHUD() {
+    if (!hudCockpitDrawer) return;
+    hudCockpitDrawer.classList.add('hud-open');
+    hudCockpitDrawer.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('hud-active');
+
+    // Reset to Q1
+    currentQIdx = 0;
+    userAnswers = new Array(levelTestQuestions.length).fill(null);
+    if (hudStageQuiz) hudStageQuiz.style.display = 'block';
+    if (hudStageResult) hudStageResult.style.display = 'none';
+
+    renderQuestion(0);
+  }
+
+  function closeLevelTestHUD() {
+    if (!hudCockpitDrawer) return;
+    hudCockpitDrawer.classList.remove('hud-open');
+    hudCockpitDrawer.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('hud-active');
+    stopTimer();
+  }
+
+  // Event Listeners
+  if (levelTestHeroBtn) {
+    levelTestHeroBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openLevelTestHUD();
+    });
+  }
+
+  if (hudDismissBtn) {
+    hudDismissBtn.addEventListener('click', () => {
+      closeLevelTestHUD();
+    });
+  }
+
+  if (quizPrevBtn) {
+    quizPrevBtn.addEventListener('click', () => {
+      if (currentQIdx > 0) renderQuestion(currentQIdx - 1);
+    });
+  }
+
+  if (quizNextBtn) {
+    quizNextBtn.addEventListener('click', () => {
+      if (currentQIdx < levelTestQuestions.length - 1) {
+        renderQuestion(currentQIdx + 1);
+      } else {
+        calculateAndShowResult();
+      }
+    });
+  }
+
+  if (resultRetakeBtn) {
+    resultRetakeBtn.addEventListener('click', () => {
+      openLevelTestHUD();
+    });
+  }
+
+  if (resultCohortBtn) {
+    resultCohortBtn.addEventListener('click', () => {
+      closeLevelTestHUD();
+    });
+  }
+
+  // Close on Escape key
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && hudCockpitDrawer && hudCockpitDrawer.classList.contains('hud-open')) {
+      closeLevelTestHUD();
+    }
+  });
+
 });

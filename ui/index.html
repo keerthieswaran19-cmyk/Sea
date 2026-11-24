@@ -36,7 +36,7 @@
         <a href="#" class="nav-link-item active" id="navLinkHome">Home</a>
         <a href="#coursesSection" class="nav-link-item" id="navLinkCourses">Courses</a>
         <a href="#learnSection" class="nav-link-item" id="navLinkBlogs">Blogs</a>
-        <a href="#impactSection" class="nav-link-item" id="navLinkImpacts">Our Impacts</a>
+        <a href="#impactSection" class="nav-link-item" id="navLinkImpacts">Gallery & Testimonials</a>
         <a href="#aboutSection" class="nav-link-item" id="navLinkAbout">About Us</a>
       </nav>
 
@@ -51,6 +51,184 @@
         </button>
       </div>
     </header>
+
+    <!-- ==========================================================================
+         EXECUTIVE HUD COCKPIT: SEA 1-MINUTE ENGLISH LEVEL TEST
+         Slides down directly beneath the floating studio header (Zero popup / Zero redirect)
+         ========================================================================== -->
+    <section class="hud-cockpit-drawer" id="hudCockpitDrawer" aria-label="SEA 1-Minute English Level Test" aria-hidden="true">
+      <div class="hud-cockpit-shell">
+        
+        <!-- Top HUD Control Bar -->
+        <div class="hud-bar-primary">
+          <div class="hud-brand-pill">
+            <span class="hud-live-beacon"></span>
+            <span class="hud-badge-kicker">SEA 1-MINUTE ENGLISH LEVEL TEST</span>
+          </div>
+
+          <!-- 60s Ticking Stopwatch HUD -->
+          <div class="hud-clock-cluster" id="hudClockCluster">
+            <div class="hud-clock-dial">
+              <svg class="clock-dial-svg" viewBox="0 0 40 40">
+                <circle class="clock-track" cx="20" cy="20" r="16"></circle>
+                <circle class="clock-progress" id="clockProgressCircle" cx="20" cy="20" r="16"></circle>
+              </svg>
+              <div class="clock-ticking-hand" id="clockTickingHand"></div>
+            </div>
+            <div class="hud-clock-text">
+              <span class="clock-label">TIME REMAINING</span>
+              <span class="clock-digits" id="clockDigitsDisplay">01:00</span>
+            </div>
+          </div>
+
+          <!-- Set & Progress Indicator -->
+          <div class="hud-set-badge" id="hudSetBadge">
+            <span class="set-indicator-dot"></span>
+            <span id="hudSetText">Set 1: Fast Basics</span>
+          </div>
+
+          <!-- Close Cockpit Button -->
+          <button class="hud-dismiss-btn" id="hudDismissBtn" aria-label="Close Level Test">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Cockpit Sub-Bar: Headline & "Spot Your Level" Infographics -->
+        <div class="hud-infographics-bar">
+          <div class="hud-intro-copy">
+            <h3 class="hud-intro-title">Spot your level.</h3>
+            <p class="hud-intro-desc">
+              This rapid 15-question check shows where you stand in about <strong>60 seconds</strong>.
+            </p>
+          </div>
+
+          <!-- CEFR Infographic Level Ladder Badges -->
+          <div class="hud-ladder-track" aria-label="CEFR Proficiency Ladders">
+            <div class="ladder-pill" id="ladderPillA" data-level="A1-A2">
+              <span class="ladder-code">A1–A2</span>
+              <span class="ladder-name">Basics</span>
+            </div>
+            <div class="ladder-pill" id="ladderPillB1" data-level="B1">
+              <span class="ladder-code">B1</span>
+              <span class="ladder-name">Fluency</span>
+            </div>
+            <div class="ladder-pill" id="ladderPillB2" data-level="B2">
+              <span class="ladder-code">B2</span>
+              <span class="ladder-name">Vocabulary</span>
+            </div>
+            <div class="ladder-pill" id="ladderPillC" data-level="C1-C2">
+              <span class="ladder-code">C1–C2</span>
+              <span class="ladder-name">Mastery</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question Stage (Live Quiz View) -->
+        <div class="hud-stage-quiz" id="hudStageQuiz">
+          <!-- Question Header Row -->
+          <div class="quiz-status-row">
+            <div class="quiz-q-counter">
+              <span class="q-current" id="qCurrentNum">1</span>
+              <span class="q-sep">/</span>
+              <span class="q-total">15</span>
+            </div>
+            <div class="quiz-track-line">
+              <div class="quiz-track-fill" id="quizTrackFill" style="width: 6.66%;"></div>
+            </div>
+            <span class="quiz-phase-tag" id="quizPhaseTag">Fast Basics (1 pt)</span>
+          </div>
+
+          <!-- Question Content Card -->
+          <div class="quiz-card-prompt" id="quizCardPrompt">
+            <h4 class="quiz-prompt-text" id="quizQuestionText">"Hi! ______ name is Arjun."</h4>
+            
+            <!-- 4 Options Grid -->
+            <div class="quiz-options-grid" id="quizOptionsGrid">
+              <!-- Dynamically populated via script.js -->
+            </div>
+          </div>
+
+          <!-- Quiz Bottom Actions -->
+          <div class="quiz-nav-row">
+            <button class="quiz-nav-btn prev-btn" id="quizPrevBtn" disabled>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              <span>Previous</span>
+            </button>
+            <span class="quiz-hint-auto">Tap any option to auto-advance</span>
+            <button class="quiz-nav-btn next-btn" id="quizNextBtn">
+              <span>Next</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Result Stage (Calculated Internally, Pure Positive Motivation) -->
+        <div class="hud-stage-result" id="hudStageResult" style="display: none;">
+          <div class="result-celebration-kicker">
+            <span class="result-sparkle">✦</span>
+            <span>YOUR SEA PROFICIENCY DISCOVERY</span>
+          </div>
+
+          <div class="result-focus-card" id="resultFocusCard">
+            <!-- Dynamic Result Tier Badge -->
+            <div class="result-tier-badge" id="resultTierBadge">
+              <span class="result-tier-symbol">🎙️</span>
+              <span class="result-tier-title" id="resultTierTitle">Fluency Focus (B1)</span>
+            </div>
+
+            <!-- Positive Roadmap Focus Statement -->
+            <h3 class="result-mantra-title" id="resultMantraTitle">Build smooth flow, tense ease, natural sparks with SEA.</h3>
+
+            <p class="result-mantra-desc" id="resultMantraDesc">
+              Our diagnostic confirms your readiness for speech acceleration. Through guaranteed microphone airtime in our signature 1:6 studio cohorts, you'll command effortless clarity and executive boardroom poise.
+            </p>
+
+            <!-- Infographic Meter with Matched Highlight -->
+            <div class="result-infographic-ladder">
+              <div class="res-ladder-step" id="resStepA">
+                <span class="res-step-code">A1–A2</span>
+                <span class="res-step-name">Basics</span>
+                <small>Core Words & Confidence</small>
+              </div>
+              <div class="res-arrow-sep">→</div>
+              <div class="res-ladder-step" id="resStepB1">
+                <span class="res-step-code">B1</span>
+                <span class="res-step-name">Fluency</span>
+                <small>Smooth Flow & Natural Sparks</small>
+              </div>
+              <div class="res-arrow-sep">→</div>
+              <div class="res-ladder-step" id="resStepB2">
+                <span class="res-step-code">B2</span>
+                <span class="res-step-name">Vocabulary</span>
+                <small>Bold Words & Standout Style</small>
+              </div>
+              <div class="res-arrow-sep">→</div>
+              <div class="res-ladder-step" id="resStepC">
+                <span class="res-step-code">C1–C2</span>
+                <span class="res-step-name">Mastery</span>
+                <small>Crisp Nuance & Effortless Command</small>
+              </div>
+            </div>
+
+            <!-- Result Actions -->
+            <div class="result-actions-cluster">
+              <a href="#coursesSection" class="btn-result-cohort" id="resultCohortBtn">
+                <span>Explore Matching 1:6 Cohort</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </a>
+              <button class="btn-result-retake" id="resultRetakeBtn" type="button">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                <span>Retake Check (60s)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
 
     <!-- Main Viewport Layout -->
     <main class="hero-layout">
@@ -113,25 +291,23 @@
       <div class="editorial-stage-right manifesto-stage" id="editorialStage">
         <div class="manifesto-card">
           
-          <!-- Official S.E.A Brand Emblem (Image 2) & Cursive Tagline -->
-          <div class="hero-brand-emblem">
-            <img src="sea-logo.png?v=2" alt="S.E.A - Sathya's English Academy" class="hero-main-logo">
-            <span class="hero-cursive-tagline">your ocean of english</span>
+          <!-- Hero Statement — S.E.A Luxury Manifesto -->
+          <div class="hero-compact-statement">
+            <!-- Decorative accent line with shimmering beam -->
+            <div class="stmt-accent-rule"></div>
+            <h1 class="compact-line-primary">
+              Unlock <span class="ocean-liquid-word" data-text="Fluent, Confident">Fluent, Confident</span> English Communication <span class="ampersand-glow">&amp;</span> Refined <span class="ocean-liquid-word" data-text="Global Accents">Global Accents</span> at <span class="brand-shimmer-highlight">Sathya’s English Academy (S.E.A)</span>.
+            </h1>
+            <p class="compact-line-tertiary">
+              We help you express your ideas with <span class="command-flair-word">effortless clarity</span>, <span class="command-flair-word">poise</span>, and <span class="command-flair-word">impact</span> in any conversation.
+            </p>
           </div>
 
-          <!-- Centered High-Fashion Manifesto Headline -->
-          <h1 class="manifesto-title">
-            <span class="manifesto-title-lead">We don’t just teach English.</span>
-            <span class="manifesto-title-emphasis">
-              We shape how the world <em class="ocean-shimmer-word">hears you.</em>
-            </span>
-          </h1>
-
-          <!-- Minimalist Luxury Action Buttons -->
+          <!-- Minimalist Luxury Action Buttons (Ocean Blue) -->
           <div class="manifesto-action-cluster">
-            <button class="btn-manifesto-action" id="heroModalTrigger">
+            <button class="btn-manifesto-action btn-ocean-solid btn-level-test-trigger" id="levelTestHeroBtn">
               <span class="btn-shimmer-foil"></span>
-              <span class="btn-action-label">Book Free Assessment</span>
+              <span class="btn-action-label">Take a free level test</span>
               <div class="btn-action-arrow">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -140,7 +316,7 @@
               </div>
             </button>
 
-            <a href="#coursesSection" class="btn-manifesto-whisper">
+            <a href="#coursesSection" class="btn-manifesto-whisper btn-ocean-ghost">
               <span>Explore Courses</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="6 9 12 15 18 9"></polyline>
@@ -177,61 +353,48 @@
           <span>INTIMATE 1:6 STUDIO COHORTS • PALLAVARAM</span>
         </div>
         <h2 class="courses-title" id="coursesTitle">
-          Our featured <span class="ocean-text-accent">courses</span>
+          Courses / Programs <span class="ocean-text-accent">Offered</span>
           <span class="title-halo-line" id="headerHaloLine"></span>
         </h2>
         <p class="courses-desc" id="coursesDesc">
-          Our featured courses inspire <span class="desc-highlight">growth</span> with <span class="desc-highlight">expert instruction</span> and <span class="desc-highlight">practical skills</span>.
+          Curated studio cohorts designed to build <span class="desc-highlight">effortless fluency</span>, <span class="desc-highlight">fearless stage presence</span>, and <span class="desc-highlight">executive authority</span>.
         </p>
       </div>
 
-      <!-- 3 Horizontal Featured Course Cards (Exact Ref 3 Layout) -->
-      <div class="courses-grid">
+      <!-- Row 1: 3 Featured Studio Cohort Cards -->
+      <div class="courses-grid courses-grid-three" id="coursesGridThree">
         
-        <!-- CARD 1: Junior (Ages 6 - 10) -->
-        <article class="course-card" data-course="junior" tabindex="0">
-          <!-- Card Cover Image Container -->
+        <!-- CARD 1: Little Ripples (Ages 8–10 / 8+) -->
+        <article class="course-card" data-course="ripples" tabindex="0">
           <div class="card-cover-wrapper">
-            <span class="card-floating-badge">Junior • Ages 6–10</span>
+            <span class="card-floating-badge">Foundations • Ages 8–10</span>
             <img 
               src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80" 
-              alt="Junior Articulators Studio" 
+              alt="Little Ripples" 
               class="card-cover-photo"
               loading="lazy"
             >
           </div>
-
-          <!-- Card Content Body -->
           <div class="card-content-body">
-            <!-- Header Row: Title on Left, Cohort Badge on Right -->
             <div class="card-headline-row">
-              <h3 class="course-name">Junior Articulators Studio</h3>
+              <h3 class="course-name">Little Ripples</h3>
               <span class="course-price-tag">1:6 Ratio</span>
             </div>
-
-            <!-- Mentor Credential Subtitle -->
-            <p class="course-mentor-line">Julian Munoz • Senior Phonetics Lead</p>
-
-            <!-- Spec Container Box (Grey 2-Column Spec) -->
+            <p class="course-mentor-line">Warm, playful, and instantly attractive to parents.</p>
             <div class="course-specs-box">
               <div class="spec-cell">
                 <div class="spec-cell-icon">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                     <polyline points="14 2 14 8 20 8"></polyline>
-                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                    <polyline points="10 9 9 9 8 9"></polyline>
                   </svg>
                 </div>
                 <div class="spec-cell-text">
-                  <span class="spec-label">Lessons</span>
-                  <span class="spec-val">24 Sessions</span>
+                  <span class="spec-label">Ages</span>
+                  <span class="spec-val">8 – 10 Yrs</span>
                 </div>
               </div>
-
               <div class="spec-cell-divider"></div>
-
               <div class="spec-cell">
                 <div class="spec-cell-icon">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -241,62 +404,97 @@
                 </div>
                 <div class="spec-cell-text">
                   <span class="spec-label">Duration</span>
-                  <span class="spec-val">12 Weeks • 48 hrs</span>
+                  <span class="spec-val">12 Weeks • 24 hrs</span>
                 </div>
               </div>
             </div>
-
-            <!-- Action Pill Button -->
-            <button class="btn-view-course btn-outline" data-course="junior" type="button">
-              <span>View Course</span>
+            <button class="btn-view-course btn-outline" data-course="ripples" type="button">
+              <span>View Program</span>
             </button>
           </div>
         </article>
 
-        <!-- CARD 2: Scholar (Ages 11 - 17) - Featured Center Card with Dark Button -->
-        <article class="course-card card-featured" data-course="scholar" tabindex="0">
-          <!-- Card Cover Image Container -->
+        <!-- CARD 2: Character Quest (Ages 10–12) -->
+        <article class="course-card" data-course="character_quest" tabindex="0">
           <div class="card-cover-wrapper">
-            <span class="card-floating-badge badge-featured">Scholar • Ages 11–17</span>
+            <span class="card-floating-badge">Adventure • Ages 10–12</span>
+            <img 
+              src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80" 
+              alt="Character Quest" 
+              class="card-cover-photo"
+              loading="lazy"
+            >
+          </div>
+          <div class="card-content-body">
+            <div class="card-headline-row">
+              <h3 class="course-name">Character Quest</h3>
+              <span class="course-price-tag">1:6 Ratio</span>
+            </div>
+            <p class="course-mentor-line">Already sounds like an engaging, gamified adventure.</p>
+            <div class="course-specs-box">
+              <div class="spec-cell">
+                <div class="spec-cell-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                  </svg>
+                </div>
+                <div class="spec-cell-text">
+                  <span class="spec-label">Ages</span>
+                  <span class="spec-val">10 – 12 Yrs</span>
+                </div>
+              </div>
+              <div class="spec-cell-divider"></div>
+              <div class="spec-cell">
+                <div class="spec-cell-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                </div>
+                <div class="spec-cell-text">
+                  <span class="spec-label">Duration</span>
+                  <span class="spec-val">12 Weeks • 24 hrs</span>
+                </div>
+              </div>
+            </div>
+            <button class="btn-view-course btn-outline" data-course="character_quest" type="button">
+              <span>View Program</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- CARD 3: Stage & Voice (School Students) - Featured Focus -->
+        <article class="course-card card-featured" data-course="stage_voice" tabindex="0">
+          <div class="card-cover-wrapper">
+            <span class="card-floating-badge badge-featured">Signature • School Students</span>
             <img 
               src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" 
-              alt="Scholar Fluency & Debate Lab" 
+              alt="Stage & Voice" 
               class="card-cover-photo"
               loading="lazy"
             >
           </div>
-
-          <!-- Card Content Body -->
           <div class="card-content-body">
-            <!-- Header Row: Title on Left, Cohort Badge on Right -->
             <div class="card-headline-row">
-              <h3 class="course-name">Scholar Fluency & Debate Lab</h3>
+              <h3 class="course-name">Stage &amp; Voice</h3>
               <span class="course-price-tag tag-featured">1:6 Ratio</span>
             </div>
-
-            <!-- Mentor Credential Subtitle -->
-            <p class="course-mentor-line">Sarah Collins • Debate & Rhetoric Coach</p>
-
-            <!-- Spec Container Box (Grey 2-Column Spec) -->
+            <p class="course-mentor-line">Modern, bold, and tells teens and parents the exact skill they’ll master.</p>
             <div class="course-specs-box">
               <div class="spec-cell">
                 <div class="spec-cell-icon">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                     <polyline points="14 2 14 8 20 8"></polyline>
-                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                    <polyline points="10 9 9 9 8 9"></polyline>
                   </svg>
                 </div>
                 <div class="spec-cell-text">
-                  <span class="spec-label">Lessons</span>
-                  <span class="spec-val">24 Sessions</span>
+                  <span class="spec-label">Audience</span>
+                  <span class="spec-val">Teens &amp; School</span>
                 </div>
               </div>
-
               <div class="spec-cell-divider"></div>
-
               <div class="spec-cell">
                 <div class="spec-cell-icon">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -306,132 +504,51 @@
                 </div>
                 <div class="spec-cell-text">
                   <span class="spec-label">Duration</span>
-                  <span class="spec-val">12 Weeks • 48 hrs</span>
+                  <span class="spec-val">12 Weeks • 24 hrs</span>
                 </div>
               </div>
             </div>
-
-            <!-- Action Pill Button (Dark Filled for Center Card per Reference 3) -->
-            <button class="btn-view-course btn-solid-dark" data-course="scholar" type="button">
-              <span>View Course</span>
-            </button>
-          </div>
-        </article>
-
-        <!-- CARD 3: Executive (Ages 18+) -->
-        <article class="course-card" data-course="executive" tabindex="0">
-          <!-- Card Cover Image Container -->
-          <div class="card-cover-wrapper">
-            <span class="card-floating-badge">Adults • Ages 18+</span>
-            <img 
-              src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80" 
-              alt="Executive Diction & Rhetoric" 
-              class="card-cover-photo"
-              loading="lazy"
-            >
-          </div>
-
-          <!-- Card Content Body -->
-          <div class="card-content-body">
-            <!-- Header Row: Title on Left, Cohort Badge on Right -->
-            <div class="card-headline-row">
-              <h3 class="course-name">Executive Diction & Rhetoric</h3>
-              <span class="course-price-tag">1:6 Ratio</span>
-            </div>
-
-            <!-- Mentor Credential Subtitle -->
-            <p class="course-mentor-line">Elwood Walsh • Executive Diction Director</p>
-
-            <!-- Spec Container Box (Grey 2-Column Spec) -->
-            <div class="course-specs-box">
-              <div class="spec-cell">
-                <div class="spec-cell-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                    <polyline points="14 2 14 8 20 8"></polyline>
-                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                    <polyline points="10 9 9 9 8 9"></polyline>
-                  </svg>
-                </div>
-                <div class="spec-cell-text">
-                  <span class="spec-label">Lessons</span>
-                  <span class="spec-val">16 Sessions</span>
-                </div>
-              </div>
-
-              <div class="spec-cell-divider"></div>
-
-              <div class="spec-cell">
-                <div class="spec-cell-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <polyline points="12 6 12 12 16 14"></polyline>
-                  </svg>
-                </div>
-                <div class="spec-cell-text">
-                  <span class="spec-label">Duration</span>
-                  <span class="spec-val">8 Weeks • 32 hrs</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Action Pill Button -->
-            <button class="btn-view-course btn-outline" data-course="executive" type="button">
-              <span>View Course</span>
+            <button class="btn-view-course btn-solid-dark" data-course="stage_voice" type="button">
+              <span>View Program</span>
             </button>
           </div>
         </article>
 
       </div>
 
-      <!-- SECOND ROW: 2 Additional Boutique Programs (Same Exact Style) -->
-      <div class="courses-grid-duo">
-        
-        <!-- CARD 4: IELTS & Academic Fluency Studio -->
-        <article class="course-card" data-course="ielts" tabindex="0">
-          <!-- Card Cover Image Container -->
+      <!-- Row 2: 1 Bottom Centered Executive Program Card -->
+      <div class="courses-bottom-row" id="coursesBottomRow">
+        <!-- CARD 4: Global Currents (Adults) -->
+        <article class="course-card course-card-solo" data-course="global_currents" tabindex="0">
           <div class="card-cover-wrapper">
-            <span class="card-floating-badge">Academic • Ages 16+</span>
+            <span class="card-floating-badge">Executive • Adults</span>
             <img 
-              src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80" 
-              alt="IELTS & Academic Fluency Studio" 
+              src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80" 
+              alt="Global Currents" 
               class="card-cover-photo"
               loading="lazy"
             >
           </div>
-
-          <!-- Card Content Body -->
           <div class="card-content-body">
-            <!-- Header Row: Title on Left, Cohort Badge on Right -->
             <div class="card-headline-row">
-              <h3 class="course-name">IELTS & Academic Fluency Studio</h3>
+              <h3 class="course-name">Global Currents</h3>
               <span class="course-price-tag">1:6 Ratio</span>
             </div>
-
-            <!-- Mentor Credential Subtitle -->
-            <p class="course-mentor-line">Dr. Aris Thorne • IELTS Master Examiner</p>
-
-            <!-- Spec Container Box (Grey 2-Column Spec) -->
+            <p class="course-mentor-line">Sleek, aspirational, and subtly highlights your accent and international communication focus.</p>
             <div class="course-specs-box">
               <div class="spec-cell">
                 <div class="spec-cell-icon">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                     <polyline points="14 2 14 8 20 8"></polyline>
-                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                    <polyline points="10 9 9 9 8 9"></polyline>
                   </svg>
                 </div>
                 <div class="spec-cell-text">
-                  <span class="spec-label">Lessons</span>
-                  <span class="spec-val">20 Sessions</span>
+                  <span class="spec-label">Audience</span>
+                  <span class="spec-val">Adults &amp; Professionals</span>
                 </div>
               </div>
-
               <div class="spec-cell-divider"></div>
-
               <div class="spec-cell">
                 <div class="spec-cell-icon">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -441,251 +558,574 @@
                 </div>
                 <div class="spec-cell-text">
                   <span class="spec-label">Duration</span>
-                  <span class="spec-val">10 Weeks • 40 hrs</span>
+                  <span class="spec-val">10 Weeks • 20 hrs</span>
                 </div>
               </div>
             </div>
-
-            <!-- Action Pill Button -->
-            <button class="btn-view-course btn-outline" data-course="ielts" type="button">
-              <span>View Course</span>
+            <button class="btn-view-course btn-outline" data-course="global_currents" type="button">
+              <span>View Program</span>
             </button>
           </div>
         </article>
-
-        <!-- CARD 5: Corporate Oratory & Stage Poise Lab -->
-        <article class="course-card card-featured" data-course="oratory" tabindex="0">
-          <!-- Card Cover Image Container -->
-          <div class="card-cover-wrapper">
-            <span class="card-floating-badge badge-featured">Weekend • Professionals</span>
-            <img 
-              src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=800&q=80" 
-              alt="Corporate Oratory & Stage Poise Lab" 
-              class="card-cover-photo"
-              loading="lazy"
-            >
-          </div>
-
-          <!-- Card Content Body -->
-          <div class="card-content-body">
-            <!-- Header Row: Title on Left, Cohort Badge on Right -->
-            <div class="card-headline-row">
-              <h3 class="course-name">Corporate Oratory & Stage Poise Lab</h3>
-              <span class="course-price-tag tag-featured">1:6 Ratio</span>
-            </div>
-
-            <!-- Mentor Credential Subtitle -->
-            <p class="course-mentor-line">Kavitha Sundaram • TEDx Speaker & Voice Coach</p>
-
-            <!-- Spec Container Box (Grey 2-Column Spec) -->
-            <div class="course-specs-box">
-              <div class="spec-cell">
-                <div class="spec-cell-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                    <polyline points="14 2 14 8 20 8"></polyline>
-                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                    <polyline points="10 9 9 9 8 9"></polyline>
-                  </svg>
-                </div>
-                <div class="spec-cell-text">
-                  <span class="spec-label">Lessons</span>
-                  <span class="spec-val">16 Sessions</span>
-                </div>
-              </div>
-
-              <div class="spec-cell-divider"></div>
-
-              <div class="spec-cell">
-                <div class="spec-cell-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <polyline points="12 6 12 12 16 14"></polyline>
-                  </svg>
-                </div>
-                <div class="spec-cell-text">
-                  <span class="spec-label">Duration</span>
-                  <span class="spec-val">8 Weeks • 32 hrs</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Action Pill Button (Dark Solid for Center Featured) -->
-            <button class="btn-view-course btn-solid-dark" data-course="oratory" type="button">
-              <span>View Course</span>
-            </button>
-          </div>
-        </article>
-
       </div>
 
     </div>
   </section>
 
   <!-- ==========================================================================
-       SECTION: OUR IMPACTS — REAL RESULTS & PROVEN CONFIDENCE
+       SECTION: GALLERY & TESTIMONIALS (STUDIO RUNWAY + CINEMA STAGE)
        ========================================================================== -->
   <section class="section-impacts" id="impactSection">
+    <!-- Ambient Ocean Light Orbs & Living Coral Caustics -->
+    <div class="coral-caustics-layer" aria-hidden="true"></div>
+    <div class="impacts-ocean-orb orb-impacts-left"></div>
+    <div class="impacts-ocean-orb orb-impacts-right"></div>
+    <div class="impacts-ocean-orb orb-coral-center"></div>
+
     <div class="impacts-container">
+      
+      <!-- Master Section Header: GALLERY & TESTIMONIALS -->
       <div class="impacts-header-block">
+        <div class="master-ocean-pill">
+          <span class="ocean-dot-pulse"></span>
+          <span class="master-kicker">STUDIO MOMENTS &amp; REAL VOICES</span>
+        </div>
         <h2 class="gallery-big-heading">
-          GALLERIES
+          Gallery &amp; <span class="ocean-text-accent">Testimonials</span>
           <span class="title-halo-line"></span>
         </h2>
+        <p class="master-subheading">
+          Witness spontaneous fluency in action. Explore our boutique 1:6 studio immersion in Pallavaram, watch live student speech reels, and discover heartfelt parent transformations.
+        </p>
       </div>
 
+      <!-- ====================================================================
+           SUBHEAD 1: STUDIO GALLERY (CONTINUOUS OCEANIC RUNWAY)
+           ==================================================================== -->
+      <div class="sub-section-container sub-gallery-section" id="gallerySubSection">
+        <div class="subhead-header-row">
+          <div class="subhead-title-wrap">
+            <span class="subhead-index-pill">01 • VISUAL IMMERSION</span>
+            <h3 class="subhead-title">Atelier Moments &amp; Studio Gallery</h3>
+            <p class="subhead-desc">Candid glimpses from our 1:6 discussion tables, acoustic phonetics lab, and speech podium.</p>
+          </div>
+          <div class="subhead-action-wrap">
+            <div class="gallery-gesture-hint">
+              <span class="hint-pulse-dot"></span>
+              <span>Drag or double-click to navigate</span>
+            </div>
+          </div>
+        </div>
 
-      <!-- 12-Card Continuous Slow Moving Interactive Gallery Track -->
-      <div class="gallery-reel-viewport" id="galleryViewport" tabindex="0">
-        <div class="gallery-reel-track" id="galleryTrack">
+        <!-- 12-Card Continuous Slow Moving Interactive Gallery Track -->
+        <div class="gallery-reel-viewport" id="galleryViewport" tabindex="0">
+          <div class="gallery-reel-track" id="galleryTrack">
+            
+            <!-- CARD 1 -->
+            <article class="gallery-reel-card" data-idx="1" data-img-src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80" data-img-title="1:6 Intimate Studio Immersion" data-img-desc="Personalized spoken airtime and direct phonetics coaching in Pallavaram.">
+              <div class="gallery-reel-img-wrap">
+                <span class="gallery-reel-badge">ATELIER STUDIO</span>
+                <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=700&q=80" alt="1:6 Intimate Studio Immersion" class="gallery-reel-img" loading="lazy">
+                <div class="gallery-card-shimmer"></div>
+              </div>
+              <div class="gallery-reel-content">
+                <h4>1:6 Studio Immersion</h4>
+                <p>Personalized spoken airtime and direct phonetics coaching in Pallavaram.</p>
+              </div>
+            </article>
+
+            <!-- CARD 2 -->
+            <article class="gallery-reel-card" data-idx="2" data-img-src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=80" data-img-title="Acoustic Precision Drills" data-img-desc="Phonetic tongue placement, natural vowel sounds, and eliminating hesitation.">
+              <div class="gallery-reel-img-wrap">
+                <span class="gallery-reel-badge">PHONETICS LAB</span>
+                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=700&q=80" alt="Phonetic Precision Drills" class="gallery-reel-img" loading="lazy">
+                <div class="gallery-card-shimmer"></div>
+              </div>
+              <div class="gallery-reel-content">
+                <h4>Acoustic Precision Drills</h4>
+                <p>Phonetic tongue placement, natural vowel sounds, and eliminating hesitation.</p>
+              </div>
+            </article>
+
+            <!-- CARD 3 -->
+            <article class="gallery-reel-card" data-idx="3" data-img-src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=1200&q=80" data-img-title="Public Speaking Poise" data-img-desc="Microphone technique, stage composure, and overcoming performance anxiety.">
+              <div class="gallery-reel-img-wrap">
+                <span class="gallery-reel-badge">STAGE POISE</span>
+                <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=700&q=80" alt="Public Speaking Poise" class="gallery-reel-img" loading="lazy">
+                <div class="gallery-card-shimmer"></div>
+              </div>
+              <div class="gallery-reel-content">
+                <h4>Public Speaking Poise</h4>
+                <p>Microphone technique, stage composure, and overcoming performance anxiety.</p>
+              </div>
+            </article>
+
+            <!-- CARD 4 -->
+            <article class="gallery-reel-card" data-idx="4" data-img-src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1200&q=80" data-img-title="Conversational Circles" data-img-desc="Fast-paced spontaneous debates without internal regional translation lag.">
+              <div class="gallery-reel-img-wrap">
+                <span class="gallery-reel-badge">CONVERSATIONAL</span>
+                <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=700&q=80" alt="Conversational Circles" class="gallery-reel-img" loading="lazy">
+                <div class="gallery-card-shimmer"></div>
+              </div>
+              <div class="gallery-reel-content">
+                <h4>Conversational Circles</h4>
+                <p>Fast-paced spontaneous debates without internal regional translation lag.</p>
+              </div>
+            </article>
+
+            <!-- CARD 5 -->
+            <article class="gallery-reel-card" data-idx="5" data-img-src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80" data-img-title="Executive Rhetoric" data-img-desc="Mastering boardroom influence, articulate summaries, and persuasive speech.">
+              <div class="gallery-reel-img-wrap">
+                <span class="gallery-reel-badge">EXECUTIVE</span>
+                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=700&q=80" alt="Boardroom Rhetoric" class="gallery-reel-img" loading="lazy">
+                <div class="gallery-card-shimmer"></div>
+              </div>
+              <div class="gallery-reel-content">
+                <h4>Executive Rhetoric</h4>
+                <p>Mastering boardroom influence, articulate summaries, and persuasive speech.</p>
+              </div>
+            </article>
+
+            <!-- CARD 6 -->
+            <article class="gallery-reel-card" data-idx="6" data-img-src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80" data-img-title="Dialogue Masterclasses" data-img-desc="Interactive peer simulations with instantaneous vocal diagnostic feedback.">
+              <div class="gallery-reel-img-wrap">
+                <span class="gallery-reel-badge">MASTERCLASS</span>
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=700&q=80" alt="Dialogue Masterclasses" class="gallery-reel-img" loading="lazy">
+                <div class="gallery-card-shimmer"></div>
+              </div>
+              <div class="gallery-reel-content">
+                <h4>Dialogue Masterclasses</h4>
+                <p>Interactive peer simulations with instantaneous vocal diagnostic feedback.</p>
+              </div>
+            </article>
+
+            <!-- CARD 7 -->
+            <article class="gallery-reel-card" data-idx="7" data-img-src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=1200&q=80" data-img-title="Acoustic Speech Library" data-img-desc="High-fidelity audio recordings to refine cadence and intonation rhythms.">
+              <div class="gallery-reel-img-wrap">
+                <span class="gallery-reel-badge">AUDIO ARCHIVE</span>
+                <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=700&q=80" alt="Acoustic Speech Library" class="gallery-reel-img" loading="lazy">
+                <div class="gallery-card-shimmer"></div>
+              </div>
+              <div class="gallery-reel-content">
+                <h4>Acoustic Speech Library</h4>
+                <p>High-fidelity audio recordings to refine cadence and intonation rhythms.</p>
+              </div>
+            </article>
+
+            <!-- CARD 8 -->
+            <article class="gallery-reel-card" data-idx="8" data-img-src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80" data-img-title="Confidence In Numbers" data-img-desc="Encouraging boutique cohorts where every student speaks in every hour.">
+              <div class="gallery-reel-img-wrap">
+                <span class="gallery-reel-badge">BOUTIQUE COHORT</span>
+                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=700&q=80" alt="Confidence In Numbers" class="gallery-reel-img" loading="lazy">
+                <div class="gallery-card-shimmer"></div>
+              </div>
+              <div class="gallery-reel-content">
+                <h4>Confidence In Numbers</h4>
+                <p>Encouraging boutique cohorts where every student speaks in every hour.</p>
+              </div>
+            </article>
+
+            <!-- CARD 9 -->
+            <article class="gallery-reel-card" data-idx="9" data-img-src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=1200&q=80" data-img-title="Spontaneous Expression" data-img-desc="Framing impromptu narratives and captivating storytelling with ease.">
+              <div class="gallery-reel-img-wrap">
+                <span class="gallery-reel-badge">STORYTELLING</span>
+                <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=700&q=80" alt="Spontaneous Expression" class="gallery-reel-img" loading="lazy">
+                <div class="gallery-card-shimmer"></div>
+              </div>
+              <div class="gallery-reel-content">
+                <h4>Spontaneous Expression</h4>
+                <p>Framing impromptu narratives and captivating storytelling with ease.</p>
+              </div>
+            </article>
+
+            <!-- CARD 10 -->
+            <article class="gallery-reel-card" data-idx="10" data-img-src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" data-img-title="Auditory Voice Mapping" data-img-desc="1-on-1 phonetic analysis identifying native tongue influence and vowel shifts.">
+              <div class="gallery-reel-img-wrap">
+                <span class="gallery-reel-badge">VOICE MAPPING</span>
+                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=80" alt="Auditory Voice Mapping" class="gallery-reel-img" loading="lazy">
+                <div class="gallery-card-shimmer"></div>
+              </div>
+              <div class="gallery-reel-content">
+                <h4>Auditory Voice Mapping</h4>
+                <p>1-on-1 phonetic analysis identifying native tongue influence and vowel shifts.</p>
+              </div>
+            </article>
+
+            <!-- CARD 11 -->
+            <article class="gallery-reel-card" data-idx="11" data-img-src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80" data-img-title="Global Benchmarking" data-img-desc="CEFR aligned fluency markers preparing candidates for global opportunities.">
+              <div class="gallery-reel-img-wrap">
+                <span class="gallery-reel-badge">CEFR BENCHMARK</span>
+                <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=700&q=80" alt="Global Benchmarking" class="gallery-reel-img" loading="lazy">
+                <div class="gallery-card-shimmer"></div>
+              </div>
+              <div class="gallery-reel-content">
+                <h4>Global Benchmarks</h4>
+                <p>CEFR aligned fluency markers preparing candidates for global opportunities.</p>
+              </div>
+            </article>
+
+            <!-- CARD 12 -->
+            <article class="gallery-reel-card" data-idx="12" data-img-src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80" data-img-title="Articulation Honors" data-img-desc="Celebrating fluent communicators who lead debates and speak without hesitation.">
+              <div class="gallery-reel-img-wrap">
+                <span class="gallery-reel-badge">GRADUATION</span>
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=700&q=80" alt="Articulation Excellence" class="gallery-reel-img" loading="lazy">
+                <div class="gallery-card-shimmer"></div>
+              </div>
+              <div class="gallery-reel-content">
+                <h4>Articulation Honors</h4>
+                <p>Celebrating fluent communicators who lead debates and speak without hesitation.</p>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- Controls Bar: Compact Nav Arrow Buttons -->
+        <div class="gallery-controls-bar">
+          <div class="gallery-nav-arrows">
+            <button class="gallery-arrow-btn" id="galleryPrevBtn" type="button" aria-label="Previous gallery cards">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button class="gallery-arrow-btn" id="galleryNextBtn" type="button" aria-label="Next gallery cards">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Living Coral Atoll Fluid Wave Connector (Tight, Seamless & Elegant) -->
+      <div class="coral-atoll-connector">
+        <span class="coral-glow-dot"></span>
+        <span class="coral-atoll-kicker">LIVING CORAL REEF • REAL STUDENT VOICES</span>
+        <span class="coral-glow-dot"></span>
+      </div>
+
+      <!-- ====================================================================
+           SUBHEAD 2: STUDENT VOICES & TESTIMONIALS (COMPACT CINEMA & STUDIO LETTER)
+           ==================================================================== -->
+      <div class="sub-section-container sub-testimonials-section" id="testimonialsSubSection">
+        <div class="subhead-header-row">
+          <div class="subhead-title-wrap">
+            <span class="subhead-index-pill pill-coral">02 • REAL VOICES &amp; REVIEWS</span>
+            <h3 class="subhead-title">Student Speeches &amp; <span class="coral-title-accent">Parent Testimonials</span></h3>
+            <p class="subhead-desc">Watch real speech reels from our 1:6 studio cohorts and explore heartfelt parent feedback.</p>
+          </div>
+          <div class="subhead-action-wrap">
+            <div class="rating-highlight-pill coral-rating-pill">
+              <span class="pill-stars">★★★★★</span>
+              <strong>4.9 / 5.0 Rating</strong>
+              <small>• 500+ Confident Speakers</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Split Cinema Stage: Left Compact Video Player, Right Coral Studio Letter -->
+        <div class="testimonials-cinema-stage">
           
-          <!-- CARD 1 -->
-          <article class="gallery-reel-card" data-idx="1">
-            <div class="gallery-reel-img-wrap">
-              <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=700&q=80" alt="1:6 Intimate Studio Immersion" class="gallery-reel-img" loading="lazy">
-            </div>
-            <div class="gallery-reel-content">
-              <h4>1:6 Studio Immersion</h4>
-              <p>Personalized spoken airtime and direct phonetics coaching in Pallavaram.</p>
-            </div>
-          </article>
+          <!-- LEFT: COMPACT VIDEO CINEMA STAGE -->
+          <div class="cinema-stage-col">
+            <div class="cinema-stage-wrapper">
+              <!-- Ambient Backlight Reactive Glow -->
+              <div class="cinema-ambient-glow" id="cinemaAmbientGlow"></div>
 
-          <!-- CARD 2 -->
-          <article class="gallery-reel-card" data-idx="2">
-            <div class="gallery-reel-img-wrap">
-              <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=700&q=80" alt="Phonetic Precision Drills" class="gallery-reel-img" loading="lazy">
-            </div>
-            <div class="gallery-reel-content">
-              <h4>Acoustic Precision Drills</h4>
-              <p>Phonetic tongue placement, natural vowel sounds, and eliminating hesitation.</p>
-            </div>
-          </article>
+              <!-- Main Video Frame (Compact & Interactive) -->
+              <div class="cinema-player-box" id="cinemaPlayerBox" tabindex="0" role="region" aria-label="Video Player Stage">
+                <video id="cinemaActiveVideo" class="cinema-video-screen" playsinline preload="metadata" poster="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=900&q=80">
+                  <source id="cinemaVideoSource" src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+                  Your browser does not support HTML5 video.
+                </video>
 
-          <!-- CARD 3 -->
-          <article class="gallery-reel-card" data-idx="3">
-            <div class="gallery-reel-img-wrap">
-              <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=700&q=80" alt="Public Speaking Poise" class="gallery-reel-img" loading="lazy">
-            </div>
-            <div class="gallery-reel-content">
-              <h4>Public Speaking Poise</h4>
-              <p>Microphone technique, stage composure, and overcoming performance anxiety.</p>
-            </div>
-          </article>
+                <!-- Floating Center Coral Play/Pause Button -->
+                <button class="cinema-center-play-trigger" id="cinemaPlayTrigger" type="button" aria-label="Play or Pause video reel">
+                  <span class="coral-play-ripple"></span>
+                  <svg class="play-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="6 3 20 12 6 21 6 3"></polygon>
+                  </svg>
+                  <svg class="pause-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                    <rect x="6" y="4" width="4" height="16"></rect>
+                    <rect x="14" y="4" width="4" height="16"></rect>
+                  </svg>
+                </button>
 
-          <!-- CARD 4 -->
-          <article class="gallery-reel-card" data-idx="4">
-            <div class="gallery-reel-img-wrap">
-              <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=700&q=80" alt="Conversational Circles" class="gallery-reel-img" loading="lazy">
-            </div>
-            <div class="gallery-reel-content">
-              <h4>Conversational Circles</h4>
-              <p>Fast-paced spontaneous debates without internal regional translation lag.</p>
-            </div>
-          </article>
+                <!-- Floating Live Soundwave EQ Bars -->
+                <div class="cinema-soundwave-indicator" aria-hidden="true">
+                  <span class="c-sw-bar"></span>
+                  <span class="c-sw-bar"></span>
+                  <span class="c-sw-bar"></span>
+                  <span class="c-sw-bar"></span>
+                  <span class="c-sw-bar"></span>
+                </div>
 
-          <!-- CARD 5 -->
-          <article class="gallery-reel-card" data-idx="5">
-            <div class="gallery-reel-img-wrap">
-              <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=700&q=80" alt="Boardroom Rhetoric" class="gallery-reel-img" loading="lazy">
-            </div>
-            <div class="gallery-reel-content">
-              <h4>Executive Rhetoric</h4>
-              <p>Mastering boardroom influence, articulate summaries, and persuasive speech.</p>
-            </div>
-          </article>
+                <!-- Floating Video Badge Overlay -->
+                <div class="cinema-floating-meta">
+                  <div class="cinema-badge-pill">
+                    <span class="video-live-dot"></span>
+                    <span id="cinemaVideoType">0:52 • SPEECH REEL</span>
+                  </div>
+                  <h4 class="cinema-floating-title" id="cinemaVideoTitle">From Hesitation to Assembly Anchor</h4>
+                </div>
+              </div>
 
-          <!-- CARD 6 -->
-          <article class="gallery-reel-card" data-idx="6">
-            <div class="gallery-reel-img-wrap">
-              <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=700&q=80" alt="Dialogue Masterclasses" class="gallery-reel-img" loading="lazy">
+              <!-- Interactive Video Selector Tabs / Switcher Bar -->
+              <div class="cinema-selector-bar" role="tablist" aria-label="Select student video reel">
+                <button class="cinema-selector-tab active" data-vid-idx="0" type="button" role="tab" aria-selected="true">
+                  <span class="tab-num">01</span>
+                  <div class="tab-info">
+                    <strong>Aadhya V.</strong>
+                    <small>8th Grade • Assembly Anchor</small>
+                  </div>
+                </button>
+                <button class="cinema-selector-tab" data-vid-idx="1" type="button" role="tab" aria-selected="false">
+                  <span class="tab-num">02</span>
+                  <div class="tab-info">
+                    <strong>Karthik N.</strong>
+                    <small>IT Lead • Executive Fluency</small>
+                  </div>
+                </button>
+                <button class="cinema-selector-tab" data-vid-idx="2" type="button" role="tab" aria-selected="false">
+                  <span class="tab-num">03</span>
+                  <div class="tab-info">
+                    <strong>Diya &amp; Tanvi</strong>
+                    <small>Ages 9 &amp; 11 • Storytelling</small>
+                  </div>
+                </button>
+                <button class="cinema-selector-tab" data-vid-idx="3" type="button" role="tab" aria-selected="false">
+                  <span class="tab-num">04</span>
+                  <div class="tab-info">
+                    <strong>Siddharth M.</strong>
+                    <small>IELTS • Band 8.0 Achieved</small>
+                  </div>
+                </button>
+              </div>
             </div>
-            <div class="gallery-reel-content">
-              <h4>Dialogue Masterclasses</h4>
-              <p>Interactive peer simulations with instantaneous vocal diagnostic feedback.</p>
-            </div>
-          </article>
+          </div>
 
-          <!-- CARD 7 -->
-          <article class="gallery-reel-card" data-idx="7">
-            <div class="gallery-reel-img-wrap">
-              <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=700&q=80" alt="Acoustic Speech Library" class="gallery-reel-img" loading="lazy">
-            </div>
-            <div class="gallery-reel-content">
-              <h4>Acoustic Speech Library</h4>
-              <p>High-fidelity audio recordings to refine cadence and intonation rhythms.</p>
-            </div>
-          </article>
+          <!-- RIGHT: COMPACT CORAL STUDIO LETTER (HOLOGRAPHIC DECK) -->
+          <div class="reviews-stage-col">
+            <div class="reviews-deck-wrapper">
+              
+              <!-- Review Deck Header Controls -->
+              <div class="reviews-deck-nav">
+                <div class="deck-trust-tag">
+                  <span class="coral-leaf-icon">🪸</span>
+                  <span>VERIFIED ATELIER PARENTS</span>
+                </div>
+                <div class="deck-arrows-row">
+                  <span class="deck-counter" id="deckCounter">01 / 04</span>
+                  <button class="deck-arrow-btn" id="deckPrevBtn" type="button" aria-label="Previous review">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                  </button>
+                  <button class="deck-arrow-btn" id="deckNextBtn" type="button" aria-label="Next review">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </button>
+                </div>
+              </div>
 
-          <!-- CARD 8 -->
-          <article class="gallery-reel-card" data-idx="8">
-            <div class="gallery-reel-img-wrap">
-              <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=700&q=80" alt="Confidence In Numbers" class="gallery-reel-img" loading="lazy">
-            </div>
-            <div class="gallery-reel-content">
-              <h4>Confidence In Numbers</h4>
-              <p>Encouraging boutique cohorts where every student speaks in every hour.</p>
-            </div>
-          </article>
+              <!-- Interactive Swappable Review Cards -->
+              <div class="reviews-deck-carousel" id="reviewsDeckCarousel">
+                
+                <!-- CARD 1 -->
+                <article class="holographic-review-card active" data-card-idx="0">
+                  <div class="review-card-top-bar">
+                    <div class="coral-quote-mark" aria-hidden="true">“</div>
+                    <div class="review-rating-capsule">
+                      <div class="stars-gold">★★★★★</div>
+                      <span class="coral-verified-dot">●</span>
+                      <span class="verified-text">Google 5.0</span>
+                    </div>
+                  </div>
+                  <blockquote class="review-quote-text">
+                    “Most spoken English classes put 30 kids in a room where shy kids never speak. S.E.A’s strict <span class="coral-text-hl">1:6 ratio</span> gave Tanmay direct microphone airtime every single class. His school teacher noticed his sudden confidence within a month.”
+                  </blockquote>
+                  <div class="review-meta-inline-row">
+                    <div class="review-pill-metric">
+                      <span class="rpm-label">Speaking Time</span>
+                      <strong class="rpm-val">20+ mins/session</strong>
+                    </div>
+                    <div class="review-pill-metric">
+                      <span class="rpm-label">Fluency Leap</span>
+                      <strong class="rpm-val">+85% in 8 Wks</strong>
+                    </div>
+                  </div>
+                  <!-- Sleek Coral Voice Memo Capsule -->
+                  <div class="coral-voice-capsule" data-duration="0:34">
+                    <button class="voice-capsule-btn" type="button" aria-label="Listen to Dr. Malini's voice review">
+                      <svg class="v-play-svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+                      <svg class="v-pause-svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                    </button>
+                    <div class="voice-capsule-waveform">
+                      <span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span>
+                      <span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span>
+                      <span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span>
+                    </div>
+                    <span class="voice-capsule-time">0:34 Voice Note</span>
+                  </div>
+                  <!-- Author Footer -->
+                  <div class="review-author-footer">
+                    <div class="review-avatar-wrap coral-avatar-ring">
+                      <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80" alt="Dr. Malini S." class="review-avatar" loading="lazy">
+                    </div>
+                    <div class="review-author-meta">
+                      <strong>Dr. Malini S.</strong>
+                      <span>Parent of Tanmay (6th Std) • Tambaram</span>
+                    </div>
+                  </div>
+                </article>
 
-          <!-- CARD 9 -->
-          <article class="gallery-reel-card" data-idx="9">
-            <div class="gallery-reel-img-wrap">
-              <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=700&q=80" alt="Spontaneous Expression" class="gallery-reel-img" loading="lazy">
-            </div>
-            <div class="gallery-reel-content">
-              <h4>Spontaneous Expression</h4>
-              <p>Framing impromptu narratives and captivating storytelling with ease.</p>
-            </div>
-          </article>
+                <!-- CARD 2 -->
+                <article class="holographic-review-card" data-card-idx="1">
+                  <div class="review-card-top-bar">
+                    <div class="coral-quote-mark" aria-hidden="true">“</div>
+                    <div class="review-rating-capsule">
+                      <div class="stars-gold">★★★★★</div>
+                      <span class="coral-verified-dot">●</span>
+                      <span class="verified-text">Alumnus Review</span>
+                    </div>
+                  </div>
+                  <blockquote class="review-quote-text">
+                    “My technical knowledge was solid, but during cross-cultural calls with UK directors, I felt insecure about my pronunciation. Sathya Ma’am’s <span class="coral-text-hl">acoustic speech mapping</span> pinpointed my exact vowel shifts. Now I lead sprint demos effortlessly.”
+                  </blockquote>
+                  <div class="review-meta-inline-row">
+                    <div class="review-pill-metric">
+                      <span class="rpm-label">Translation Lag</span>
+                      <strong class="rpm-val">Zero Delay</strong>
+                    </div>
+                    <div class="review-pill-metric">
+                      <span class="rpm-label">CEFR Benchmark</span>
+                      <strong class="rpm-val">C1 Executive</strong>
+                    </div>
+                  </div>
+                  <div class="coral-voice-capsule" data-duration="0:41">
+                    <button class="voice-capsule-btn" type="button" aria-label="Listen to Venkatesh's voice review">
+                      <svg class="v-play-svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+                      <svg class="v-pause-svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                    </button>
+                    <div class="voice-capsule-waveform">
+                      <span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span>
+                      <span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span>
+                      <span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span>
+                    </div>
+                    <span class="voice-capsule-time">0:41 Voice Note</span>
+                  </div>
+                  <div class="review-author-footer">
+                    <div class="review-avatar-wrap coral-avatar-ring">
+                      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Venkatesh R." class="review-avatar" loading="lazy">
+                    </div>
+                    <div class="review-author-meta">
+                      <strong>Venkatesh R.</strong>
+                      <span>Tech Lead • Cognizant, Chennai</span>
+                    </div>
+                  </div>
+                </article>
 
-          <!-- CARD 10 -->
-          <article class="gallery-reel-card" data-idx="10">
-            <div class="gallery-reel-img-wrap">
-              <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=80" alt="Auditory Voice Mapping" class="gallery-reel-img" loading="lazy">
-            </div>
-            <div class="gallery-reel-content">
-              <h4>Auditory Voice Mapping</h4>
-              <p>1-on-1 phonetic analysis identifying native tongue influence and vowel shifts.</p>
-            </div>
-          </article>
+                <!-- CARD 3 -->
+                <article class="holographic-review-card" data-card-idx="2">
+                  <div class="review-card-top-bar">
+                    <div class="coral-quote-mark" aria-hidden="true">“</div>
+                    <div class="review-rating-capsule">
+                      <div class="stars-gold">★★★★★</div>
+                      <span class="coral-verified-dot">●</span>
+                      <span class="verified-text">Parent Review</span>
+                    </div>
+                  </div>
+                  <blockquote class="review-quote-text">
+                    “Kaviya used to cry before school recitation competitions. After 12 weeks of Junior Articulators at S.E.A, <span class="coral-text-hl">she won 2nd prize</span> in the inter-school elocution! Her voice projection and articulation make us so proud.”
+                  </blockquote>
+                  <div class="review-meta-inline-row">
+                    <div class="review-pill-metric">
+                      <span class="rpm-label">Competition</span>
+                      <strong class="rpm-val">2nd Prize Won</strong>
+                    </div>
+                    <div class="review-pill-metric">
+                      <span class="rpm-label">Stage Poise</span>
+                      <strong class="rpm-val">Fear Eliminated</strong>
+                    </div>
+                  </div>
+                  <div class="coral-voice-capsule" data-duration="0:29">
+                    <button class="voice-capsule-btn" type="button" aria-label="Listen to Priya's voice review">
+                      <svg class="v-play-svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+                      <svg class="v-pause-svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                    </button>
+                    <div class="voice-capsule-waveform">
+                      <span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span>
+                      <span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span>
+                      <span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span>
+                    </div>
+                    <span class="voice-capsule-time">0:29 Voice Note</span>
+                  </div>
+                  <div class="review-author-footer">
+                    <div class="review-avatar-wrap coral-avatar-ring">
+                      <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80" alt="Priya & Anand" class="review-avatar" loading="lazy">
+                    </div>
+                    <div class="review-author-meta">
+                      <strong>Priya &amp; Anand</strong>
+                      <span>Parents of Kaviya (4th Std) • Pallavaram</span>
+                    </div>
+                  </div>
+                </article>
 
-          <!-- CARD 11 -->
-          <article class="gallery-reel-card" data-idx="11">
-            <div class="gallery-reel-img-wrap">
-              <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=700&q=80" alt="Global Benchmarking" class="gallery-reel-img" loading="lazy">
-            </div>
-            <div class="gallery-reel-content">
-              <h4>Global Benchmarks</h4>
-              <p>CEFR aligned fluency markers preparing candidates for global opportunities.</p>
-            </div>
-          </article>
+                <!-- CARD 4 -->
+                <article class="holographic-review-card" data-card-idx="3">
+                  <div class="review-card-top-bar">
+                    <div class="coral-quote-mark" aria-hidden="true">“</div>
+                    <div class="review-rating-capsule">
+                      <div class="stars-gold">★★★★★</div>
+                      <span class="coral-verified-dot">●</span>
+                      <span class="verified-text">Placement Success</span>
+                    </div>
+                  </div>
+                  <blockquote class="review-quote-text">
+                    “The spontaneous debate circles at S.E.A simulated real HR group discussions. <span class="coral-text-hl">I cleared all 3 campus interview rounds</span> on my first attempt with zero stammer. The investment in my spoken voice paid off immediately.”
+                  </blockquote>
+                  <div class="review-meta-inline-row">
+                    <div class="review-pill-metric">
+                      <span class="rpm-label">Campus Placement</span>
+                      <strong class="rpm-val">Tier-1 MNC Selected</strong>
+                    </div>
+                    <div class="review-pill-metric">
+                      <span class="rpm-label">Interview GD</span>
+                      <strong class="rpm-val">1st Attempt Cleared</strong>
+                    </div>
+                  </div>
+                  <div class="coral-voice-capsule" data-duration="0:38">
+                    <button class="voice-capsule-btn" type="button" aria-label="Listen to Anirudh's voice review">
+                      <svg class="v-play-svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+                      <svg class="v-pause-svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                    </button>
+                    <div class="voice-capsule-waveform">
+                      <span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span>
+                      <span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span>
+                      <span class="cw-bar"></span><span class="cw-bar"></span><span class="cw-bar"></span>
+                    </div>
+                    <span class="voice-capsule-time">0:38 Voice Note</span>
+                  </div>
+                  <div class="review-author-footer">
+                    <div class="review-avatar-wrap coral-avatar-ring">
+                      <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=150&q=80" alt="Anirudh B." class="review-avatar" loading="lazy">
+                    </div>
+                    <div class="review-author-meta">
+                      <strong>Anirudh B.</strong>
+                      <span>Engineering Graduate • Anna University</span>
+                    </div>
+                  </div>
+                </article>
 
-          <!-- CARD 12 -->
-          <article class="gallery-reel-card" data-idx="12">
-            <div class="gallery-reel-img-wrap">
-              <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=700&q=80" alt="Articulation Excellence" class="gallery-reel-img" loading="lazy">
+              </div>
+
+              <!-- Bottom CTA Action -->
+              <div class="review-deck-action">
+                <button class="btn-deck-schedule" id="deckScheduleBtn" type="button">
+                  <span>Book Diagnostic for Your Child</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+              </div>
+
             </div>
-            <div class="gallery-reel-content">
-              <h4>Articulation Honors</h4>
-              <p>Celebrating fluent communicators who lead debates and speak without hesitation.</p>
-            </div>
-          </article>
+          </div>
 
         </div>
       </div>
 
-      <!-- Controls Bar: Bottom Right Nav Arrow Buttons -->
-      <div class="gallery-controls-bar">
-        <div class="gallery-nav-arrows">
-          <button class="gallery-arrow-btn" id="galleryPrevBtn" type="button" aria-label="Previous gallery cards">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
-          </button>
-          <button class="gallery-arrow-btn" id="galleryNextBtn" type="button" aria-label="Next gallery cards">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </button>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -805,46 +1245,318 @@
   </section>
 
   <!-- ==========================================================================
-       SECTION: ABOUT US — SATHYA'S ENGLISH ACADEMY (YOUR OCEAN OF ENGLISH)
+       SECTION: ABOUT (IN-PLACE INTERACTIVE & SCROLL SWAP)
        ========================================================================== -->
-  <section class="section-about" id="aboutSection">
-    <div class="about-container">
-      <div class="about-card-banner">
-        <div class="about-brand-side">
-          <img src="sea-logo.png?v=2" alt="S.E.A - Sathya's English Academy" class="about-brand-logo">
-          <span class="hero-cursive-tagline">your ocean of english</span>
-          <h3 class="about-tagline">We don't just teach English. We shape how the world hears you.</h3>
-          <p class="about-text">
-            Sathya's English Academy (S.E.A) is Chennai's premier boutique speech & conversational fluency atelier located in Pallavaram. We specialize in intimate 1:6 studio cohorts, phonetics, and speech psychology.
-          </p>
-        </div>
+  <section class="section-about-white" id="aboutSection">
+    <!-- Anchor target for About The Trainer links -->
+    <div id="aboutTrainerSection" class="about-anchor-target" aria-hidden="true"></div>
 
-        <div class="about-details-side">
-          <div class="about-info-item">
-            <span class="info-icon">📍</span>
-            <div>
-              <strong>Studio Atelier</strong>
-              <p>2nd Main Road, Pallavaram, Chennai, Tamil Nadu</p>
-            </div>
+    <div class="about-container">
+      
+      <!-- Interactive Ocean Segmented Switcher -->
+      <div class="about-switcher-nav" role="tablist" aria-label="About Sathya's English Academy">
+        <button 
+          type="button" 
+          class="about-switch-btn active" 
+          id="btnAboutAtelier" 
+          role="tab" 
+          aria-selected="true" 
+          aria-controls="panelAboutAtelier"
+          data-tab="atelier"
+        >
+          <span class="switch-icon">🏛️</span>
+          <span class="switch-text">About Atelier</span>
+        </button>
+        <button 
+          type="button" 
+          class="about-switch-btn" 
+          id="btnAboutTrainer" 
+          role="tab" 
+          aria-selected="false" 
+          aria-controls="panelAboutTrainer"
+          data-tab="trainer"
+        >
+          <span class="switch-icon">🎙️</span>
+          <span class="switch-text">The Master Trainer</span>
+        </button>
+      </div>
+
+      <!-- Tab Panels Viewport with Fluid Cross-Fade -->
+      <div class="about-panels-viewport">
+        
+        <!-- PANEL 1: ABOUT ATELIER (US) -->
+        <article class="about-panel active" id="panelAboutAtelier" role="tabpanel" aria-labelledby="btnAboutAtelier">
+          <div class="about-header-block">
+            <span class="about-kicker-pill">
+              <span class="kicker-pulse-dot"></span>
+              <span>PALLAVARAM • CHENNAI</span>
+            </span>
+            <h2 class="about-section-heading">
+              About <span class="ocean-text-accent">Us</span>
+              <span class="title-halo-line"></span>
+            </h2>
+            <p class="about-main-lead">
+              Sathya’s English Academy is Chennai’s dedicated atelier for spoken fluency and executive speech confidence. Through our signature 1:6 cohort format, every learner commands guaranteed microphone airtime in every session. From schoolchildren overcoming stage fear to tech leaders leading global demos, we craft articulate speakers. Step inside our Pallavaram studio and discover how the world listens when you speak.
+            </p>
           </div>
-          <div class="about-info-item">
-            <span class="info-icon">🎙️</span>
-            <div>
-              <strong>Pedagogical Method</strong>
-              <p>1:6 Intimate Studio Immersion & Acoustic Speech Precision</p>
-            </div>
+        </article>
+
+        <!-- PANEL 2: ABOUT THE MASTER TRAINER -->
+        <article class="about-panel" id="panelAboutTrainer" role="tabpanel" aria-labelledby="btnAboutTrainer">
+          <div class="about-header-block">
+            <span class="about-kicker-pill trainer-kicker-pill">
+              <span class="kicker-pulse-dot"></span>
+              <span>FOUNDER &amp; MASTER TRAINER</span>
+            </span>
+            <h2 class="about-section-heading">
+              About The <span class="ocean-text-accent">Trainer</span>
+              <span class="title-halo-line"></span>
+            </h2>
+            <p class="about-main-lead">
+              I am Sathya, Founder and Master Speech Trainer at Sathya’s English Academy (S.E.A.). With a dedicated focus on natural fluency, acoustic phonetics, and speech confidence, I champion globally aligned, learner-centred training methodologies. At S.E.A., we eliminate hesitation and regional lag, empowering school students, teenagers, and professionals to communicate with effortless clarity, commanding composure, and international competence.
+            </p>
           </div>
-          <div class="about-info-item">
-            <span class="info-icon">💬</span>
-            <div>
-              <strong>Admissions & Diagnostics</strong>
-              <p>Direct WhatsApp & Voice: +91 98400 00000</p>
-            </div>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECTION 3: GET IN TOUCH (POSTER EDITORIAL SKY-OCEAN THEME - REFERENCE MATCH)
+       ========================================================================== -->
+  <section class="section-contact" id="contactSection">
+    <!-- Big Ghost Backdrop Lettering: CONTACT -->
+    <div class="contact-backdrop-watermark" aria-hidden="true">CONTACT</div>
+
+    <div class="contact-container">
+      
+      <!-- Top Center Stage Title -->
+      <div class="contact-title-wrap">
+        <h2 class="contact-highlight-heading" aria-label="GET IN TOUCH">
+          <span class="touch-word-get">GET</span>
+          <span class="touch-word-in">IN</span>
+          <span class="touch-word-touch">TOUCH</span>
+        </h2>
+        <!-- Animated Wave Underscore & Floating Ocean Droplets -->
+        <div class="contact-wave-visual-wrap">
+          <svg class="contact-wave-svg-line" viewBox="0 0 200 16" preserveAspectRatio="none">
+            <path class="wave-line-path" d="M0,8 C30,16 50,0 80,8 C110,16 130,0 160,8 C180,14 195,3 200,8" fill="none" stroke="url(#contactWaveGrad)" stroke-width="3" stroke-linecap="round"></path>
+            <defs>
+              <linearGradient id="contactWaveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#009DC4"></stop>
+                <stop offset="50%" stop-color="#22d3ee"></stop>
+                <stop offset="100%" stop-color="#0284c7"></stop>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="contact-spray-dots" aria-hidden="true">
+            <span class="dot-spray d1"></span>
+            <span class="dot-spray d2"></span>
+            <span class="dot-spray d3"></span>
           </div>
         </div>
       </div>
+
+      <!-- Main Two-Column Layout (Matching User Reference Image) -->
+      <div class="contact-poster-grid">
+        
+        <!-- Left Side: Warm Personal Tone & Direct Contacts -->
+        <div class="contact-left-col">
+          <h3 class="contact-bold-kicker">DON'T BE SHY</h3>
+          <p class="contact-sub-statement">
+            Feel free to get in touch with me. I am always open to discussing new batches, public speaking aspirations, or custom 1:6 studio cohorts to be part of your speech journey.
+          </p>
+
+          <div class="contact-channels-stack">
+            <!-- Mail Channel -->
+            <div class="contact-channel-item">
+              <div class="channel-icon-box">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+              </div>
+              <div class="channel-text">
+                <span class="channel-label">Mail me</span>
+                <a href="mailto:info@sathyasenglishacademy.com" class="channel-value">sathyasenglishacademy@gmail.com</a>
+              </div>
+            </div>
+
+            <!-- Call / WhatsApp Channel -->
+            <div class="contact-channel-item">
+              <div class="channel-icon-box">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                </svg>
+              </div>
+              <div class="channel-text">
+                <span class="channel-label">Call / WhatsApp me</span>
+                <a href="tel:+919840000000" class="channel-value">+91 98400 00000</a>
+              </div>
+            </div>
+
+            <!-- Studio Address Pin -->
+            <div class="contact-channel-item">
+              <div class="channel-icon-box">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+              </div>
+              <div class="channel-text">
+                <span class="channel-label">Visit Atelier</span>
+                <span class="channel-value">2nd Main Road, Pallavaram, Chennai</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Clean Dark-Line Form (Exact Match to User Reference) -->
+        <div class="contact-right-col">
+          <form class="contact-minimal-form" id="contactSectionForm" onsubmit="return false;">
+            <div class="minimal-input-field">
+              <input type="text" id="contactFullName" placeholder="Enter your Name" required>
+            </div>
+            <div class="minimal-input-field">
+              <input type="email" id="contactEmail" placeholder="Enter a valid email address" required>
+            </div>
+            <div class="minimal-input-field">
+              <textarea id="contactMessage" rows="5" placeholder="Enter your message" required></textarea>
+            </div>
+
+            <div class="minimal-checkbox-row">
+              <label class="custom-check-wrap">
+                <input type="checkbox" id="termsCheck" required checked>
+                <span class="check-box-visual"></span>
+                <span class="check-label-text">I accept the <a href="#" class="terms-link">Terms of Service</a></span>
+              </label>
+            </div>
+
+            <button type="submit" class="btn-minimal-submit" id="contactSubmitBtn">
+              <span>SUBMIT</span>
+            </button>
+          </form>
+        </div>
+
+      </div>
+
     </div>
   </section>
+
+  <!-- ==========================================================================
+       SECTION 4: S.E.A LUXURY FOOTER (CINEMATIC OCEAN WAVE SURGE REVEAL)
+       ========================================================================== -->
+  <footer class="studio-footer" id="studioFooter">
+    
+    <!-- Top Ocean Wave Transition Divider -->
+    <div class="footer-wave-crest-divider" aria-hidden="true">
+      <svg class="footer-wave-svg" viewBox="0 0 1440 90" preserveAspectRatio="none">
+        <path class="footer-wave-back" d="M0,24 C240,65 480,5 720,40 C960,75 1200,15 1440,35 L1440,90 L0,90 Z"></path>
+        <path class="footer-wave-mid" d="M0,45 C280,10 560,70 840,30 C1120,70 1300,20 1440,50 L1440,90 L0,90 Z"></path>
+        <path class="footer-wave-front" d="M0,60 C320,85 640,35 960,65 C1200,45 1360,70 1440,60 L1440,90 L0,90 Z"></path>
+      </svg>
+    </div>
+
+    <!-- Cinematic Ocean Wave Surge Overlay Curtain (Sweeps from LEFT to RIGHT across footer, revealing content!) -->
+    <div class="footer-ocean-surge-curtain" id="footerSurgeCurtain" aria-hidden="true">
+      <div class="surge-wave-foam-vertical">
+        <svg class="surge-vertical-crest-svg" viewBox="0 0 160 800" preserveAspectRatio="none">
+          <!-- Deep oceanic swell undertow -->
+          <path d="M0,0 Q60,100 15,200 Q75,300 20,400 Q80,500 25,600 Q70,700 10,800 L0,800 Z" fill="rgba(2, 132, 199, 0.55)"></path>
+          <!-- Aquamarine mid-swell water wave -->
+          <path d="M0,0 Q95,90 35,210 Q110,310 40,410 Q105,520 45,620 Q90,720 20,800 L0,800 Z" fill="rgba(56, 189, 248, 0.85)"></path>
+          <!-- Frothy white water wave crest & curls -->
+          <path d="M0,0 Q130,80 50,220 Q145,320 60,420 Q140,530 65,630 Q125,730 30,800 L0,800 Z" fill="#ffffff" opacity="0.95"></path>
+          <!-- Seafoam bubbles & spray droplets -->
+          <circle cx="145" cy="85" r="4.5" fill="#ffffff" opacity="0.95"></circle>
+          <circle cx="152" cy="115" r="3" fill="#e0f2fe" opacity="0.85"></circle>
+          <circle cx="158" cy="325" r="5" fill="#ffffff" opacity="0.95"></circle>
+          <circle cx="142" cy="360" r="3.5" fill="#e0f2fe" opacity="0.85"></circle>
+          <circle cx="155" cy="535" r="5" fill="#ffffff" opacity="0.95"></circle>
+          <circle cx="138" cy="735" r="4" fill="#ffffff" opacity="0.95"></circle>
+        </svg>
+      </div>
+      <div class="surge-bubbles-layer-vertical">
+        <span class="surge-bubble vb1"></span>
+        <span class="surge-bubble vb2"></span>
+        <span class="surge-bubble vb3"></span>
+        <span class="surge-bubble vb4"></span>
+        <span class="surge-bubble vb5"></span>
+      </div>
+    </div>
+
+    <div class="footer-container" id="footerContainer">
+      
+      <!-- Top Row: Brand & Quick Links -->
+      <div class="footer-top-grid">
+        <div class="footer-brand-col">
+          <img src="sea-logo.png?v=2" alt="S.E.A - Sathya's English Academy" class="footer-brand-logo">
+          <p class="footer-brand-manifesto">
+            Chennai’s premier boutique atelier for spoken English fluency, acoustic phonetics, and refined global accents.
+          </p>
+          <div class="footer-tagline-pill">
+            <span>your ocean of english</span>
+          </div>
+        </div>
+
+        <div class="footer-links-col">
+          <h4 class="footer-col-heading">Programs</h4>
+          <ul class="footer-nav-list">
+            <li><a href="#coursesSection">Little Ripples (Ages 8–10)</a></li>
+            <li><a href="#coursesSection">Character Quest (Ages 10–12)</a></li>
+            <li><a href="#coursesSection">Stage &amp; Voice (Teens)</a></li>
+            <li><a href="#coursesSection">Global Currents (Adults)</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h4 class="footer-col-heading">Explore</h4>
+          <ul class="footer-nav-list">
+            <li><a href="#learnSection">Atelier Journal</a></li>
+            <li><a href="#impactSection">Gallery &amp; Testimonials</a></li>
+            <li><a href="#aboutSection">About Atelier</a></li>
+            <li><a href="#aboutTrainerSection">About The Trainer</a></li>
+            <li><a href="#contactSection">Admissions Desk</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h4 class="footer-col-heading">Studio Address</h4>
+          <address class="footer-address-block">
+            Sathya’s English Academy (S.E.A)<br>
+            2nd Main Road, Pallavaram<br>
+            Chennai, Tamil Nadu 600043<br>
+            <strong>Direct: +91 98400 00000</strong>
+          </address>
+        </div>
+      </div>
+
+      <!-- Bottom Row: Copyright -->
+      <div class="footer-bottom-bar">
+        <p class="footer-copy-text">
+          &copy; 2026 Sathya’s English Academy (S.E.A). All Rights Reserved. Crafted for Spoken Fluency.
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       OCEAN IMAGE LIGHTBOX MODAL (STUDIO GALLERY EXPAND)
+       ========================================================================== -->
+  <dialog class="ocean-image-dialog" id="oceanImageModal" aria-labelledby="modalImageTitle">
+    <div class="ocean-image-panel">
+      <button class="ocean-image-dismiss" id="closeImageModalBtn" aria-label="Close photo view">✕</button>
+      <div class="ocean-image-viewer">
+        <img id="oceanLightboxImg" src="" alt="Studio Gallery View" class="ocean-lightbox-media">
+        <div class="ocean-image-caption">
+          <span class="lightbox-caption-kicker">PALLAVARAM ATELIER ARCHIVE</span>
+          <h4 id="modalImageTitle">1:6 Intimate Studio Immersion</h4>
+          <p id="modalImageDesc">Personalized spoken airtime and direct phonetics coaching in Pallavaram.</p>
+        </div>
+      </div>
+    </div>
+  </dialog>
 
   <!-- Editorial Reading Modal / Reader Overlay -->
   <dialog class="reader-dialog" id="readerDialog">
